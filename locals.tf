@@ -22,7 +22,7 @@ locals {
   host_image_id           = var.host_image_id == "OEL" ? data.oci_core_images.oracle_images.images.0.id : var.host_image_id
   hosts_file              = var.hosts_file == "" ? "${path.module}/etc/hosts.template" : var.hosts_file
   host_env_config         = var.host_env_config == "" ? "${path.module}/cloudinit/templates/set_env_config.template.sh" : var.host_env_config
-  host_setup_folder       = var.host_setup_folder == "" ? "${path.module}/cloudinit" : var.host_env_config
+  host_setup_folder       = var.host_setup_folder == "" ? "${path.module}/cloudinit/" : var.host_setup_folder
   host_cloudinit_template = var.host_cloudinit_template == "" ? "${path.module}/cloudinit/templates/linux_host.yaml" : var.host_cloudinit_template
   host_bootstrap_template = var.host_bootstrap_template == "" ? "${path.module}/cloudinit/templates/bootstrap_host.template.sh" : var.host_bootstrap_template
   host_bootstrap = base64encode(templatefile(local.host_cloudinit_template, {

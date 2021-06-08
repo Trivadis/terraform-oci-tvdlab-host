@@ -30,4 +30,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 [unreleased]: https://github.com/Trivadis/terraform-oci-tvdlab-host
-[0.0.1]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases
+[0.0.1]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.1

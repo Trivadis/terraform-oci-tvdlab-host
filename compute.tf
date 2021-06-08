@@ -57,8 +57,8 @@ resource "oci_core_instance" "compute" {
   }
 
   provisioner "file" {
-    source      = local.host_setup_folder
-    destination = "/home/${var.tvd_os_user}"
+    source      = "${local.host_setup_folder}/"
+    destination = "/home/${var.tvd_os_user}/cloudinit"
 
     connection {
       type                = "ssh"

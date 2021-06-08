@@ -1,0 +1,87 @@
+#cloud-config
+# -----------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# -----------------------------------------------------------------------------
+# Name.......: linux_host.yaml 
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2020.12.02
+# Revision...: 
+# Purpose....: cloud-init configuration file for linux hosts
+# Notes......: --
+# Reference..: --
+# License....: Apache License Version 2.0, January 2004 as shown
+#              at http://www.apache.org/licenses/
+# -----------------------------------------------------------------------------
+# --- Install/upgrade yum packages --------------------------------------------
+# package_upgrade: ${yum_upgrade}     # Enable yum update
+# packages:                           # install additional packages
+#   - git                             # Fast Version Control System
+#   - tmux                            # A terminal multiplexer
+#   - putty                           # SSH, Telnet and Rlogin client
+#   - pwgen                           # Automatic password generation
+# --- EOF Install/upgrade yum packages ----------------------------------------
+
+# --- Create users ------------------------------------------------------------
+users:
+  - default
+  - name: ${os_user}
+    gecos: Oracle OS User
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    lock_passwd: true
+# --- EOF Create users --------------------------------------------------------
+
+# --- Update remote files -----------------------------------------------------
+write_files:
+# Add oracle SSH authorized keys ----------------------------------------------
+  - path: "/home/${os_user}/.ssh/authorized_keys"
+    permissions: "0600"
+    encoding: "gzip+base64"
+    content: |
+      ${authorized_keys}
+
+# Append /etc/hosts with custom hosts entries ---------------------------------
+  - path: /etc/hosts
+    append: true
+    encoding: "gzip+base64"
+    content: |
+      ${etc_hosts}
+
+# Add bootstrap script --------------------------------------------------------
+  - path: "/home/${os_user}/cloudinit/bootstrap_linux_host.sh"
+    permissions: "0750"
+    encoding: "gzip+base64"
+    content: |
+      ${bootstrap_script}
+
+
+# Add release environement script --------------------------------------------------------
+  - path: "/home/${os_user}/cloudinit/set_config_env.sh"
+    permissions: "0750"
+    encoding: "gzip+base64"
+    content: |
+      ${env_conf_script}
+    
+# --- EOF Update remote files -------------------------------------------------
+
+# --- Run configuration commands ----------------------------------------------
+runcmd:
+  # configure tools from development repositories
+  - yum-config-manager --enable ol7_developer --enable ol7_developer_EPEL
+  - yum upgrade -y
+  - yum install -y tmux pwgen
+  
+  # config SELinux Network access
+  - setsebool httpd_can_network_connect on -P
+  - setenforce 0
+  - sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
+
+  # Fix permissions
+  - chown -R ${os_user}:${os_user} /home/${os_user}/.ssh
+  - chown -R ${os_user}:${os_user} /home/${os_user}/cloudinit
+
+  # start bootstrap
+  - /home/${os_user}/cloudinit/bootstrap_linux_host.sh
+# --- EOF Run configuration commands ------------------------------------------
+# --- EOF ---------------------------------------------------------------------

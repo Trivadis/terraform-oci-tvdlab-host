@@ -94,13 +94,11 @@ variable "ssh_authorized_keys" {
 
 variable "ssh_private_key" {
   description = "ssh private key used to access the internal hosts."
-  default     = ""
   type        = string
 }
 
 variable "software_repo" {
   description = "Software repository URL to OCI object store swift API"
-  default     = ""
   type        = string
 }
 
@@ -237,7 +235,7 @@ variable "host_env_config" {
 }
 
 variable "host_setup_folder" {
-  description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh"
+  description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/"
   default     = ""
   type        = string
 }

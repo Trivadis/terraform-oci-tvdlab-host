@@ -22,7 +22,7 @@ export ORACLE_PWD=""                            # Default Oracle password
 export PORT_LIST="7001 5556 7002"               # list of firewall ports to configure
 
 # Source for WLS Config
-export DOMAIN_NAME=${DOMAIN_NAME}
+export DOMAIN_NAME="cpu_domain"
 export DOMAIN_HOME="/u01/domains/$DOMAIN_NAME"
 export DOMAIN_MODE="dev"
 export PORT_NM="5556"
@@ -73,11 +73,16 @@ export CPU_COHERENCE_PATCH_PKG="p32581859_122140_Generic.zip"
 export CPU_WLS_ONEOFF_PKGS=""
 export CPU_OUI_PATCH_PKG=""
 
-# list of software to download
-export SOFTWARE_LIST="$JAVA_PKG;$FMW_BASE_PKG"
-export SOFTWARE_LIST="$SOFTWARE_LIST;$BASENV_PKG;$TVDPERL_PKG"
-export SOFTWARE_LIST="$SOFTWARE_LIST;$WLS_OPATCH_PKG;$FMW_PATCH_PKG;$COHERENCE_PATCH_PKG;$WLS_ONEOFF_PKGS;$OUI_PATCH_PKG"
-export SOFTWARE_LIST="$SOFTWARE_LIST;$CPU_WLS_OPATCH_PKG;$CPU_FMW_PATCH_PKG;$CPU_COHERENCE_PATCH_PKG;$CPU_WLS_ONEOFF_PKGS;$CPU_OUI_PATCH_PKG"
+# Create a list of software to download based on environment variables ending 
+# with _PKG, _PKGS, or _MASTER
+SOFTWARE_LIST=""                        # initial values of SOFTWARE_LIST
+for i in $(env|cut -d= -f1|grep '_PKG$\|_PKGS$\|_MASTER$'); do
+    # check if environment variable is not empty and value not yet part of SOFTWARE_LIST
+    if [ -n "${!i}" ] && [[ $SOFTWARE_LIST != *"${!i}"* ]]; then
+        SOFTWARE_LIST+="${!i};"
+    fi
+done
+export SOFTWARE_LIST=$(echo $SOFTWARE_LIST|sed 's/.$//')
 # - End of Customization -------------------------------------------------------
 
 # --- EOF ----------------------------------------------------------------------

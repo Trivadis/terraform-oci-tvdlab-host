@@ -6,7 +6,7 @@
 # Name.......: set_env_config.template.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.08
+# Date.......: 2021.06.11
 # Revision...: 
 # Purpose....: Template script to config the environement.
 # Notes......: --
@@ -31,8 +31,16 @@ export task_oudbase_install=false   # enable / disable oudbase installation
 export task_firewall_config=true    # enable / disable firewall configuration
 export task_lab_config=false        # enable / disable Training configuration
 
-# list of software to download
-export SOFTWARE_LIST=""
-# - End of Customization ------------------------------------------------------
+# Create a list of software to download based on environment variables ending 
+# with _PKG, _PKGS, or _MASTER
+SOFTWARE_LIST=""                        # initial values of SOFTWARE_LIST
+for i in $(env|cut -d= -f1|grep '_PKG$\|_PKGS$\|_MASTER$'); do
+    # check if environment variable is not empty and value not yet part of SOFTWARE_LIST
+    if [ -n "${!i}" ] && [[ $SOFTWARE_LIST != *"${!i}"* ]]; then
+        SOFTWARE_LIST+="${!i};"
+    fi
+done
+export SOFTWARE_LIST=$(echo $SOFTWARE_LIST|sed 's/.$//')
+# - End of Customization -------------------------------------------------------
 
-# --- EOF ---------------------------------------------------------------------
+# --- EOF ----------------------------------------------------------------------

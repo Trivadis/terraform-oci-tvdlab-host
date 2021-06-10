@@ -12,7 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- change set env scripts [set_env_wls12c_config.sh](examples/host_wls12c/cloudinit/set_env_wls12c_config.sh) and [set_env_wls14c_config.sh](examples/host_wls14c/cloudinit/set_env_wls14c_config.sh) to dynamically build the SOFTWARE_LIST string.
+- remove dependency on *task_db_install* to run *task_basenv_install*
+- Start to build SOFTWARE_LIST b based on environment variables
+
 ### Fixed
+
+- add missing value for DOMAIN_NAME in example [host_wls12c.sh](examples/host_wls12c) and [host_wls14c.sh](examples/host_wls14c)
 
 ### Removed
 

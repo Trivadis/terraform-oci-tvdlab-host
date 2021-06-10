@@ -12,15 +12,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+### Fixed
+
+### Removed
+
+## [0.0.4] - 2021-06-11
+
+### Added
+
+- Add host example for [host_db19c](examples/host_db19c)
+
+### Changed
+
 - change set env scripts [set_env_wls12c_config.sh](examples/host_wls12c/cloudinit/set_env_wls12c_config.sh) and [set_env_wls14c_config.sh](examples/host_wls14c/cloudinit/set_env_wls14c_config.sh) to dynamically build the SOFTWARE_LIST string.
 - remove dependency on *task_db_install* to run *task_basenv_install*
 - Start to build SOFTWARE_LIST b based on environment variables
+- Clean up DB config scripts for [host_db19c](examples/host_db19c)
 
 ### Fixed
 
-- add missing value for DOMAIN_NAME in example [host_wls12c.sh](examples/host_wls12c) and [host_wls14c.sh](examples/host_wls14c)
-
-### Removed
+- add missing value for DOMAIN_NAME in example [host_wls12c](examples/host_wls12c) and [host_wls14c](examples/host_wls14c)
 
 ## [0.0.3] - 2021-06-11
 
@@ -55,3 +66,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.1]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.1
 [0.0.2]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.2
 [0.0.3]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.3
+[0.0.4]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.4

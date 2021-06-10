@@ -2,20 +2,20 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ------------------------------------------------------------------------------
-# Name.......: host_wls14c.tf
+# Name.......: main.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.11
+# Date.......: 2021.05.05
 # Revision...: 
-# Purpose....: Module file the terraform module tvdlab host.
-# Notes......: 
+# Purpose....: Main configuration to build the training environment.
+# Notes......: Define the core resouces using the module tvdlab-base
 # Reference..: --
 # License....: Apache License Version 2.0, January 2004 as shown
 #              at http://www.apache.org/licenses/
 # ------------------------------------------------------------------------------
 
 # - ADD VCM Module -------------------------------------------------------------
-module "tvdlab-wls14c" {
+module "tvdlab-db19c" {
   source  = "Trivadis/tvdlab-host/oci"
   version = ">=0.0.3"
 
@@ -45,20 +45,20 @@ module "tvdlab-wls14c" {
   host_ORACLE_ROOT      = var.ORACLE_ROOT                         # default Oracle root / software folder 
   host_ORACLE_DATA      = var.ORACLE_DATA                         # default Oracle data folder used to store datafiles
   host_ORACLE_ARCH      = var.ORACLE_ARCH                         # default Oracle arch folder used to store archive logs and backups
-  host_setup_folder     = var.host_wls14c_setup_folder            # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
-  host_env_config       = var.host_wls14c_env_config              # Host environment config script used to bootstrap host.
-  host_enabled          = var.host_wls14c_enabled                 # whether to create the compute instance or not.
-  host_name             = var.host_wls14c_name                    # Name portion of host
-  host_image_id         = var.host_wls14c_image_id                # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).
-  host_boot_volume_size = var.host_wls14c_boot_volume_size        # Size of the boot volume.
-  host_ocpus            = var.host_wls14c_ocpus                   # The ocpus for the shape.
-  host_memory_in_gbs    = var.host_wls14c_memory_in_gbs           # The memory in gbs for the shape.
-  host_volume_enabled   = var.host_wls14c_volume_enabled          # add a block volume
-  host_volume_size      = var.host_wls14c_volume_size             # Size of the additional volume.
-  host_volume_source    = var.host_wls14c_volume_source           # Source block volume to clone from.
-  host_private_ip       = var.host_wls14c_private_ip              # Private IP for host.
-  host_shape            = var.host_wls14c_shape                   # The shape of compute instance.
-  host_state            = var.host_wls14c_state                   # Whether the host should be either RUNNING or STOPPED state.
+  host_setup_folder     = var.host_db19c_setup_folder             # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
+  host_env_config       = var.host_db19c_env_config               # Host environment config script used to bootstrap host.
+  host_enabled          = var.host_db19c_enabled                  # whether to create the compute instance or not.
+  host_name             = var.host_db19c_name                     # Name portion of host
+  host_image_id         = var.host_db19c_image_id                 # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).
+  host_boot_volume_size = var.host_db19c_boot_volume_size         # Size of the boot volume.
+  host_ocpus            = var.host_db19c_ocpus                    # The ocpus for the shape.
+  host_memory_in_gbs    = var.host_db19c_memory_in_gbs            # The memory in gbs for the shape.
+  host_volume_enabled   = var.host_db19c_volume_enabled           # add a block volume
+  host_volume_size      = var.host_db19c_volume_size              # Size of the additional volume.
+  host_volume_source    = var.host_db19c_volume_source            # Source block volume to clone from.
+  host_private_ip       = var.host_db19c_private_ip               # Private IP for host.
+  host_shape            = var.host_db19c_shape                    # The shape of compute instance.
+  host_state            = var.host_db19c_state                    # Whether the host should be either RUNNING or STOPPED state.
 }
 
 # ------------------------------------------------------------------------------
@@ -66,84 +66,84 @@ module "tvdlab-wls14c" {
 # ------------------------------------------------------------------------------
 
 # Host Parameter ---------------------------------------------------------------
-variable "host_wls14c_enabled" {
+variable "host_db19c_enabled" {
   description = "whether to create the compute instance or not."
   default     = false
   type        = bool
 }
 
-variable "host_wls14c_name" {
+variable "host_db19c_name" {
   description = "Name portion of host"
-  default     = "wls14"
+  default     = "db19"
   type        = string
 }
 
-variable "host_wls14c_image_id" {
+variable "host_db19c_image_id" {
   description = "Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux)."
   default     = "OEL"
   type        = string
 }
 
-variable "host_wls14c_boot_volume_size" {
+variable "host_db19c_boot_volume_size" {
   description = "Size of the boot volume."
-  default     = 100
+  default     = 150
   type        = number
 }
 
-variable "host_wls14c_shape" {
+variable "host_db19c_shape" {
   description = "The shape of compute instance."
   default     = "VM.Standard.E3.Flex"
   type        = string
 }
 
-variable "host_wls14c_ocpus" {
+variable "host_db19c_ocpus" {
   description = "The ocpus for the shape."
-  default     = 1
+  default     = 2
   type        = number
 }
 
-variable "host_wls14c_memory_in_gbs" {
+variable "host_db19c_memory_in_gbs" {
   description = "The memory in gbs for the shape."
-  default     = 8
+  default     = 16
   type        = number
 }
 
-variable "host_wls14c_volume_enabled" {
+variable "host_db19c_volume_enabled" {
   description = "whether to create an additional volume or not."
   default     = false
   type        = bool
 }
 
-variable "host_wls14c_volume_source" {
+variable "host_db19c_volume_source" {
   description = "Source block volume to clone from."
   default     = ""
   type        = string
 }
 
-variable "host_wls14c_volume_size" {
+variable "host_db19c_volume_size" {
   description = "Size of the additional volume."
   default     = 256
   type        = number
 }
 
-variable "host_wls14c_private_ip" {
+variable "host_db19c_private_ip" {
   description = "Private IP for host."
-  default     = "10.0.1.44"
+  default     = "10.0.1.19"
   type        = string
 }
 
-variable "host_wls14c_state" {
+variable "host_db19c_state" {
   description = "Whether the host should be either RUNNING or STOPPED state. "
   default     = "RUNNING"
 }
 
-variable "host_wls14c_env_config" {
+variable "host_db19c_env_config" {
   description = "Host environment config script used to bootstrap host."
   default     = ""
   type        = string
 }
 
-variable "host_wls14c_setup_folder" {
+variable "host_db19c_setup_folder" {
   description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh"
   default     = ""
   type        = string

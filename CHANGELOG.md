@@ -12,9 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Add service, crontab and housekeeping configuration to the `config_db_env.sh` files.
+- Add *ORACLE_ROOT*, *ORACLE_DATA* and *ORACLE_ARCH* variables
+
 ### Fixed
 
 - fix wrong header info in *tfvars.example* files
+
 ### Removed
 
 ## [0.0.5] - 2021-06-11

@@ -23,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add readme files for the [cloudinit](cloudinit) folder
 - Add example for a WLS 12c [host_wls12c](examples/host_wls12c/README.md)
 
+### Changed
+
+- Add prerequisites to [README.md](examples/host_wls14c/README.md) and
+  [README.md](examples/host_wls12c/README.md)
+
 ## [0.0.2] - 2021-06-11
 
 ### Added

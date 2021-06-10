@@ -12,15 +12,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+### Fixed
+
+### Removed
+
+## [0.0.6] - 2021-06-11
+
+### Changed
+
 - Add service, crontab and housekeeping configuration to the `config_db_env.sh` files.
 - Add *ORACLE_ROOT*, *ORACLE_DATA* and *ORACLE_ARCH* variables
 - Remove *ORADBA_PKG* from [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
+- Add host example for Oracle Unified Directory 12c [host_oud12c](examples/host_oud12c)
 
 ### Fixed
 
 - fix wrong header info in *tfvars.example* files
-
-### Removed
 
 ## [0.0.5] - 2021-06-11
 
@@ -89,3 +96,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.2]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.2
 [0.0.3]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.3
 [0.0.4]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.4
+[0.0.5]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.5
+[0.0.6]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.6

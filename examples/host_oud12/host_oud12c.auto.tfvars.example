@@ -1,0 +1,34 @@
+# ------------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ------------------------------------------------------------------------------
+# Name.......: host_oud12c.auto.auto.tfvars.example
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2021.06.11
+# Revision...: 
+# Purpose....: Terraform Variable file for Oracle OUD 12c host
+# Notes......: 
+# Reference..: --
+# License....: Apache License Version 2.0, January 2004 as shown
+#              at http://www.apache.org/licenses/
+# ------------------------------------------------------------------------------
+# OUD Host Parameter Oracle Unified Directory 12c ------------------------------
+host_oud12c_enabled          = true                                   # whether to create the compute instance or not.
+host_oud12c_name             = "oud12"                                # Name portion of host
+host_oud12c_private_ip       = "10.0.1.40"                            # Private IP for host.
+host_oud12c_image_id         = "OEL"                                  # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).host_oud12c_private_ip             = "10.0.1.19"            # Private IP for host.
+host_oud12c_shape            = "VM.Standard.E3.Flex"                  # The shape of compute instance.
+host_oud12c_boot_volume_size = 100
+host_oud12c_ocpus            = 1                                      # The OCPUS for the shape.
+host_oud12c_memory_in_gbs    = 8                                      # The memory in gbs for the shape. 
+host_oud12c_volume_enabled   = true                                   # add a block volume
+host_oud12c_volume_size      = 256                                    # Size of the additional volume.
+host_oud12c_volume_source    = ""                                     # Source block volume to clone from.
+host_oud12c_state            = "RUNNING"                              # Whether the host should be either RUNNING or STOPPED state. 
+host_oud12c_setup_folder     = "./host_oud12c"                        # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
+host_oud12c_env_config       = "./host_oud12c/set_env_oud12c_config.sh" # Host environment config script used to bootstrap host.
+host_oud12c_ORACLE_ROOT      = "/u00"                                 # default Oracle root / software folder 
+host_oud12c_ORACLE_DATA      = "/u01"                                 # default Oracle data folder used to store datafiles
+host_oud12c_ORACLE_ARCH      = "/u02"                                 # default Oracle arch folder used to store archive logs and backups
+# --- EOF ----------------------------------------------------------------------

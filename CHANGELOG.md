@@ -10,16 +10,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add readme files for the [cloudinit](cloudinit) folder
-  
 ### Changed
-
-- fix upload of cloudinit config files
 
 ### Fixed
 
 ### Removed
 
+## [0.0.2] - 2021-06-11
+
+### Added
+
+- Add readme files for the [cloudinit](cloudinit) folder
+- Add example for a WLS 14c [host_wls14c](examples/host_wls14c/README.md)
+
+### Changed
+
+- fix upload of cloudinit config files
 
 ## [0.0.1] - 2021-06-08
 
@@ -27,11 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - add initial version of terraform configuration
 
-### Changed
-
-### Fixed
-
-### Removed
-
 [unreleased]: https://github.com/Trivadis/terraform-oci-tvdlab-host
 [0.0.1]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.1
+[0.0.2]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.2

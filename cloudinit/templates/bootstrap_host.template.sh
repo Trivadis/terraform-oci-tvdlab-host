@@ -380,7 +380,6 @@ fi
 # Start BasEnv installation enabled and software available
 if
     [ "$task_basenv_install" = true ] && 
-    [ "$task_db_install"     = true ] && 
     [ "$task_sw_download"    = true ] && 
     [ -n "$SOFTWARE_REPO" ]
 then

@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- fix wrong header info in *tfvars.example* files
 ### Removed
 
 ## [0.0.5] - 2021-06-11

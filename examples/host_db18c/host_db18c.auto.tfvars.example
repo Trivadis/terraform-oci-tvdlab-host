@@ -5,15 +5,15 @@
 # Name.......: host_db18c.auto.tfvars
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.04.24
+# Date.......: 2021.06.11
 # Revision...: 
-# Purpose....: Terraform Variable file for Oracle 18c DB host
+# Purpose....: Terraform Variable file for Oracle Database 18c host
 # Notes......: 
 # Reference..: --
 # License....: Apache License Version 2.0, January 2004 as shown
 #              at http://www.apache.org/licenses/
 # ------------------------------------------------------------------------------
-# OUD Host Parameter Oracle Unified Directory 12c ------------------------------
+# OUD Host Parameter Oracle Database 18c ---------------------------------------
 host_db18c_enabled        = true                                   # whether to create the compute instance or not.
 host_db18c_name           = "db18"                                 # Name portion of host
 host_db18c_private_ip     = "10.0.1.18"                            # Private IP for host.

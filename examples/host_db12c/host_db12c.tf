@@ -42,9 +42,9 @@ module "tvdlab-db12c" {
   label_prefix          = var.label_prefix                        # A string that will be prepended to all resources
   tags                  = var.tags                                # A simple key-value pairs to tag the resources created
   hosts_file            = local.hosts_file                        # path to a custom /etc/hosts which has to be appended"
-  host_ORACLE_ROOT      = var.ORACLE_ROOT                         # default Oracle root / software folder 
-  host_ORACLE_DATA      = var.ORACLE_DATA                         # default Oracle data folder used to store datafiles
-  host_ORACLE_ARCH      = var.ORACLE_ARCH                         # default Oracle arch folder used to store archive logs and backups
+  host_ORACLE_ROOT      = var.host_db12c_ORACLE_ROOT              # default Oracle root / software folder 
+  host_ORACLE_DATA      = var.host_db12c_ORACLE_DATA              # default Oracle data folder used to store datafiles
+  host_ORACLE_ARCH      = var.host_db12c_ORACLE_ARCH              # default Oracle arch folder used to store archive logs and backups
   host_setup_folder     = var.host_db12c_setup_folder             # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
   host_env_config       = var.host_db12c_env_config               # Host environment config script used to bootstrap host.
   host_enabled          = var.host_db12c_enabled                  # whether to create the compute instance or not.
@@ -147,5 +147,21 @@ variable "host_db12c_setup_folder" {
   description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh"
   default     = ""
   type        = string
+}
+
+# Oracle Home configuration variable
+variable "host_db12c_ORACLE_ROOT" {
+  description = "default Oracle root / software folder."
+  default     = "/u00"
+}
+
+variable "host_db12c_ORACLE_DATA" {
+  description = "default Oracle data folder used to store datafiles."
+  default     = "/u01"
+}
+
+variable "host_db12c_ORACLE_ARCH" {
+  description = "default Oracle arch folder used to store archive logs and backups."
+  default     = "/u02"
 }
 # --- EOF ----------------------------------------------------------------------

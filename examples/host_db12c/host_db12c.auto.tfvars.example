@@ -27,4 +27,7 @@ host_db12c_volume_source  = ""                                     # Source bloc
 host_db12c_state          = "RUNNING"                              # Whether the host should be either RUNNING or STOPPED state. 
 host_db12c_setup_folder   = "./host_db12c"                         # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
 host_db12c_env_config     = "./host_db12c/set_env_db12c_config.sh" # Host environment config script used to bootstrap host.
+host_db12c_ORACLE_ROOT    = "/u00"                                 # default Oracle root / software folder 
+host_db12c_ORACLE_DATA    = "/u01"                                 # default Oracle data folder used to store datafiles
+host_db12c_ORACLE_ARCH    = "/u02"                                 # default Oracle arch folder used to store archive logs and backups
 # --- EOF ----------------------------------------------------------------------

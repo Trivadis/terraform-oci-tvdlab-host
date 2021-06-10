@@ -59,7 +59,6 @@ fi
 
 # define the oradba url and package name
 export GITHUB_URL="https://raw.githubusercontent.com/oehrlis/oradba_init/master"
-export ORADBA_PKG="oradba_init.zip"
 
 # OraDBA init, setup an configuration scripts
 export SETUP_INIT="00_setup_oradba_init.sh"             # main init script

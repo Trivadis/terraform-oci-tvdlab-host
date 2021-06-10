@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add service, crontab and housekeeping configuration to the `config_db_env.sh` files.
 - Add *ORACLE_ROOT*, *ORACLE_DATA* and *ORACLE_ARCH* variables
+- Remove *ORADBA_PKG* from [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
 
 ### Fixed
 

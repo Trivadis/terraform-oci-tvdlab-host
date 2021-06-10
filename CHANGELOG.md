@@ -14,16 +14,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+### Removed
+
+## [0.0.5] - 2021-06-11
+
+### Added
+
+- Add host example for Oracle Database 18c [host_db18c](examples/host_db18c)
+- Add host example for Oracle Database 12c Release 2 [host_db12c](examples/host_db12c)
+
+### Changed
+
+- change base module version in example files to `version = ">=0.0.5"`
+
+### Fixed
+
 - add dummy oratab entry in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
   if variable *BE_ALIAS* is defined in the *set_env* file.
-
-### Removed
 
 ## [0.0.4] - 2021-06-11
 
 ### Added
 
-- Add host example for [host_db19c](examples/host_db19c)
+- Add host example for Oracle Database 19c [host_db19c](examples/host_db19c)
 
 ### Changed
 

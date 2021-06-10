@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - add dummy oratab entry in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
   if variable *BE_ALIAS* is defined in the *set_env* file.
+- Fix header in example files
 
 ## [0.0.4] - 2021-06-11
 

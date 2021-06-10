@@ -2,10 +2,10 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ------------------------------------------------------------------------------
-# Name.......: main.tf
+# Name.......: host_db19c.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.05.05
+# Date.......: 2021.06.11
 # Revision...: 
 # Purpose....: Main configuration to build the training environment.
 # Notes......: Define the core resouces using the module tvdlab-base
@@ -17,7 +17,7 @@
 # - ADD VCM Module -------------------------------------------------------------
 module "tvdlab-db19c" {
   source  = "Trivadis/tvdlab-host/oci"
-  version = ">=0.0.5"
+  version = ">=0.0.6"
 
   # - Mandatory Parameters -----------------------------------------------------
   region              = var.region                          # The OCI region where resources will be created

@@ -385,7 +385,15 @@ if
 then
     echo "### Install BasEnv #####################################################"
     if [ -f "$ORADBA_BIN/$SETUP_BASENV" ]; then
+        # create a softlink for oratab
+        mkdir -p $ORACLE_BASE/local/dba
+        touch $ORACLE_BASE/local/dba/oratab
+        ln -sfv $ORACLE_BASE/local/dba/oratab /etc/oratab
+        chown -Rv $ORACLE_USER:$ORACLE_USER $ORACLE_BASE/local
         su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; $ORADBA_BIN/$SETUP_BASENV"
+        if [ -n "$BE_ALIAS" ]; then
+            echo "$BE_ALIAS:$ORACLE_HOME:D" >$ORACLE_BASE/local/dba/oratab
+        fi
     else
         echo "WARN: Could not find $ORADBA_BIN/$SETUP_BASENV"
     fi

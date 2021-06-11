@@ -16,6 +16,10 @@
 # -----------------------------------------------------------------------------
 # - Customization -------------------------------------------------------------
 export ORACLE_PWD=""                            # Default Oracle password
+export ORACLE_ROOT=""                           # default Oracle root / software folder 
+export ORACLE_DATA=""                           # default Oracle data folder used to store datafiles
+export ORACLE_ARCH=""                           # default Oracle arch folder used to store archive logs and backups
+export ORACLE_BASE=""                           # Oracle base directory
 export PORT_LIST="1521 5500 5501 5502"          # list of firewall ports to configure
 
 # enable tasks to run during bootstrap

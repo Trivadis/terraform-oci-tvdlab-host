@@ -16,6 +16,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.10] - 2021-06-12
+
+### Changed
+
+- update terraform example files to latest source version [0.0.10].
+- reorder *runcmd* in cloud-init. First change permissions of some files
+- disable agent for file provisioner connect.
+
+### Fixed
+
+- remove dependency on `local` for different setups. It now can be parameterized
+  by setting *BE_DIR_NAME*. Default is `local`.
+- check if oracle service does exist before restarting it.
+
 ## [0.0.9] - 2021-06-12
 
 ### Changed
@@ -124,3 +138,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.7]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.7
 [0.0.8]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.8
 [0.0.9]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.9
+[0.0.10]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.10

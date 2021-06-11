@@ -64,6 +64,7 @@ resource "oci_core_instance" "compute" {
       type                = "ssh"
       user                = var.tvd_os_user
       host                = self.private_ip
+      agent               = false
       private_key         = var.ssh_private_key
       bastion_host        = var.bastion_hosts[count.index]
       bastion_user        = "opc"

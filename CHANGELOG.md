@@ -16,6 +16,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.11] - 2021-06-12
+
+### Changed
+
+- Add empty variable to `set_env_config.template.sh` i.e. *ORACLE_ROOT*,
+  *ORACLE_DATA*, *ORACLE_ARCH* and *ORACLE_BASE*
+- Bootstrap script now update variables *ORACLE_ROOT*, *ORACLE_DATA*,
+  *ORACLE_ARCH* and *ORACLE_BASE* in `set_env_config.template.sh`
+- update terraform example files to latest source version [0.0.11].
+
+### Fixed
+
+- check if config has to run
+
 ## [0.0.10] - 2021-06-12
 
 ### Changed
@@ -139,3 +153,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.8]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.8
 [0.0.9]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.9
 [0.0.10]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.10
+[0.0.11]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.11

@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.8] - 2021-06-12
+
+### Fixed
+
+- fix issue with undefined *EMAIL*
+
 ## [0.0.7] - 2021-06-11
 
 ### Fixed
@@ -106,3 +112,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.5]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.5
 [0.0.6]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.6
 [0.0.7]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.7
+[0.0.8]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.8

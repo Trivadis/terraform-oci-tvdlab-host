@@ -25,7 +25,8 @@ export OUD_CUSTOM='TRUE'                    # Flag to create custom instance
 export PORT_REST_ADMIN=8444
 export PORT_REST_HTTP=1080
 export PORT_REST_HTTPS=1081
-export ADMIN_PASSWORD=${tvd_def_password}   # Default directory admin password
+export ORACLE_PWD=""                        # Default Oracle password
+export ADMIN_PASSWORD=$ORACLE_PWD           # Default directory admin password
 export PORT_LIST="1389 1636 4444 8989 8444 1080 1081 7001 7002" # list of firewall ports to configure
 
 # enable tasks to run during bootstrap

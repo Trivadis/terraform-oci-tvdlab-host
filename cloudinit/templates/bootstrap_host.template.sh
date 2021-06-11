@@ -47,6 +47,7 @@ export PRIVATE_IP="$(hostname -I |cut -d' ' -f1)"  # IP address for the compute 
 # - Default Values ------------------------------------------------------------
 # define logfile and logging
 export BE_ALIAS=""
+export EMAIL="MAILADDRESS"
 export LOG_BASE="/var/log"                      # Use script directory as default logbase
 TIMESTAMP=$(date "+%Y.%m.%d_%H%M%S")            # timestamp used for the log file
 readonly LOGFILE="$LOG_BASE/$(basename $SCRIPT_NAME .sh)_$TIMESTAMP.log" # absolute logfile name

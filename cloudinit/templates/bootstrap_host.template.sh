@@ -31,6 +31,13 @@ export ORACLE_ARCH=${ORACLE_ARCH}               # default Oracle arch folder use
 # - End of Terraform Customization --------------------------------------------
 
 # - Customization -------------------------------------------------------------
+export BE_ALIAS=""
+export EMAIL="MAILADDRESS"
+export BE_DIR_NAME="local"                      # Name of the TVD-BasEnv folder either local oder tvdtoolbox
+# - End of Customization ------------------------------------------------------
+
+# - Default Values ------------------------------------------------------------
+# define logfile and logging
 export SCRIPT_NAME=$(basename $0)               # script name
 export SCRIPT_BIN_DIR=$(dirname $0)             # script bin directory
 export ORACLE_BASE="$ORACLE_ROOT/app/oracle"    # Oracle base directory
@@ -39,15 +46,8 @@ export ORADBA_BIN="$OPT_DIR/oradba/bin"         # bin foder of oradba init
 export SOFTWARE="$OPT_DIR/stage"                # local software stage folder
 export DOWNLOAD="/tmp/download"                 # temporary download location
 export LAB_NAME_LOWER=$(echo $LAB_NAME| tr '[:upper:]' '[:lower:]')             # lower case LAB name
-export LAB_BASE="$ORACLE_BASE/local/$(echo $LAB_NAME_LOWER| sed 's/-//')"       # local LAB base folder
+export LAB_BASE="$ORACLE_BASE/$BE_DIR_NAME/$(echo $LAB_NAME_LOWER| sed 's/-//')"       # local LAB base folder
 export PRIVATE_IP="$(hostname -I |cut -d' ' -f1)"  # IP address for the compute instance
-
-# - End of Customization ------------------------------------------------------
-
-# - Default Values ------------------------------------------------------------
-# define logfile and logging
-export BE_ALIAS=""
-export EMAIL="MAILADDRESS"
 export LOG_BASE="/var/log"                      # Use script directory as default logbase
 TIMESTAMP=$(date "+%Y.%m.%d_%H%M%S")            # timestamp used for the log file
 readonly LOGFILE="$LOG_BASE/$(basename $SCRIPT_NAME .sh)_$TIMESTAMP.log" # absolute logfile name
@@ -114,6 +114,9 @@ if [ -f "$SCRIPT_BIN_DIR/set_config_env.sh" ]; then
 else
     echo "WARN: could not source db env $SCRIPT_BIN_DIR/set_config_env.sh"
 fi
+
+
+export LAB_BASE="$ORACLE_BASE/$BE_DIR_NAME/$(echo $LAB_NAME_LOWER| sed 's/-//')"       # local LAB base folder
 
 if [ "$system_initilized" = true ] ; then
     echo "INFO: System already initialized. Fallback to minimal initialisation."
@@ -295,22 +298,22 @@ then
     su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; $ORADBA_BIN/$SETUP_OUDBASE"
 
     echo "### Configure Start Scripts ############################################"
-    cp -v $ORACLE_BASE/local/oudbase/templates/etc/oracle_oud_all /etc/init.d
+    cp -v $ORACLE_BASE/$BE_DIR_NAME/oudbase/templates/etc/oracle_oud_all /etc/init.d
     chkconfig --add oracle_oud_all
     chkconfig --list
 
     echo "### Config $ORACLE_USER crontab ##############################################"
-    su -l $ORACLE_USER -c "cp $ORACLE_BASE/local/oudbase/templates/etc/oud.crontab $ORACLE_BASE/local/oudbase/etc/oud.crontab"
-    su -l $ORACLE_USER -c "sed -i \"s|OUD_BASE|$ORACLE_BASE/local|g\" $ORACLE_BASE/local/oudbase/etc/oud.crontab"
-    su -l $ORACLE_USER -c "sed -i \"s|MAILADDRESS|$EMAIL|g\" $ORACLE_BASE/local/oudbase/etc/oud.crontab"
-    su -l $ORACLE_USER -c "sed -i '/^#.*oud_backup.sh/s/^#//' $ORACLE_BASE/local/oudbase/etc/oud.crontab"
-    su -l $ORACLE_USER -c "sed -i '/^#.*oud_export.sh/s/^#//' $ORACLE_BASE/local/oudbase/etc/oud.crontab"
-    su -l $ORACLE_USER -c "crontab $ORACLE_BASE/local/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "cp $ORACLE_BASE/$BE_DIR_NAME/oudbase/templates/etc/oud.crontab $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "sed -i \"s|OUD_BASE|$ORACLE_BASE/$BE_DIR_NAME|g\" $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "sed -i \"s|MAILADDRESS|$EMAIL|g\" $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "sed -i '/^#.*oud_backup.sh/s/^#//' $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "sed -i '/^#.*oud_export.sh/s/^#//' $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "crontab $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
 
     echo "### Config $ORACLE_USER housekeeping #########################################"
-    su -l $ORACLE_USER -c "crontab -l >$ORACLE_BASE/local/oudbase/etc/oud.crontab"
-    su -l $ORACLE_USER -c "sed -i '/^#.*housekeeping.conf/s/^#//' $ORACLE_BASE/local/oudbase/etc/oud.crontab"
-    su -l $ORACLE_USER -c "crontab $ORACLE_BASE/local/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "crontab -l >$ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "sed -i '/^#.*housekeeping.conf/s/^#//' $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "crontab $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
 else
     echo "### Skip OUDBase installation ##########################################"
 fi
@@ -387,13 +390,13 @@ then
     echo "### Install BasEnv #####################################################"
     if [ -f "$ORADBA_BIN/$SETUP_BASENV" ]; then
         # create a softlink for oratab
-        mkdir -p $ORACLE_BASE/local/dba
-        touch $ORACLE_BASE/local/dba/oratab
-        ln -sfv $ORACLE_BASE/local/dba/oratab /etc/oratab
-        chown -Rv $ORACLE_USER:$ORACLE_USER $ORACLE_BASE/local
+        mkdir -p $ORACLE_BASE/$BE_DIR_NAME/dba
+        touch $ORACLE_BASE/$BE_DIR_NAME/dba/oratab
+        ln -sfv $ORACLE_BASE/$BE_DIR_NAME/dba/oratab /etc/oratab
+        chown -Rv $ORACLE_USER:$ORACLE_USER $ORACLE_BASE/$BE_DIR_NAME
         su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; $ORADBA_BIN/$SETUP_BASENV"
         if [ -n "$BE_ALIAS" ]; then
-            echo "$BE_ALIAS:$ORACLE_HOME:D" >$ORACLE_BASE/local/dba/oratab
+            echo "$BE_ALIAS:$ORACLE_HOME:D" >$ORACLE_BASE/$BE_DIR_NAME/dba/oratab
         fi
     else
         echo "WARN: Could not find $ORADBA_BIN/$SETUP_BASENV"
@@ -421,14 +424,14 @@ if [ "$task_lab_config" = true ]; then
     echo "### Config LAB environment ########################################"
     mkdir -vp $(dirname $LAB_BASE)
     chown -vR $ORACLE_USER:$ORACLE_USER $(dirname $LAB_BASE)
-    curl -Lf $LAB_REPO -o "$ORACLE_BASE/local/$LAB_NAME.zip"
+    curl -Lf $LAB_REPO -o "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip"
     # check if we have a lab ZIP
-    if [ -f "$ORACLE_BASE/local/$LAB_NAME.zip" ]; then
+    if [ -f "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip" ]; then
         echo "INFO: Deploy LAB environment"
         rm -rf $LAB_BASE
-        unzip "$ORACLE_BASE/local/$LAB_NAME.zip" -d $LAB_BASE
+        unzip "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip" -d $LAB_BASE
         chown -vR $ORACLE_USER:$ORACLE_USER $LAB_BASE
-        rm -rf $ORACLE_BASE/local/$LAB_NAME.zip
+        rm -rf $ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip
     else
         echo "WARN: could not deploy LAB environment"
     fi
@@ -450,7 +453,7 @@ if [ "$task_lab_config" = true ]; then
     # start post config
     if [ -f "$SCRIPT_BIN_DIR/$CONFIG_ENV" ]; then
         echo "INFO: initiate lab configuration in background $SCRIPT_BIN_DIR/$CONFIG_ENV"
-        su -l $ORACLE_USER -c "nohup $SCRIPT_BIN_DIR/$CONFIG_ENV > $ORACLE_BASE/local/dba/log/$(basename $CONFIG_ENV .sh).log 2>&1 &"
+        su -l $ORACLE_USER -c "nohup $SCRIPT_BIN_DIR/$CONFIG_ENV > $SCRIPT_BIN_DIR/$(basename $CONFIG_ENV .sh).log 2>&1 &"
     fi
 else
     echo "### Skip config LAB_NAME environment ###################################"
@@ -461,7 +464,7 @@ if [ "$system_initilized" = true ] ; then
     ORACLE_SERVICE=$(systemctl list-unit-files --type service|grep -i "oracle.service")
     if [ -n "$ORACLE_SERVICE" ]; then
         systemctl restart oracle
-    then
+    fi
 fi
 
 # adjust permissions

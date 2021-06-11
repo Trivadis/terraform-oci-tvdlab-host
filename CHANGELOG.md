@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.12] - 2021-06-12
+
+### Fixed
+
+- Fix issue with escape of slash in sed command in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
+
 ## [0.0.11] - 2021-06-12
 
 ### Changed
@@ -154,3 +160,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.9]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.9
 [0.0.10]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.10
 [0.0.11]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.11
+[0.0.12]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.12

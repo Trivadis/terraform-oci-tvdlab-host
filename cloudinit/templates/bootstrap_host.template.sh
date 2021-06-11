@@ -107,12 +107,21 @@ echo "INFO: Start the bootstrap process on host $(hostname) at $(date)"
 if [ -f "$SCRIPT_BIN_DIR/set_config_env.sh" ]; then
     # add ORACLE_PASSWORD to the file
     echo "INFO: update a few variables in $SCRIPT_BIN_DIR/set_config_env.sh"
-    if [ -n "$ORACLE_PWD" ];  then sed -i "s/\(.*ORACLE_PWD=\)\"\"/\1\"$ORACLE_PWD\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
-    if [ -n "$ORACLE_ROOT" ]; then sed -i "s/\(.*ORACLE_ROOT=\)\"\"/\1\"$ORACLE_ROOT\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
-    if [ -n "$ORACLE_DATA" ]; then sed -i "s/\(.*ORACLE_DATA=\)\"\"/\1\"$ORACLE_DATA\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
-    if [ -n "$ORACLE_ARCH" ]; then sed -i "s/\(.*ORACLE_ARCH=\)\"\"/\1\"$ORACLE_ARCH\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
-    if [ -n "$ORACLE_BASE" ]; then sed -i "s/\(.*ORACLE_BASE=\)\"\"/\1\"$ORACLE_BASE\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
-    
+    if [ -n "$ORACLE_PWD" ]; then
+        sed -i "s|\(.*ORACLE_PWD=\)\"\"|\1\"$ORACLE_PWD\"|" $SCRIPT_BIN_DIR/set_config_env.sh
+    fi
+    if [ -n "$ORACLE_ROOT" ]; then
+        sed -i "s|\(.*ORACLE_ROOT=\)\"\"|\1\"$ORACLE_ROOT\"|" $SCRIPT_BIN_DIR/set_config_env.sh
+    fi
+    if [ -n "$ORACLE_DATA" ]; then
+        sed -i "s|\(.*ORACLE_DATA=\)\"\"|\1\"$ORACLE_DATA\"|" $SCRIPT_BIN_DIR/set_config_env.sh
+    fi
+    if [ -n "$ORACLE_ARCH" ]; then
+        sed -i "s|\(.*ORACLE_ARCH=\)\"\"|\1\"$ORACLE_ARCH\"|" $SCRIPT_BIN_DIR/set_config_env.sh
+    fi
+    if [ -n "$ORACLE_BASE" ]; then
+        sed -i "s|\(.*ORACLE_BASE=\)\"\"|\1\"$ORACLE_BASE\"|" $SCRIPT_BIN_DIR/set_config_env.sh
+    fi
     echo "INFO: source DB env from $SCRIPT_BIN_DIR/set_config_env.sh"
     . $SCRIPT_BIN_DIR/set_config_env.sh
 else

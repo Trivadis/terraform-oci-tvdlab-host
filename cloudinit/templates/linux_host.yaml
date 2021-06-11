@@ -67,6 +67,10 @@ write_files:
 
 # --- Run configuration commands ----------------------------------------------
 runcmd:
+  # Fix permissions
+  - chown -R ${os_user}:${os_user} /home/${os_user}/.ssh
+  - chown -R ${os_user}:${os_user} /home/${os_user}/cloudinit
+
   # configure tools from development repositories
   - yum-config-manager --enable ol7_developer --enable ol7_developer_EPEL
   - yum upgrade -y
@@ -76,10 +80,6 @@ runcmd:
   - setsebool httpd_can_network_connect on -P
   - setenforce 0
   - sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
-
-  # Fix permissions
-  - chown -R ${os_user}:${os_user} /home/${os_user}/.ssh
-  - chown -R ${os_user}:${os_user} /home/${os_user}/cloudinit
 
   # start bootstrap
   - /home/${os_user}/cloudinit/bootstrap_linux_host.sh

@@ -106,9 +106,13 @@ echo "INFO: Start the bootstrap process on host $(hostname) at $(date)"
 # source the release specific environment variables
 if [ -f "$SCRIPT_BIN_DIR/set_config_env.sh" ]; then
     # add ORACLE_PASSWORD to the file
-    if [ -n "$ORACLE_PWD" ]; then
-        sed -i "s/\(.*ORACLE_PWD=\)\"\"/\1\"$ORACLE_PWD\"/" $SCRIPT_BIN_DIR/set_config_env.sh
-    fi
+    echo "INFO: update a few variables in $SCRIPT_BIN_DIR/set_config_env.sh"
+    if [ -n "$ORACLE_PWD" ];  then sed -i "s/\(.*ORACLE_PWD=\)\"\"/\1\"$ORACLE_PWD\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
+    if [ -n "$ORACLE_ROOT" ]; then sed -i "s/\(.*ORACLE_ROOT=\)\"\"/\1\"$ORACLE_ROOT\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
+    if [ -n "$ORACLE_DATA" ]; then sed -i "s/\(.*ORACLE_DATA=\)\"\"/\1\"$ORACLE_DATA\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
+    if [ -n "$ORACLE_ARCH" ]; then sed -i "s/\(.*ORACLE_ARCH=\)\"\"/\1\"$ORACLE_ARCH\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
+    if [ -n "$ORACLE_BASE" ]; then sed -i "s/\(.*ORACLE_BASE=\)\"\"/\1\"$ORACLE_BASE\"/" $SCRIPT_BIN_DIR/set_config_env.sh; fi
+    
     echo "INFO: source DB env from $SCRIPT_BIN_DIR/set_config_env.sh"
     . $SCRIPT_BIN_DIR/set_config_env.sh
 else
@@ -450,10 +454,12 @@ if [ "$task_lab_config" = true ]; then
     echo "INFO: Adjust permision of files uploaded with provisioner"
     find $SCRIPT_BIN_DIR  -name '*.sh' -type f -exec chmod -v 755 {} \;
 
-    # start post config
-    if [ -f "$SCRIPT_BIN_DIR/$CONFIG_ENV" ]; then
-        echo "INFO: initiate lab configuration in background $SCRIPT_BIN_DIR/$CONFIG_ENV"
-        su -l $ORACLE_USER -c "nohup $SCRIPT_BIN_DIR/$CONFIG_ENV > $SCRIPT_BIN_DIR/$(basename $CONFIG_ENV .sh).log 2>&1 &"
+    if [ "$system_initilized" = false ] ; then
+        # start post config
+        if [ -f "$SCRIPT_BIN_DIR/$CONFIG_ENV" ]; then
+            echo "INFO: initiate lab configuration in background $SCRIPT_BIN_DIR/$CONFIG_ENV"
+            su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; nohup $SCRIPT_BIN_DIR/$CONFIG_ENV > $SCRIPT_BIN_DIR/$(basename $CONFIG_ENV .sh).log 2>&1 &"
+        fi
     fi
 else
     echo "### Skip config LAB_NAME environment ###################################"

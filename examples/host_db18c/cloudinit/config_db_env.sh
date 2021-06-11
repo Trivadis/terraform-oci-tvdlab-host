@@ -55,9 +55,12 @@ else
     echo "WARN: could not source db environment"
 fi
 
-echo "INFO: Workaround TVD-Backup ---------------------------------------------"
-# remove Pod::Find as this is not available as of Perl 5.32.x
-sed -i -e "s|^\(use Pod::Find.*\)|#\1|g" ${ORACLE_BASE}/local/tvdbackup/lib/TVD/Usage.pm
+USAGE=$(find /u0?/app/oracle/*/tvdbackup/lib/TVD -name Usage.pm 2>/dev/null |head -1)
+if [ -n "$USAGE" ]; then
+    echo "INFO: Workaround TVD-Backup ---------------------------------------------"
+    # remove Pod::Find as this is not available as of Perl 5.32.x
+    sed -i -e "s|^\(use Pod::Find.*\)|#\1|g" $USAGE
+fi
 
 echo "INFO: Listener Environment ------------------------------------------------"
 echo "" >${TNS_ADMIN}/tnsnames.ora

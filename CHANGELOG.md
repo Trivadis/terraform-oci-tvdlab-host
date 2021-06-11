@@ -16,6 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.9] - 2021-06-12
+
+### Changed
+
+- update to latest source version
+
+### Fixed
+
+- check for service
+
 ## [0.0.8] - 2021-06-12
 
 ### Fixed
@@ -113,3 +123,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.6]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.6
 [0.0.7]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.7
 [0.0.8]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.8
+[0.0.9]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.9

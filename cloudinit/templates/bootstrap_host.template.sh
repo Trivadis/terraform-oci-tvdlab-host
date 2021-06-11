@@ -458,7 +458,10 @@ fi
 
 # restart Oracle services 
 if [ "$system_initilized" = true ] ; then
-    systemctl restart oracle
+    ORACLE_SERVICE=$(systemctl list-unit-files --type service|grep -i "oracle.service")
+    if [ -n "$ORACLE_SERVICE" ]; then
+        systemctl restart oracle
+    then
 fi
 
 # adjust permissions

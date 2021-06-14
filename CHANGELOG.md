@@ -16,6 +16,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.15] - 2021-06-14
+
+### Changed
+
+- Introduce post configuration script for cloned systems. If system is initialized if will look for the script defined by *POST_CONFIG_ENV*. The script will then be executed nohup as user *oracle*.
+- update terraform example files to latest source version [0.0.15].
+
+### Fixed
+
+- Initialize bash variable *CONFIG_ENV* and *POST_CONFIG_ENV* in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
+
 ## [0.0.14] - 2021-06-14
 
 ### Changed

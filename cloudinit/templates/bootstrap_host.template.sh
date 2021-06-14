@@ -32,6 +32,8 @@ export ORACLE_ARCH=${ORACLE_ARCH}               # default Oracle arch folder use
 
 # - Customization -------------------------------------------------------------
 export BE_ALIAS=""
+export CONFIG_ENV=""
+export POST_CONFIG_ENV=""
 export EMAIL="MAILADDRESS"
 export BE_DIR_NAME="local"                      # Name of the TVD-BasEnv folder either local oder tvdtoolbox
 # - End of Customization ------------------------------------------------------
@@ -475,6 +477,12 @@ if [ "$task_lab_config" = true ]; then
         if [ -f "$SCRIPT_BIN_DIR/$CONFIG_ENV" ]; then
             echo "INFO: initiate lab configuration in background $SCRIPT_BIN_DIR/$CONFIG_ENV"
             su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; nohup $SCRIPT_BIN_DIR/$CONFIG_ENV > $SCRIPT_BIN_DIR/$(basename $CONFIG_ENV .sh).log 2>&1 &"
+        fi
+    elif [ "$system_initilized" = true ] ; then
+        # start post config for initialized system
+        if [ -f "$SCRIPT_BIN_DIR/$POST_CONFIG_ENV" ]; then
+            echo "INFO: initiate lab post configuration in background $SCRIPT_BIN_DIR/$POST_CONFIG_ENV"
+            su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; nohup $SCRIPT_BIN_DIR/$POST_CONFIG_ENV > $SCRIPT_BIN_DIR/$(basename $CONFIG_ENV .sh).log 2>&1 &"
         fi
     fi
 else

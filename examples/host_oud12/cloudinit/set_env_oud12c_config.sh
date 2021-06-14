@@ -53,7 +53,7 @@ OPENDS_JAVA_ARGS="-Dcom.sun.jndi.ldap.object.disableEndpointIdentification=true"
 # Scripts and Folder configuration
 export ORACLE_HOME="$ORACLE_BASE/product/$OUD_HOME_NAME"
 export CONFIG_ENV="config_oud_env.sh"
-export POST_CONFIG_ENV=""
+export POST_CONFIG_ENV="post_config_oud_env.sh"
 
 # regular software packages customization
 # regular OUD Software Packages

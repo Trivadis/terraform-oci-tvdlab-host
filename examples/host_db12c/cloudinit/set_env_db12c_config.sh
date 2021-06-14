@@ -38,7 +38,7 @@ export task_lab_config=true         # enable / disable Training configuration
 # Scripts and Folder configuration
 export ORACLE_HOME="$ORACLE_BASE/product/$ORACLE_HOME_NAME"
 export CONFIG_ENV="config_db_env.sh"
-export POST_CONFIG_ENV=""
+export POST_CONFIG_ENV="post_config_db_env.sh"
 
 # regular software packages customization
 export DB_BASE_PKG="linuxx64_12201_database.zip"

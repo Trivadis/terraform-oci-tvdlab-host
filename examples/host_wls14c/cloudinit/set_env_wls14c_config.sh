@@ -51,7 +51,7 @@ export task_lab_config=true         # enable / disable Training configuration
 # Scripts and Folder configuration
 export ORACLE_HOME="$ORACLE_BASE/product/$WLS_HOME_NAME"
 export CONFIG_ENV="config_wls_env.sh"
-export POST_CONFIG_ENV=""
+export POST_CONFIG_ENV="post_config_wls_env.sh"
 
 # regular software packages customization
 # regular WLS Software Packages

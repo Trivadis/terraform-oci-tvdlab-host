@@ -17,7 +17,7 @@
 # - ADD VCM Module -------------------------------------------------------------
 module "tvdlab-oud12c" {
   source  = "Trivadis/tvdlab-host/oci"
-  version = ">=0.0.13"
+  version = ">=0.0.14"
 
   # - Mandatory Parameters -----------------------------------------------------
   region              = var.region                          # The OCI region where resources will be created
@@ -42,23 +42,23 @@ module "tvdlab-oud12c" {
   label_prefix          = var.label_prefix                        # A string that will be prepended to all resources
   tags                  = var.tags                                # A simple key-value pairs to tag the resources created
   hosts_file            = local.hosts_file                        # path to a custom /etc/hosts which has to be appended"
-  host_ORACLE_ROOT      = var.host_oud12c_ORACLE_ROOT              # default Oracle root / software folder 
-  host_ORACLE_DATA      = var.host_oud12c_ORACLE_DATA              # default Oracle data folder used to store datafiles
-  host_ORACLE_ARCH      = var.host_oud12c_ORACLE_ARCH              # default Oracle arch folder used to store archive logs and backups
-  host_setup_folder     = var.host_oud12c_setup_folder             # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
-  host_env_config       = var.host_oud12c_env_config               # Host environment config script used to bootstrap host.
-  host_enabled          = var.host_oud12c_enabled                  # whether to create the compute instance or not.
-  host_name             = var.host_oud12c_name                     # Name portion of host
-  host_image_id         = var.host_oud12c_image_id                 # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).
-  host_boot_volume_size = var.host_oud12c_boot_volume_size         # Size of the boot volume.
-  host_ocpus            = var.host_oud12c_ocpus                    # The ocpus for the shape.
-  host_memory_in_gbs    = var.host_oud12c_memory_in_gbs            # The memory in gbs for the shape.
-  host_volume_enabled   = var.host_oud12c_volume_enabled           # add a block volume
-  host_volume_size      = var.host_oud12c_volume_size              # Size of the additional volume.
-  host_volume_source    = var.host_oud12c_volume_source            # Source block volume to clone from.
-  host_private_ip       = var.host_oud12c_private_ip               # Private IP for host.
-  host_shape            = var.host_oud12c_shape                    # The shape of compute instance.
-  host_state            = var.host_oud12c_state                    # Whether the host should be either RUNNING or STOPPED state.
+  host_ORACLE_ROOT      = var.host_oud12c_ORACLE_ROOT             # default Oracle root / software folder 
+  host_ORACLE_DATA      = var.host_oud12c_ORACLE_DATA             # default Oracle data folder used to store datafiles
+  host_ORACLE_ARCH      = var.host_oud12c_ORACLE_ARCH             # default Oracle arch folder used to store archive logs and backups
+  host_setup_folder     = var.host_oud12c_setup_folder            # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
+  host_env_config       = var.host_oud12c_env_config              # Host environment config script used to bootstrap host.
+  host_enabled          = var.host_oud12c_enabled                 # whether to create the compute instance or not.
+  host_name             = var.host_oud12c_name                    # Name portion of host
+  host_image_id         = var.host_oud12c_image_id                # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).
+  host_boot_volume_size = var.host_oud12c_boot_volume_size        # Size of the boot volume.
+  host_ocpus            = var.host_oud12c_ocpus                   # The ocpus for the shape.
+  host_memory_in_gbs    = var.host_oud12c_memory_in_gbs           # The memory in gbs for the shape.
+  host_volume_enabled   = var.host_oud12c_volume_enabled          # add a block volume
+  host_volume_size      = var.host_oud12c_volume_size             # Size of the additional volume.
+  host_volume_source    = var.host_oud12c_volume_source           # Source block volume to clone from.
+  host_private_ip       = var.host_oud12c_private_ip              # Private IP for host.
+  host_shape            = var.host_oud12c_shape                   # The shape of compute instance.
+  host_state            = var.host_oud12c_state                   # Whether the host should be either RUNNING or STOPPED state.
 }
 
 # ------------------------------------------------------------------------------

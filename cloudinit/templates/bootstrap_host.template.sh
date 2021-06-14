@@ -481,14 +481,6 @@ else
     echo "### Skip config LAB_NAME environment ###################################"
 fi
 
-# restart Oracle services 
-if [ "$system_initilized" = true ] ; then
-    ORACLE_SERVICE=$(systemctl list-unit-files --type service|grep -i "oracle.service")
-    if [ -n "$ORACLE_SERVICE" ]; then
-        systemctl restart oracle
-    fi
-fi
-
 # adjust permissions
 chown -R $ORACLE_USER:$ORACLE_USER /home/$ORACLE_USER 
 echo "INFO: Finish the bootstrap process on host $(hostname) at $(date)"

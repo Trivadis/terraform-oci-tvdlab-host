@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.14] - 2021-06-14
+
+### Changed
+
+- Remove service restart in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
+- update terraform example files to latest source version [0.0.14].
+
 ## [0.0.13] - 2021-06-14
 
 ### Changed
@@ -171,3 +178,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.11]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.11
 [0.0.12]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.12
 [0.0.13]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.13
+[0.0.14]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.14

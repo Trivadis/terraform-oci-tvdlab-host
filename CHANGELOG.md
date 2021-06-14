@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change behavior of command in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
   LAB environment will only be deployed if `$LAB_REPO` and `$LAB_NAME` is defined.
   Otherwise it will take config files from the *cloudinit* folder.
+- update terraform example files to latest source version [0.0.13].
 
 ## [0.0.12] - 2021-06-12
 

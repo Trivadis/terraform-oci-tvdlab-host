@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.13] - 2021-06-14
+
+### Changed
+
+- Change behavior of command in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
+  LAB environment will only be deployed if `$LAB_REPO` and `$LAB_NAME` is defined.
+  Otherwise it will take config files from the *cloudinit* folder.
+
 ## [0.0.12] - 2021-06-12
 
 ### Fixed
@@ -161,3 +169,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.10]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.10
 [0.0.11]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.11
 [0.0.12]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.12
+[0.0.13]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.13

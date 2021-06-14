@@ -434,28 +434,35 @@ chown -R $ORACLE_USER:$ORACLE_USER $ORACLE_DATA/fast_recovery_area
 
 # Start task config the lab
 if [ "$task_lab_config" = true ]; then
+    CONFIG_BASE=$SCRIPT_BIN_DIR
     echo "### Config LAB environment ########################################"
-    mkdir -vp $(dirname $LAB_BASE)
-    chown -vR $ORACLE_USER:$ORACLE_USER $(dirname $LAB_BASE)
-    curl -Lf $LAB_REPO -o "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip"
-    # check if we have a lab ZIP
-    if [ -f "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip" ]; then
-        echo "INFO: Deploy LAB environment"
-        rm -rf $LAB_BASE
-        unzip "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip" -d $LAB_BASE
-        chown -vR $ORACLE_USER:$ORACLE_USER $LAB_BASE
-        rm -rf $ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip
+    if [ -n "$LAB_REPO" ] && [ -n "$LAB_BASE" ]; then
+        CONFIG_BASE=$LAB_BASE
+        echo "INFO: Download and deploy LAB configuration"
+        mkdir -vp $(dirname $LAB_BASE)
+        chown -vR $ORACLE_USER:$ORACLE_USER $(dirname $LAB_BASE)
+        curl -Lf $LAB_REPO -o "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip"
+        # check if we have a lab ZIP
+        if [ -f "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip" ]; then
+            echo "INFO: Deploy LAB environment"
+            rm -rf $LAB_BASE
+            unzip "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip" -d $LAB_BASE
+            chown -vR $ORACLE_USER:$ORACLE_USER $LAB_BASE
+            rm -rf $ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip
+        else
+            echo "WARN: could not deploy LAB environment"
+        fi
     else
-        echo "WARN: could not deploy LAB environment"
+        echo "INFO: Skip deploy LAB configuration"
     fi
 
-    # Copy bash config
-    if [ -f "$LAB_BASE/etc/bash_profile" ]; then
-        echo "INFO: Copy bash profile from LAB environment"
+    # copy a predefined bash profile
+    if [ -f "$CONFIG_BASE/bash_profile" ]; then 
+        echo "INFO: Copy bash profile from $CONFIG_BASE/bash_profile"
         if [ -f "/home/$ORACLE_USER/.bash_profile" ]; then
-            cp -v /home/$ORACLE_USER/.bash_profile /home/$ORACLE_USER/.bash_profile.orig
+            cp -v $CONFIG_BASE/bash_profile /home/$ORACLE_USER/.bash_profile.orig
         fi
-        cp -v $LAB_BASE/etc/bash_profile /home/$ORACLE_USER/.bash_profile
+        cp -v $CONFIG_BASE/bash_profile /home/$ORACLE_USER/.bash_profile
         chown -vR $ORACLE_USER:$ORACLE_USER /home/$ORACLE_USER/.bash_profile
     fi
     

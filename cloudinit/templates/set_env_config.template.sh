@@ -33,7 +33,7 @@ export task_oud_install=false       # enable / disable OUD software installation
 export task_basenv_install=false    # enable / disable basenv installation
 export task_oudbase_install=false   # enable / disable oudbase installation
 export task_firewall_config=true    # enable / disable firewall configuration
-export task_lab_config=false        # enable / disable Training configuration
+export task_lab_config=true         # enable / disable Training configuration
 
 # Create a list of software to download based on environment variables ending 
 # with _PKG, _PKGS, or _MASTER

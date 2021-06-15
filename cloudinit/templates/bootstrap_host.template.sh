@@ -150,10 +150,11 @@ else
     echo "INFO: Regular initialisation."
 fi
 
-# copy default profiles from skel
-if [ -f "/etc/skel/.bashrc" ]; then
-    cp /etc/skel/.bash* /home/$ORACLE_USER
-fi
+# copy default bash files from skel
+[ -f /etc/skel/.bashrc ]        && cp --verbose --update /etc/skel/.bashrc /home/$ORACLE_USER
+[ -f /etc/skel/.bash_profile ]  && cp --verbose --update /etc/skel/.bash_profile /home/$ORACLE_USER
+[ -f /etc/skel/.bash_logout ]   && cp --verbose --update /etc/skel/.bash_logout /home/$ORACLE_USER
+
 # adjust permissions
 chown -vR $ORACLE_USER:$ORACLE_USER /home/$ORACLE_USER 
 
@@ -466,6 +467,8 @@ if [ "$task_lab_config" = true ]; then
         fi
         cp -v $CONFIG_BASE/bash_profile /home/$ORACLE_USER/.bash_profile
         chown -vR $ORACLE_USER:$ORACLE_USER /home/$ORACLE_USER/.bash_profile
+    else
+        echo "INFO: Skip copy bash profile ($CONFIG_BASE/bash_profile)"
     fi
     
     # change permissions of bash scripts

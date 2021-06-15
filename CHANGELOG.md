@@ -16,6 +16,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.16] - 2021-06-15
+
+### Added
+
+- add example *POST_CONF_ENV* scripts for the different examples.
+
+### Changed
+
+- changed default value for *task_lab_config* to *true*.
+- add verbose information in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh).
+- update terraform example files to latest source version [0.0.16].
+
+### Fixed
+
+- fix [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh) to copy bash skel files only if the do not exits.
+
 ## [0.0.15] - 2021-06-14
 
 ### Changed
@@ -190,3 +206,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.12]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.12
 [0.0.13]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.13
 [0.0.14]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.14
+[0.0.15]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.15
+[0.0.16]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.16

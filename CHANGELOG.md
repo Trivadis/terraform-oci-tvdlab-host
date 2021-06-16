@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - update file header [set_env_config.template.sh](cloudinit/templates/set_env_config.template.sh)
+- change default *LOG_BASE* in all example config script to script execution
+  directory rather than `/tmp`.
 
 ### Fixed
 

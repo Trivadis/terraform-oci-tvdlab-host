@@ -6,7 +6,7 @@
 # Name.......: config_wls_env.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.11
+# Date.......: 2021.06.16
 # Revision...: 
 # Purpose....: Script to configure the WLS server after bootstrap
 # Notes......: --
@@ -24,7 +24,7 @@ HOST=${HOST:-$(hostname)}
 export SCRIPT_NAME=$(basename $0)               # script name
 export SCRIPT_BIN_DIR=$(dirname $0)             # script bin directory
 # define logfile and logging
-export LOG_BASE=${LOG_BASE:-"/tmp"}             # Use script directory as default logbase
+export LOG_BASE=${LOG_BASE:-"$SCRIPT_BIN_DIR"}  # Use script directory as default logbase
 # Define Logfile but first reset LOG_BASE if directory does not exists
 if [ ! -d ${LOG_BASE} ] || [ ! -w ${LOG_BASE} ] ; then
     echo "INFO : set LOG_BASE to /tmp"

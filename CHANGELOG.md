@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix wrong log file name in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
+  for post config scripts
+
 ### Removed
 
 ## [0.0.16] - 2021-06-15

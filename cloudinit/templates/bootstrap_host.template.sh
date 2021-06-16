@@ -485,7 +485,7 @@ if [ "$task_lab_config" = true ]; then
         # start post config for initialized system
         if [ -f "$SCRIPT_BIN_DIR/$POST_CONFIG_ENV" ]; then
             echo "INFO: initiate lab post configuration in background $SCRIPT_BIN_DIR/$POST_CONFIG_ENV"
-            su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; nohup $SCRIPT_BIN_DIR/$POST_CONFIG_ENV > $SCRIPT_BIN_DIR/$(basename $CONFIG_ENV .sh).log 2>&1 &"
+            su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; nohup $SCRIPT_BIN_DIR/$POST_CONFIG_ENV > $SCRIPT_BIN_DIR/$(basename $POST_CONFIG_ENV .sh).log 2>&1 &"
         fi
     fi
 else

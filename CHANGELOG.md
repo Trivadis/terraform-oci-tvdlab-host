@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- update file header [set_env_config.template.sh](cloudinit/templates/set_env_config.template.sh)
+
 ### Fixed
 
 ### Removed

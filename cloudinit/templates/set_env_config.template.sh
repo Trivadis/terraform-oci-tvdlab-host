@@ -6,7 +6,7 @@
 # Name.......: set_env_config.template.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.11
+# Date.......: 2021.06.15
 # Revision...: 
 # Purpose....: Template script to config the environement.
 # Notes......: --

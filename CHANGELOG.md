@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- add example *bash_profile* to all examples using basenv. The profile does
+  source *basenv.ksh* conditionally e.g. if it is available.
+
 ### Changed
 
 ### Fixed

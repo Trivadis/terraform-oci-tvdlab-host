@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - add example *bash_profile* to all examples using basenv. The profile does
   source *basenv.ksh* conditionally e.g. if it is available.
+- Add reboot command to all post config example scripts.
 
 ### Changed
 

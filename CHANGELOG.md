@@ -10,6 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Removed
+
+## [0.0.17] - 2021-06-16
+
+### Added
+
 - add example *bash_profile* to all examples using basenv. The profile does
   source *basenv.ksh* conditionally e.g. if it is available.
 - Add reboot command to all post config example scripts.
@@ -19,13 +29,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update file header [set_env_config.template.sh](cloudinit/templates/set_env_config.template.sh)
 - change default *LOG_BASE* in all example config script to script execution
   directory rather than `/tmp`.
+- change base module version in example files to `version = ">=0.0.17"`
 
 ### Fixed
 
 - Fix wrong log file name in [bootstrap_host.template.sh](cloudinit/templates/bootstrap_host.template.sh)
   for post config scripts
-
-### Removed
 
 ## [0.0.16] - 2021-06-15
 
@@ -219,3 +228,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.14]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.14
 [0.0.15]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.15
 [0.0.16]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.16
+[0.0.17]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.17

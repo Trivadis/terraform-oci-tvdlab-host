@@ -17,7 +17,7 @@
 # - ADD VCM Module -------------------------------------------------------------
 module "tvdlab-wls12c" {
   source  = "Trivadis/tvdlab-host/oci"
-  version = ">=0.0.16"
+  version = ">=0.0.17"
 
   # - Mandatory Parameters -----------------------------------------------------
   region              = var.region                          # The OCI region where resources will be created

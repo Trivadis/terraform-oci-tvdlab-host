@@ -17,7 +17,7 @@
 # - ADD VCM Module -------------------------------------------------------------
 module "tvdlab-oud12c" {
   source  = "Trivadis/tvdlab-host/oci"
-  version = ">=0.0.17"
+  version = ">=0.1.0"
 
   # - Mandatory Parameters -----------------------------------------------------
   region              = var.region                          # The OCI region where resources will be created
@@ -40,6 +40,7 @@ module "tvdlab-oud12c" {
   software_password     = var.software_password                   # Default OCI password to access the software repository
   ad_index              = var.ad_index                            # The index of the availability domain. This is used to identify the availability_domain place the compute instances.
   label_prefix          = var.label_prefix                        # A string that will be prepended to all resources
+  defined_tags          = var.defined_tags                        # Defined tags to tag the resources created
   tags                  = var.tags                                # A simple key-value pairs to tag the resources created
   hosts_file            = local.hosts_file                        # path to a custom /etc/hosts which has to be appended"
   host_ORACLE_ROOT      = var.host_oud12c_ORACLE_ROOT             # default Oracle root / software folder 

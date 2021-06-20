@@ -16,6 +16,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.1.0] - 2021-06-20
+
+### Added
+
+- add new variable for defined tags *defined_tags*
+- example crontab to [host_db12c](examples/host_db12c/cloudinit/crontab), [host_db18c](examples/host_db18c/cloudinit/crontab) and [host_db19c](examples/host_db19c/cloudinit/crontab)
+- example *oracle.service* file to [host_db12c](examples/host_db12c/cloudinit/oracle.service), [host_db18c](examples/host_db18c/cloudinit/oracle.service) and [host_db19c](examples/host_db19c/cloudinit/oracle.service)
+- add reboot with while loop in *post_config_db_env.sh* to reboot DB server as
+  soon as volumes are available
+
+### Changed
+
+- change base module version in example files to `version = ">=0.1.0"`
+- Update examples to new defined tags *defined_tags*
+- Update *config_db_env.sh* in DB example to replace mount points in *oracle.service*
+
+### Fixed
+
+- Update *config_db_env.sh* in DB example and remove *.sh* string while
+  replacing DB name in *crontab* file.
+- Update *config_db_env.sh* in DB example and replace *local* with *BE_DIR_NAME*
+  variable
+- fix [variable.tf](examples/variables.tf) to match correct variable values
+
+### Removed
+
 ## [0.0.17] - 2021-06-16
 
 ### Added
@@ -229,3 +255,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.15]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.15
 [0.0.16]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.16
 [0.0.17]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.17
+[0.1.0]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.1.0

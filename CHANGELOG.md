@@ -40,8 +40,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   variable
 - fix [variable.tf](examples/variables.tf) to match correct variable values
 
-### Removed
-
 ## [0.0.17] - 2021-06-16
 
 ### Added

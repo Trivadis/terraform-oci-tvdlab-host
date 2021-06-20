@@ -1,0 +1,45 @@
+# $Id: 21d109c069ddf05fa31958235d5abb477a5a7bd9 $
+# $Name$
+#
+# This is the runlevel script to start Oracle services with Basenv
+# for RedHat/Oracle Enterprise Linux 7+ (systemd)
+#
+# Copy this script to /usr/lib/systemd/system/ 
+# and adapt User/Group/TimeOut and Path below if required
+#
+# root> systemctl --system daemon-reload
+# root> systemctl enable oracle
+# root> systemctl start oracle
+# root> systemctl status oracle
+
+[Unit]
+Description=Oracle services started by Trivadis BasEnv
+After=ORACLE_ROOT.mount
+After=ORACLE_DATA.mount
+After=ORACLE_ARCH.mount
+After=syslog.target
+After=network.target
+After=sshd.service 
+Wants=ORACLE_ROOT.mount
+Wants=ORACLE_DATA.mount
+Wants=ORACLE_ARCH.mount
+Before=shutdown.target
+ConditionPathExists=/ORACLE_ROOT/app/oracle/local/dba/etc/oracle_start_stop.conf
+
+[Service]
+Type=forking
+RemainAfterExit=yes
+User=oracle
+Group=oinstall
+ExecStart=/ORACLE_ROOT/app/oracle/local/dba/bin/oracle_start_stop.ksh start
+ExecStop=/ORACLE_ROOT/app/oracle/local/dba/bin/oracle_start_stop.ksh stop
+TimeoutSec=300
+StandardOutput=syslog+console
+StandardError=syslog+console
+LimitMEMLOCK=infinity
+LimitNOFILE=65535
+LimitSTACK=10240K
+
+
+[Install]
+WantedBy=multi-user.target

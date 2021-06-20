@@ -1,12 +1,12 @@
 #!/bin/bash
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Name.......: post_config_db_env.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.16
+# Date.......: 2021.06.20
 # Revision...: 
 # Purpose....: Script to configure the DB server after bootstrap of an 
 #              initialized system
@@ -14,13 +14,13 @@
 # Reference..: --
 # License....: Apache License Version 2.0, January 2004 as shown
 #              at http://www.apache.org/licenses/
-# -----------------------------------------------------------------------------
-# - Customization -------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# - Customization --------------------------------------------------------------
 ORACLE_USER=$(id -nu)
 HOST=${HOST:-$(hostname)}
-# - End of Customization ------------------------------------------------------
+# - End of Customization -------------------------------------------------------
 
-# - Default Values ------------------------------------------------------------
+# - Default Values -------------------------------------------------------------
 # source genric environment variables and functions
 export SCRIPT_NAME=$(basename $0)               # script name
 export SCRIPT_BIN_DIR=$(dirname $0)             # script bin directory
@@ -33,9 +33,9 @@ if [ ! -d ${LOG_BASE} ] || [ ! -w ${LOG_BASE} ] ; then
 fi
 TIMESTAMP=$(date "+%Y.%m.%d_%H%M%S")
 readonly LOGFILE="$LOG_BASE/$(basename $SCRIPT_NAME .sh)_$TIMESTAMP.log"
-# - EOF Default Values --------------------------------------------------------
+# - EOF Default Values ---------------------------------------------------------
 
-# - Initialization ------------------------------------------------------------
+# - Initialization -------------------------------------------------------------
 # Define a bunch of bash option see 
 # https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
 set -o nounset                              # stop script after 1st cmd failed
@@ -53,10 +53,17 @@ if [ -f "$SCRIPT_BIN_DIR/set_config_env.sh" ]; then
     echo "INFO: Source basic Oracle Environment -------------------------------------"
     . $SCRIPT_BIN_DIR/set_config_env.sh
 else
-    echo "WARN: could not source db environment"
+    echo "WARN: could not source environment"
 fi
 
+echo "INFO: Check if volumes are mounted ----------------------------------------"
+until mountpoint -q $ORACLE_ROOT && mountpoint -q $ORACLE_DATA && mountpoint -q $ORACLE_ARCH; do
+    echo "INFO: $ORACLE_ROOT, $ORACLE_DATA and $ORACLE_ARCH not yet mounted"
+    sleep 10
+done
+echo "INFO: Continue, volumes are mounted ---------------------------------------"
+
 echo "INFO: Finish post bootstrap lab environment configuration on host $(hostname) at $(date)"
-echo "INFO: Initiate system reboot in about 1m ----------------------------------"
-sudo shutdown --reboot --no-wall +1
-# --- EOF ---------------------------------------------------------------------
+echo "INFO: Initiate system reboot now ------------------------------------------"
+sudo shutdown --reboot --no-wall 
+# --- EOF ----------------------------------------------------------------------

@@ -1,20 +1,20 @@
-# ---------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
-# ---------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Name.......: variables.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2020.10.12
+# Date.......: 2021.06.08
 # Revision...: 
-# Purpose....: Variable file for the terraform module tvdlab compute.
+# Purpose....: Variable file for the terraform module tvdlab host.
 # Notes......: -- 
 # Reference..: --
 # License....: Apache License Version 2.0, January 2004 as shown
 #              at http://www.apache.org/licenses/
-# ---------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
-# provider identity parameters ----------------------------------------------
+# provider identity parameters -------------------------------------------------
 variable "tenancy_ocid" {
   description = "tenancy id where to create the resources"
   type        = string
@@ -26,8 +26,8 @@ variable "region" {
   type        = string
 }
 
-# general oci parameters ----------------------------------------------------
-variable "compartment_id" {
+# general oci parameters -------------------------------------------------------
+variable "compartment_ocid" {
   description = "OCID of the compartment where to create all resources"
   type        = string
 }
@@ -50,34 +50,93 @@ variable "ad_index" {
   type        = number
 }
 
+variable "defined_tags" {
+  description = "Defined tags for this resource"
+  type        = map(any)
+  default     = {}
+}
+
 variable "tags" {
   description = "A simple key-value pairs to tag the resources created"
   type        = map(any)
   default     = {}
 }
 
-# Host Parameter ----------------------------------------------------
+# Trivadis LAB specific parameter ----------------------------------------------
+variable "tvd_participants" {
+  description = "The number of VCN to create"
+  type        = number
+  default     = 1
+}
+
+variable "tvd_domain" {
+  description = "The domain name of the LAB environment"
+  type        = string
+  default     = "trivadislabs.com"
+}
+
+variable "tvd_os_user" {
+  description = "Default OS user used to bootstrap"
+  default     = "oracle"
+  type        = string
+}
+
+variable "tvd_def_password" {
+  description = "Default password for windows administrator, oracle, directory and more"
+  type        = string
+  sensitive   = true
+}
+
+variable "lab_source_url" {
+  description = "preauthenticated URL to the LAB source ZIP file."
+  default     = ""
+  type        = string
+}
+
+variable "ssh_authorized_keys" {
+  description = "SSH authorized keys to access the resource."
+  type        = string
+}
+
+variable "ssh_private_key" {
+  description = "ssh private key used to access the internal hosts."
+  type        = string
+}
+
+variable "software_repo" {
+  description = "Software repository URL to OCI object store swift API"
+  type        = string
+}
+
+variable "software_user" {
+  description = "Default OCI user to access the software repository"
+  default     = ""
+  type        = string
+  sensitive   = true
+}
+
+variable "software_password" {
+  description = "Default OCI password to access the software repository"
+  default     = ""
+  type        = string
+  sensitive   = true
+}
+
+variable "bastion_hosts" {
+  description = "List of bastion host ips"
+  type        = list(string)
+}
+
+# Host Parameter ---------------------------------------------------------------
 variable "host_enabled" {
   description = "whether to create the compute instance or not."
-  default     = true
+  default     = false
   type        = bool
 }
 
 variable "host_name" {
   description = "Name portion of host"
-  default     = "host"
-  type        = string
-}
-
-variable "host_public_ip" {
-  description = "whether to assigne a public IP or not."
-  default     = false
-  type        = bool
-}
-
-variable "host_private_ip" {
-  description = "Private IP for host."
-  default     = "10.0.1.6"
+  default     = "db19"
   type        = string
 }
 
@@ -95,7 +154,24 @@ variable "host_os" {
 
 variable "host_os_version" {
   description = "Define Base OS version for the host."
-  default     = "7.8"
+  default     = "7.9"
+  type        = string
+}
+
+variable "host_subnet" {
+  description = "List of subnets for the host hosts"
+  type        = list(string)
+}
+
+variable "host_public_ip" {
+  description = "whether to assigne a public IP or not."
+  default     = false
+  type        = bool
+}
+
+variable "host_private_ip" {
+  description = "Private IP for host."
+  default     = "10.0.1.19"
   type        = string
 }
 
@@ -105,16 +181,27 @@ variable "hosts_file" {
   type        = string
 }
 
-variable "yum_upgrade" {
-  description = "Enable YUM upgrade during bootstrap / cloud-init"
-  default     = true
-  type        = bool
+variable "host_state" {
+  description = "Whether the host should be either RUNNING or STOPPED state. "
+  default     = "RUNNING"
 }
 
 variable "host_shape" {
   description = "The shape of compute instance."
-  default     = "VM.Standard2.2"
+  default     = "VM.Standard.E3.Flex"
   type        = string
+}
+
+variable "host_ocpus" {
+  description = "The ocpus for the shape."
+  default     = 2
+  type        = number
+}
+
+variable "host_memory_in_gbs" {
+  description = "The memory in gbs for the shape."
+  default     = 16
+  type        = number
 }
 
 variable "host_boot_volume_size" {
@@ -147,44 +234,43 @@ variable "host_volume_size" {
   type        = number
 }
 
-variable "host_state" {
-  description = "Whether the host should be either RUNNING or STOPPED state. "
-  default     = "RUNNING"
-}
-
-variable "host_bootstrap" {
-  description = "Bootstrap script."
+variable "host_env_config" {
+  description = "Host environment config script used to bootstrap host."
   default     = ""
   type        = string
 }
 
-variable "host_subnet" {
-  description = "List of subnets for the host hosts"
-  type        = list(string)
-}
-
-variable "ssh_public_key" {
-  description = "the content of the ssh public key used to access the host. set this or the ssh_public_key_path"
+variable "host_setup_folder" {
+  description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/"
   default     = ""
   type        = string
 }
 
-variable "ssh_public_key_path" {
-  description = "path to the ssh public key used to access the host. set this or the ssh_public_key"
+variable "host_cloudinit_template" {
+  description = "Host specific cloudinit YAML file. Defaults to $path.module/cloudinit/templates/linux_host.yaml"
   default     = ""
   type        = string
 }
 
-# Trivadis LAB specific parameter -------------------------------------------
-variable "tvd_participants" {
-  description = "The number of VCN to create"
-  type        = number
-  default     = 1
+variable "host_bootstrap_template" {
+  description = "Host specific bootstrap template script. Defaults to $path.module/cloudinit/templates/bootstrap_host.template.sh"
+  default     = ""
+  type        = string
 }
 
-variable "tvd_domain" {
-  description = "The domain name of the LAB environment"
-  type        = string
-  default     = "trivadislabs.com"
+# Oracle Home configuration variable
+variable "host_ORACLE_ROOT" {
+  description = "default Oracle root / software folder."
+  default     = "/u00"
 }
-# --- EOF -------------------------------------------------------------------
+
+variable "host_ORACLE_DATA" {
+  description = "default Oracle data folder used to store datafiles."
+  default     = "/u01"
+}
+
+variable "host_ORACLE_ARCH" {
+  description = "default Oracle arch folder used to store archive logs and backups."
+  default     = "/u02"
+}
+# --- EOF ----------------------------------------------------------------------

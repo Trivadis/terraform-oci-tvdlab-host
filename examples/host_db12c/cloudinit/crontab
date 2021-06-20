@@ -1,0 +1,34 @@
+# +----------------------------------------------------------------------------------+
+# | RECORD FORMAT                                                                    |
+# | -------------                                                                    |
+# | minute(0-59) hour(0-23) day(1-31) month(1-12) weekday(0-6  0=Sunday)             |
+# +----------------------------------------------------------------------------------+
+
+# +---------------------------------------------------------+------------------------+
+# | Maintain backups and delete obsolete (RMAN)             | Sunday at 1:00 a.m.    |
+# +---------------------------------------------------------+------------------------+
+#00 01 * * * /u01/app/oracle/local/tvdbackup/bin/rman_exec.ksh -t DB1_TARGET -s mnt_del_obs >/dev/null 2>&1
+#00 01 * * * /u01/app/oracle/local/tvdbackup/bin/rman_exec.ksh -t DB2_TARGET -s mnt_del_obs >/dev/null 2>&1
+
+# +---------------------------------------------------------+------------------------+
+# | Online (hot) Full Oracle Physical Backup (RMAN)         | Sunday                 |
+# +---------------------------------------------------------+------------------------+
+#00 21 * * 5 /u01/app/oracle/local/tvdbackup/bin/rman_exec.ksh -t DB1_TARGET -s bck_inc0 >/dev/null 2>&1
+#00 21 * * 5 /u01/app/oracle/local/tvdbackup/bin/rman_exec.ksh -t DB2_TARGET -s bck_inc0 >/dev/null 2>&1
+
+# +---------------------------------------------------------+------------------------+
+# | Online (hot) Diff Oracle Physical Backup (RMAN)         | Mo-Sa at 3:00 a.m.     |
+# +---------------------------------------------------------+------------------------+
+#30 22 * * 1-6 /u01/app/oracle/local/tvdbackup/bin/rman_exec.ksh -t DB1_TARGET -s bck_inc1c >/dev/null 2>&1
+#30 22 * * 1-6 /u01/app/oracle/local/tvdbackup/bin/rman_exec.ksh -t DB2_TARGET -s bck_inc1c >/dev/null 2>&1
+
+# +---------------------------------------------------------+------------------------+
+# | Backup/Delete archive log files                         | Daily every 4 hours    |
+# +---------------------------------------------------------+------------------------+
+#45 0,4,8,16,20 * * * /u01/app/oracle/local/tvdbackup/bin/rman_exec.ksh -t DB1_TARGET -s bck_arc >/dev/null 2>&1
+#45 0,4,8,16,20 * * * /u01/app/oracle/local/tvdbackup/bin/rman_exec.ksh -t DB2_TARGET -s bck_arc >/dev/null 2>&1
+
+# +---------------------------------------------------------+------------------------+
+# | Purge/Truncate old log/trace files                      | Friday at 5:00 a.m.    |
+# +---------------------------------------------------------+------------------------+
+00 05 * * 5 /u01/app/oracle/local/dba/bin/housekeep.ksh  > /dev/null 2>&1

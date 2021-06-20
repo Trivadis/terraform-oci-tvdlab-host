@@ -70,7 +70,7 @@ sed -i -e "s|<HOSTNAME>|${HOST}|g" ${TNS_ADMIN}/listener.ora
 # Start LISTENER and run DBCA
 $ORACLE_HOME/bin/lsnrctl status > /dev/null 2>&1 || $ORACLE_HOME/bin/lsnrctl start
 
-# create a multi tenant DB if specified
+# create a first DB if specified
 if [ -n "$DB1_TARGET" ]; then 
     echo "INFO: Setup DB $DB1_TARGET ----------------------------------------------"
     export INSTANCE_INIT="$SCRIPT_BIN_DIR/$DB1_TARGET"
@@ -79,7 +79,7 @@ else
     echo "INFO: Skip setup of single Tenant DB $DB1_TARGET ------------------------"
 fi
 
-# create a multi tenant DB if specified
+# create a second DB if specified
 if [ -n "$DB2_TARGET" ]; then 
     echo "INFO: Setup DB $DB2_TARGET ----------------------------------------------"
     export INSTANCE_INIT="$SCRIPT_BIN_DIR/$DB2_TARGET"
@@ -88,9 +88,18 @@ else
     echo "INFO: Skip setup of single Tenant DB $DB2_TARGET ------------------------"
 fi
 
-if [ -f "${ORACLE_BASE}/local/dba/etc/oracle.service" ]; then
+if [ -f "$SCRIPT_BIN_DIR/oracle.service" ]; then 
     echo "INFO: Configure Oracle Service -------------------------------------------"
-    sudo cp ${ORACLE_BASE}/local/dba/etc/oracle.service /usr/lib/systemd/system/
+    #check if we do have a vgora
+    if [ $(sudo vgs|grep -ic vgora) -eq 0 ]; then
+        sed -i "/ORACLE_ROOT.mount/d" $SCRIPT_BIN_DIR/oracle.service
+        sed -i "/ORACLE_DATA.mount/d" $SCRIPT_BIN_DIR/oracle.service
+        sed -i "/ORACLE_ARCH.mount/d" $SCRIPT_BIN_DIR/oracle.service
+    fi
+    sed -i "s|ORACLE_ROOT|$(basename $ORACLE_ROOT)|g" $SCRIPT_BIN_DIR/oracle.service
+    sed -i "s|ORACLE_DATA|$(basename $ORACLE_DATA)|g" $SCRIPT_BIN_DIR/oracle.service
+    sed -i "s|ORACLE_ARCH|$(basename $ORACLE_ARCH)|g" $SCRIPT_BIN_DIR/oracle.service
+    sudo cp $SCRIPT_BIN_DIR/oracle.service /etc/systemd/system/
     sudo systemctl --system daemon-reload
     sudo systemctl enable oracle
 else
@@ -99,23 +108,28 @@ fi
 
 if [ -f "$SCRIPT_BIN_DIR/housekeep_work.conf" ]; then 
     echo "INFO: Configure Housekeeping ---------------------------------------------"
-    mkdir -p $ORACLE_BASE/local/dba/log/archive
+    mkdir -p $ORACLE_BASE/$BE_DIR_NAME/dba/log/archive
     mkdir -p ${ORACLE_BASE}/network/log/archive
-    cp $SCRIPT_BIN_DIR/housekeep_work.conf $ORACLE_BASE/local/dba/etc/housekeep_work.conf
-else  
+    cp $SCRIPT_BIN_DIR/housekeep_work.conf $ORACLE_BASE/$BE_DIR_NAME/dba/etc/housekeep_work.conf
+else
     echo "INFO: Skip Configure Housekeeping ----------------------------------------"
 fi
+
+echo "INFO: Configure network admin in ORACLE_HOME ---------------------------------"
+for i in $ORACLE_BASE/network/admin/*.ora; do
+    ln -svf $i $ORACLE_HOME/network/admin/$(basename $i)
+done
 
 if [ -f "$SCRIPT_BIN_DIR/crontab" ]; then 
     echo "INFO: Configure Crontab --------------------------------------------------"
     # uncomment DB1_TARGET
     if [ -n "$DB1_TARGET" ]; then
-        sed -i '/^#.*DB1_TARGET.sh/s/^#//' $SCRIPT_BIN_DIR/crontab
+        sed -i '/^#.*DB1_TARGET/s/^#//' $SCRIPT_BIN_DIR/crontab
         sed -i "s|DB1_TARGET|$DB1_TARGET|g" $SCRIPT_BIN_DIR/crontab
     fi
     # uncomment DB2_TARGET
     if [ -n "$DB2_TARGET" ]; then
-        sed -i '/^#.*DB2_TARGET.sh/s/^#//' $SCRIPT_BIN_DIR/crontab
+        sed -i '/^#.*DB2_TARGET/s/^#//' $SCRIPT_BIN_DIR/crontab
         sed -i "s|DB2_TARGET|$DB2_TARGET|g" $SCRIPT_BIN_DIR/crontab
     fi
     # load crontab

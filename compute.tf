@@ -21,6 +21,7 @@ resource "oci_core_instance" "compute" {
   display_name        = var.label_prefix == "none" ? format("${local.resource_shortname}-${var.host_name}%02d", count.index) : format("${var.label_prefix}-${local.resource_shortname}-${var.host_name}%02d", count.index)
   shape               = var.host_shape
   state               = var.host_state
+  defined_tags        = var.defined_tags
   freeform_tags       = var.tags
 
   create_vnic_details {

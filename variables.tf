@@ -50,6 +50,12 @@ variable "ad_index" {
   type        = number
 }
 
+variable "defined_tags" {
+  description = "Defined tags for this resource"
+  type        = map(any)
+  default     = {}
+}
+
 variable "tags" {
   description = "A simple key-value pairs to tag the resources created"
   type        = map(any)

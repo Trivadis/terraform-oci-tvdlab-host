@@ -49,6 +49,7 @@ module "tvdlab-compute" {
   # general oci parameters
   ad_index     = var.ad_index
   label_prefix = var.label_prefix
+  defined_tags = var.defined_tags
   tags         = var.tags
 
   # Lab Configuration

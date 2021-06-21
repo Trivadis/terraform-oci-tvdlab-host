@@ -40,7 +40,7 @@ module "tvdlab-wls12c" {
   software_password     = var.software_password                   # Default OCI password to access the software repository
   ad_index              = var.ad_index                            # The index of the availability domain. This is used to identify the availability_domain place the compute instances.
   label_prefix          = var.label_prefix                        # A string that will be prepended to all resources
-  defined_tags          = var.defined_tags                        # Defined tags to tag the resources created
+  defined_tags          = local.host_wls12c_defined_tags          # Defined tags to tag the resources created
   tags                  = var.tags                                # A simple key-value pairs to tag the resources created
   hosts_file            = local.hosts_file                        # path to a custom /etc/hosts which has to be appended"
   host_ORACLE_ROOT      = var.ORACLE_ROOT                         # default Oracle root / software folder 
@@ -60,6 +60,13 @@ module "tvdlab-wls12c" {
   host_private_ip       = var.host_wls12c_private_ip              # Private IP for host.
   host_shape            = var.host_wls12c_shape                   # The shape of compute instance.
   host_state            = var.host_wls12c_state                   # Whether the host should be either RUNNING or STOPPED state.
+}
+
+# ------------------------------------------------------------------------------
+# - local Variables
+# ------------------------------------------------------------------------------
+locals {
+  host_wls12c_defined_tags = var.host_wls12c_defined_tags != "" ? var.defined_tags : var.host_wls12c_defined_tags
 }
 
 # ------------------------------------------------------------------------------
@@ -148,5 +155,17 @@ variable "host_wls12c_setup_folder" {
   description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh"
   default     = ""
   type        = string
+}
+
+variable "host_wls12c_defined_tags" {
+  description = "Defined tags for this resource"
+  type        = map(any)
+  default     = {}
+}
+
+variable "host_wls12c_tags" {
+  description = "A simple key-value pairs to tag the resources created"
+  type        = map(any)
+  default     = {}
 }
 # --- EOF ----------------------------------------------------------------------

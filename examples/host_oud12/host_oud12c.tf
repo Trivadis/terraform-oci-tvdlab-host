@@ -40,7 +40,7 @@ module "tvdlab-oud12c" {
   software_password     = var.software_password                   # Default OCI password to access the software repository
   ad_index              = var.ad_index                            # The index of the availability domain. This is used to identify the availability_domain place the compute instances.
   label_prefix          = var.label_prefix                        # A string that will be prepended to all resources
-  defined_tags          = var.defined_tags                        # Defined tags to tag the resources created
+  defined_tags          = local.host_oud12c_defined_tags          # Defined tags to tag the resources created
   tags                  = var.tags                                # A simple key-value pairs to tag the resources created
   hosts_file            = local.hosts_file                        # path to a custom /etc/hosts which has to be appended"
   host_ORACLE_ROOT      = var.host_oud12c_ORACLE_ROOT             # default Oracle root / software folder 
@@ -60,6 +60,13 @@ module "tvdlab-oud12c" {
   host_private_ip       = var.host_oud12c_private_ip              # Private IP for host.
   host_shape            = var.host_oud12c_shape                   # The shape of compute instance.
   host_state            = var.host_oud12c_state                   # Whether the host should be either RUNNING or STOPPED state.
+}
+
+# ------------------------------------------------------------------------------
+# - local Variables
+# ------------------------------------------------------------------------------
+locals {
+  host_oud12c_defined_tags = var.host_oud12c_defined_tags != "" ? var.defined_tags : var.host_oud12c_defined_tags
 }
 
 # ------------------------------------------------------------------------------
@@ -99,13 +106,13 @@ variable "host_oud12c_shape" {
 
 variable "host_oud12c_ocpus" {
   description = "The ocpus for the shape."
-  default     = 2
+  default     = 1
   type        = number
 }
 
 variable "host_oud12c_memory_in_gbs" {
   description = "The memory in gbs for the shape."
-  default     = 16
+  default     = 8
   type        = number
 }
 
@@ -153,16 +160,28 @@ variable "host_oud12c_setup_folder" {
 # Oracle Home configuration variable
 variable "host_oud12c_ORACLE_ROOT" {
   description = "default Oracle root / software folder."
-  default     = "/u00"
+  default     = "/u01"
 }
 
 variable "host_oud12c_ORACLE_DATA" {
   description = "default Oracle data folder used to store datafiles."
-  default     = "/u01"
+  default     = "/u02"
 }
 
 variable "host_oud12c_ORACLE_ARCH" {
   description = "default Oracle arch folder used to store archive logs and backups."
-  default     = "/u02"
+  default     = "/u04"
+}
+
+variable "host_oud12c_defined_tags" {
+  description = "Defined tags for this resource"
+  type        = map(any)
+  default     = {}
+}
+
+variable "host_oud12c_tags" {
+  description = "A simple key-value pairs to tag the resources created"
+  type        = map(any)
+  default     = {}
 }
 # --- EOF ----------------------------------------------------------------------

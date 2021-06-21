@@ -28,7 +28,12 @@ host_oud12c_volume_source    = ""                                     # Source b
 host_oud12c_state            = "RUNNING"                              # Whether the host should be either RUNNING or STOPPED state. 
 host_oud12c_setup_folder     = "./host_oud12c"                        # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
 host_oud12c_env_config       = "./host_oud12c/set_env_oud12c_config.sh" # Host environment config script used to bootstrap host.
-host_oud12c_ORACLE_ROOT      = "/u00"                                 # default Oracle root / software folder 
-host_oud12c_ORACLE_DATA      = "/u01"                                 # default Oracle data folder used to store datafiles
-host_oud12c_ORACLE_ARCH      = "/u02"                                 # default Oracle arch folder used to store archive logs and backups
+host_oud12c_ORACLE_ROOT      = "/u01"                                 # default Oracle root / software folder 
+host_oud12c_ORACLE_DATA      = "/u02"                                 # default Oracle data folder used to store datafiles
+host_oud12c_ORACLE_ARCH      = "/u04"                                 # default Oracle arch folder used to store archive logs and backups
+# Lab schedule for this resource uncomment enable specific schedule :
+# - weekends: off 20:00-09:00, allow 09:00-20:00
+# - week day: off 20:00-06:00, allow 06:00-08:00, on 08:00-18:00, allow 18:00-19:00
+# host_oud12c_defined_tags   = { "Schedule.Weekend" = "0,0,0,0,0,0,0,0,0,0,*,*,*,*,*,*,*,*,*,*,0,0,0,0",
+#                                "Schedule.WeekDay" = "0,0,0,0,0,0,*,*,1,1,1,1,1,1,1,1,1,1,1,*,0,0,0,0" }
 # --- EOF ----------------------------------------------------------------------

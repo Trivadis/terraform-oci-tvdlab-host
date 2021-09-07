@@ -12,11 +12,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- update examples with local variable for defined tags
-
 ### Fixed
 
 ### Removed
+
+## [0.2.0] - 2021-09-07
+
+### Added
+
+- add OCI Stack schema templates
+- add Database 21c config
+
+### Changed
+
+- update examples with local variable for defined tags
 
 ## [0.1.0] - 2021-06-20
 
@@ -256,3 +265,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.16]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.16
 [0.0.17]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.0.17
 [0.1.0]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.1.0
+[0.2.0]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.2.0

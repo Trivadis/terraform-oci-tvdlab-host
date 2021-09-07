@@ -84,7 +84,6 @@ variable "tvd_os_user" {
 variable "tvd_def_password" {
   description = "Default password for windows administrator, oracle, directory and more"
   type        = string
-  sensitive   = true
 }
 
 variable "lab_source_url" {
@@ -112,14 +111,12 @@ variable "software_user" {
   description = "Default OCI user to access the software repository"
   default     = ""
   type        = string
-  sensitive   = true
 }
 
 variable "software_password" {
   description = "Default OCI password to access the software repository"
   default     = ""
   type        = string
-  sensitive   = true
 }
 
 variable "bastion_hosts" {

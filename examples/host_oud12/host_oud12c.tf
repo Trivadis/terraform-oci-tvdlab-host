@@ -76,7 +76,7 @@ locals {
 # Host Parameter ---------------------------------------------------------------
 variable "host_oud12c_enabled" {
   description = "whether to create the compute instance or not."
-  default     = false
+  default     = true
   type        = bool
 }
 
@@ -147,13 +147,13 @@ variable "host_oud12c_state" {
 
 variable "host_oud12c_env_config" {
   description = "Host environment config script used to bootstrap host."
-  default     = ""
+  default     = "./host_oud12c/set_env_oud12c_config.sh"
   type        = string
 }
 
 variable "host_oud12c_setup_folder" {
   description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh"
-  default     = ""
+  default     = "./host_oud12c"
   type        = string
 }
 

@@ -1,0 +1,165 @@
+# ------------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ------------------------------------------------------------------------------
+# Name.......: schema_host_oud12c
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2021.09.07
+# Revision...: 
+# Purpose....: Partially schema definition for an OCI Stack.
+# Notes......: -- 
+# Reference..: --
+# License....: Apache License Version 2.0, January 2004 as shown
+#              at http://www.apache.org/licenses/
+# ------------------------------------------------------------------------------
+# MISSING:
+# - intergraton of tags
+# - general functional test
+# ------------------------------------------------------------------------------
+
+- title: "Advanced OUD 12c Host Configuration"
+  description: Advanced configuration to customize the Oracle OUD 12c host of the training environment. 
+  variables:
+    - host_oud12c_enabled
+    - host_oud12c_name
+    - host_oud12c_private_ip
+    - host_oud12c_image_id
+    - host_oud12c_shape
+    - host_oud12c_ocpus
+    - host_oud12c_memory_in_gbs
+    - host_oud12c_volume_enabled
+    - host_oud12c_volume_size
+    - host_oud12c_volume_source
+  visible: show_advanced_oud12_conf
+# ------------------------------------------------------------------------------
+# - Hidden Variables:
+# - variables used by Terraform but not necessarily exposed exposed to end user
+# ------------------------------------------------------------------------------
+- title: "Extras Variables OUD 12c"
+  variables:
+    - host_oud12c_tags
+    - host_oud12c_state
+    - host_oud12c_boot_volume_size
+    - host_oud12c_setup_folder
+    - host_oud12c_env_config
+    - host_oud12c_ORACLE_ROOT
+    - host_oud12c_ORACLE_DATA
+    - host_oud12c_ORACLE_ARCH
+    - host_oud12c_defined_tags
+  visible: false
+
+variables:
+ 
+# -  Configuration -----------------------------------------------------
+# ------------------------------------------------------------------------------
+# - Optional Configuration:
+# - Configuration, which has to be specified by the end user
+# ------------------------------------------------------------------------------
+  show_advanced_oud12_conf:
+    type: boolean
+    title: "Show advanced OUD 12c host options?"
+    description: "Shows advanced OUD 12c host options, allowing enable customize the host name, IP address, base image OCID, shape, OCPUs, memory and more."
+    visible: true
+
+# OUD 12c Host parameters ------------------------------------------------------
+  host_oud12c_enabled:
+    type: boolean
+    title: Enable OUD 12c host?
+    description: Select whether to enable the OUD 12c host or not.
+
+  host_oud12c_name:
+    type: string
+    title: OUD 12c Hostname
+    description: Name part of the OUD 12c hostname. Default value is oud12.
+    visible: host_oud12c_enabled
+
+  host_oud12c_private_ip:
+    title: Private IP address
+    description: Private IP address of the OUD 12c host.
+    type: string
+    pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+    visible: host_oud12c_enabled
+
+  host_oud12c_image_id:
+    type: string
+    pattern: (^OEL$|^ocid1\.([a-z0-9_-]{1,32})\.([a-z0-9_-]{1,15})\.([a-z0-9_-]{0,24})\.([a-z0-9]{60}))
+    title: Base Image OCID
+    description: OCID of the base image used to deploy the OUD 12c host. The default value is undefined, which creates a OUD 12c host from scratch.
+    visible: host_oud12c_enabled
+  
+  host_oud12c_shape:
+    type: oci:core:instanceshape:name
+    title: Select a shape for the OUD 12c host
+    description: A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created instance.
+    dependsOn:
+      compartmentId: compartment_ocid
+    required: true
+    visible: host_oud12c_enabled
+
+  host_oud12c_ocpus:
+    type: integer
+    minimum: 1
+    maximum: 64
+    title: Number of OCPUs
+    description: Number of OCPUs allocated to for the windows shape. Can only be specified for a flexible shape. e.g. VM.Standard.E3.Flex or VM.Standard.E4.Flex
+    visible: 
+      and:
+        - and:
+          - host_oud12c_enabled
+        - or:
+          - eq:
+            - host_oud12c_shape 
+            - "VM.Standard.E3.Flex"
+          - eq:
+            - host_oud12c_shape 
+            - "VM.Standard.E4.Flex"
+
+  host_oud12c_memory_in_gbs:
+    type: integer
+    minimum: 1
+    maximum: 1024
+    title: Amount of memory (GB)
+    description: Amount of memory allocated to the windows shape. Can only be specified for a flexible shape. e.g. VM.Standard.E3.Flex or VM.Standard.E4.Flex
+    visible:
+      and:
+        - and:
+          - host_oud12c_enabled
+        - or:
+          - eq:
+            - host_oud12c_shape 
+            - "VM.Standard.E3.Flex"
+          - eq:
+            - host_oud12c_shape 
+            - "VM.Standard.E4.Flex"
+  
+  host_oud12c_volume_enabled:
+    type: boolean
+    title: Enable block volume?
+    description: Select whether to enable block volume or not.
+    visible: host_oud12c_enabled
+
+  host_oud12c_volume_size:
+    type: integer
+    minimum: 1
+    maximum: 1024
+    title: Volume Size (in GB)
+    description: Size must be between 50 GB and 32,768 GB (32 TB). Volume performance varies with volume size.
+    visible:
+      and:
+        - and:
+          - show_advanced_oud12_conf
+          - host_oud12c_volume_enabled
+
+  host_oud12c_volume_source:
+    type: string
+    pattern: (^$|^ocid1\.([a-z0-9_-]{1,32})\.([a-z0-9_-]{1,15})\.([a-z0-9_-]{0,24})\.([a-z0-9]{60}))
+    title: Base Block Volume OCID
+    description: OCID of the base block volume for the OUD 12c host. The default value is undefined, which creates a new block volume from scratch.
+    visible:
+      and:
+        - and:
+          - show_advanced_oud12_conf
+          - host_oud12c_volume_enabled
+
+# --- EOF ----------------------------------------------------------------------

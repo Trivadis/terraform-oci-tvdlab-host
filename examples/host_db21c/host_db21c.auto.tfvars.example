@@ -1,0 +1,38 @@
+# ------------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ------------------------------------------------------------------------------
+# Name.......: host_db21c.auto.tfvars
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2021.06.11
+# Revision...: 
+# Purpose....: Terraform Variable file for Oracle Database 21c host
+# Notes......: 
+# Reference..: --
+# License....: Apache License Version 2.0, January 2004 as shown
+#              at http://www.apache.org/licenses/
+# ------------------------------------------------------------------------------
+# DB Host Parameter Oracle Database 21c ----------------------------------------
+# host_db21c_enabled        = true                                   # whether to create the compute instance or not.
+# host_db21c_name           = "db21"                                 # Name portion of host
+# host_db21c_private_ip     = "10.0.1.21"                            # Private IP for host.
+# host_db21c_image_id       = "OEL"                                  # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).host_db21c_private_ip             = "10.0.1.19"            # Private IP for host.
+# host_db21c_shape          = "VM.Standard.E3.Flex"                  # The shape of compute instance.
+# host_db21c_ocpus          = 1                                      # The OCPUS for the shape.
+# host_db21c_memory_in_gbs  = 16                                     # The memory in gbs for the shape. 
+# host_db21c_volume_enabled = true                                   # add a block volume
+# host_db21c_volume_size    = 256                                    # Size of the additional volume.
+# host_db21c_volume_source  = ""                                     # Source block volume to clone from.
+# host_db21c_state          = "RUNNING"                              # Whether the host should be either RUNNING or STOPPED state. 
+# host_db21c_setup_folder   = "./host_db21c"                         # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
+# host_db21c_env_config     = "./host_db21c/set_env_db21c_config.sh" # Host environment config script used to bootstrap host.
+# host_db21c_ORACLE_ROOT    = "/u01"                                 # default Oracle root / software folder 
+# host_db21c_ORACLE_DATA    = "/u02"                                 # default Oracle data folder used to store datafiles
+# host_db21c_ORACLE_ARCH    = "/u04"                                 # default Oracle arch folder used to store archive logs and backups
+# Lab schedule for this resource uncomment enable specific schedule :
+# - weekends: off 20:00-09:00, allow 09:00-20:00
+# - week day: off 20:00-06:00, allow 06:00-08:00, on 08:00-18:00, allow 18:00-19:00
+# host_db21c_defined_tags   = { "Schedule.Weekend" = "0,0,0,0,0,0,0,0,*,*,*,*,*,*,*,*,*,*,*,*,0,0,0,0",
+#                               "Schedule.WeekDay" = "0,0,0,0,0,*,1,1,1,1,1,1,1,1,1,1,1,1,*,*,0,0,0,0" }
+# --- EOF ----------------------------------------------------------------------

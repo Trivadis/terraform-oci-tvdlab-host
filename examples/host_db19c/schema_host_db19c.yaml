@@ -1,0 +1,165 @@
+# ------------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ------------------------------------------------------------------------------
+# Name.......: schema_host_db19c
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2021.09.07
+# Revision...: 
+# Purpose....: Partially schema definition for an OCI Stack.
+# Notes......: -- 
+# Reference..: --
+# License....: Apache License Version 2.0, January 2004 as shown
+#              at http://www.apache.org/licenses/
+# ------------------------------------------------------------------------------
+# MISSING:
+# - intergraton of tags
+# - general functional test
+# ------------------------------------------------------------------------------
+
+- title: "Advanced DB 19c Host Configuration"
+  description: Advanced configuration to customize the Oracle Database 19c host of the training environment. 
+  variables:
+    - host_db19c_enabled
+    - host_db19c_name
+    - host_db19c_private_ip
+    - host_db19c_image_id
+    - host_db19c_shape
+    - host_db19c_ocpus
+    - host_db19c_memory_in_gbs
+    - host_db19c_volume_enabled
+    - host_db19c_volume_size
+    - host_db19c_volume_source
+  visible: show_advanced_db19_conf
+# ------------------------------------------------------------------------------
+# - Hidden Variables:
+# - variables used by Terraform but not necessarily exposed exposed to end user
+# ------------------------------------------------------------------------------
+- title: "Extras Variables DB 19c"
+  variables:
+    - host_db19c_tags
+    - host_db19c_state
+    - host_db19c_boot_volume_size
+    - host_db19c_setup_folder
+    - host_db19c_env_config
+    - host_db19c_ORACLE_ROOT
+    - host_db19c_ORACLE_DATA
+    - host_db19c_ORACLE_ARCH
+    - host_db19c_defined_tags
+  visible: false
+
+variables:
+ 
+# -  Configuration -----------------------------------------------------
+# ------------------------------------------------------------------------------
+# - Optional Configuration:
+# - Configuration, which has to be specified by the end user
+# ------------------------------------------------------------------------------
+  show_advanced_db19_conf:
+    type: boolean
+    title: "Show advanced 19c database host options?"
+    description: "Shows advanced 19c database host options, allowing enable customize the host name, IP address, base image OCID, shape, OCPUs, memory and more."
+    visible: true
+
+# DB 19c Host parameters -------------------------------------------------------
+  host_db19c_enabled:
+    type: boolean
+    title: Enable DB 19c host?
+    description: Select whether to enable the 19c Database host or not.
+
+  host_db19c_name:
+    type: string
+    title: DB 19c Hostname
+    description: Name part of the 19c Database hostname. Default value is db19.
+    visible: host_db19c_enabled
+
+  host_db19c_private_ip:
+    title: Private IP address
+    description: Private IP address of the 19c Database host.
+    type: string
+    pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+    visible: host_db19c_enabled
+
+  host_db19c_image_id:
+    type: string
+    pattern: (^OEL$|^ocid1\.([a-z0-9_-]{1,32})\.([a-z0-9_-]{1,15})\.([a-z0-9_-]{0,24})\.([a-z0-9]{60}))
+    title: Base Image OCID
+    description: OCID of the base image used to deploy the 19c Database host. The default value is undefined, which creates a 19c Database host from scratch.
+    visible: host_db19c_enabled
+  
+  host_db19c_shape:
+    type: oci:core:instanceshape:name
+    title: Select a shape for the 19c Database host
+    description: A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created instance.
+    dependsOn:
+      compartmentId: compartment_ocid
+    required: true
+    visible: host_db19c_enabled
+
+  host_db19c_ocpus:
+    type: integer
+    minimum: 1
+    maximum: 64
+    title: Number of OCPUs
+    description: Number of OCPUs allocated to for the windows shape. Can only be specified for a flexible shape. e.g. VM.Standard.E3.Flex or VM.Standard.E4.Flex
+    visible: 
+      and:
+        - and:
+          - host_db19c_enabled
+        - or:
+          - eq:
+            - host_db19c_shape 
+            - "VM.Standard.E3.Flex"
+          - eq:
+            - host_db19c_shape 
+            - "VM.Standard.E4.Flex"
+
+  host_db19c_memory_in_gbs:
+    type: integer
+    minimum: 1
+    maximum: 1024
+    title: Amount of memory (GB)
+    description: Amount of memory allocated to the windows shape. Can only be specified for a flexible shape. e.g. VM.Standard.E3.Flex or VM.Standard.E4.Flex
+    visible:
+      and:
+        - and:
+          - host_db19c_enabled
+        - or:
+          - eq:
+            - host_db19c_shape 
+            - "VM.Standard.E3.Flex"
+          - eq:
+            - host_db19c_shape 
+            - "VM.Standard.E4.Flex"
+  
+  host_db19c_volume_enabled:
+    type: boolean
+    title: Enable block volume?
+    description: Select whether to enable block volume or not.
+    visible: host_db19c_enabled
+
+  host_db19c_volume_size:
+    type: integer
+    minimum: 1
+    maximum: 1024
+    title: Volume Size (in GB)
+    description: Size must be between 50 GB and 32,768 GB (32 TB). Volume performance varies with volume size.
+    visible:
+      and:
+        - and:
+          - show_advanced_db19_conf
+          - host_db19c_volume_enabled
+
+  host_db19c_volume_source:
+    type: string
+    pattern: (^$|^ocid1\.([a-z0-9_-]{1,32})\.([a-z0-9_-]{1,15})\.([a-z0-9_-]{0,24})\.([a-z0-9]{60}))
+    title: Base Block Volume OCID
+    description: OCID of the base block volume for the 19c database host. The default value is undefined, which creates a new block volume from scratch.
+    visible:
+      and:
+        - and:
+          - show_advanced_db19_conf
+          - host_db19c_volume_enabled
+
+# --- EOF ----------------------------------------------------------------------

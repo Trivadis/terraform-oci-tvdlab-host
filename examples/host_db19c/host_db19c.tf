@@ -76,7 +76,7 @@ locals {
 # Host Parameter ---------------------------------------------------------------
 variable "host_db19c_enabled" {
   description = "whether to create the compute instance or not."
-  default     = false
+  default     = true
   type        = bool
 }
 
@@ -118,7 +118,7 @@ variable "host_db19c_memory_in_gbs" {
 
 variable "host_db19c_volume_enabled" {
   description = "whether to create an additional volume or not."
-  default     = false
+  default     = true
   type        = bool
 }
 
@@ -147,13 +147,13 @@ variable "host_db19c_state" {
 
 variable "host_db19c_env_config" {
   description = "Host environment config script used to bootstrap host."
-  default     = ""
+  default     = "./host_db19c/set_env_db19c_config.sh"
   type        = string
 }
 
 variable "host_db19c_setup_folder" {
   description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh"
-  default     = ""
+  default     = "./host_db19c"
   type        = string
 }
 

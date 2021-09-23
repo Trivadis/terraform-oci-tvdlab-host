@@ -130,7 +130,6 @@ else
     echo "WARN: could not source db env $SCRIPT_BIN_DIR/set_config_env.sh"
 fi
 
-
 export LAB_BASE="$ORACLE_BASE/$BE_DIR_NAME/$(echo $LAB_NAME_LOWER| sed 's/-//')"       # local LAB base folder
 
 if [ "$system_initilized" = true ] ; then
@@ -154,6 +153,10 @@ fi
 [ -f /etc/skel/.bashrc ]        && cp --verbose --update /etc/skel/.bashrc /home/$ORACLE_USER
 [ -f /etc/skel/.bash_profile ]  && cp --verbose --update /etc/skel/.bash_profile /home/$ORACLE_USER
 [ -f /etc/skel/.bash_logout ]   && cp --verbose --update /etc/skel/.bash_logout /home/$ORACLE_USER
+
+# update user password
+echo "INFO: reset password for $ORACLE_USER to default value"
+echo $ORACLE_PWD |passwd --stdin $ORACLE_USER
 
 # adjust permissions
 chown -vR $ORACLE_USER:$ORACLE_USER /home/$ORACLE_USER 

@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.3.0] - 2021-10-11
+
+### Changed
+
+- Explicitly remove oci and etc folder in LAB base to make sure no sensitive
+  information is stored in the lab folder.
+
 ## [0.2.1] - 2021-09-23
 
 ### Changed
@@ -273,3 +280,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.0]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.1.0
 [0.2.0]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.2.0
 [0.2.1]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.2.1
+[0.3.0]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.0

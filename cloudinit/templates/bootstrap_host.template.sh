@@ -453,6 +453,9 @@ if [ "$task_lab_config" = true ]; then
             echo "INFO: Deploy LAB environment"
             rm -rf $LAB_BASE
             unzip "$ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip" -d $LAB_BASE
+            rm -rf $LAB_BASE/oci
+            rm -rf $LAB_BASE/etc
+            rm -rf $LAB_BASE/.build
             chown -vR $ORACLE_USER:$ORACLE_USER $LAB_BASE
             rm -rf $ORACLE_BASE/$BE_DIR_NAME/$LAB_NAME.zip
         else

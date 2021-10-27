@@ -407,7 +407,7 @@ then
     echo "### Install BasEnv #####################################################"
     if [ -f "$ORADBA_BIN/$SETUP_BASENV" ]; then
         # create a softlink for oratab
-        mkdir -p $ORACLE_BASE/$BE_DIR_NAME/dba
+        mkdir -p 
         touch $ORACLE_BASE/$BE_DIR_NAME/dba/oratab
         ln -sfv $ORACLE_BASE/$BE_DIR_NAME/dba/oratab /etc/oratab
         chown -Rv $ORACLE_USER:$ORACLE_USER $ORACLE_BASE/$BE_DIR_NAME
@@ -491,6 +491,50 @@ if [ "$task_lab_config" = true ]; then
             echo "INFO: initiate lab post configuration in background $SCRIPT_BIN_DIR/$POST_CONFIG_ENV"
             su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; nohup $SCRIPT_BIN_DIR/$POST_CONFIG_ENV > $SCRIPT_BIN_DIR/$(basename $POST_CONFIG_ENV .sh).log 2>&1 &"
         fi
+    fi
+
+    # Update basenv.conf and add the lab
+
+    if [ "$task_basenv_install" = true ] ; then
+        if [ -f $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf ]; then
+            echo "INFO: update basenv.conf with lab information"
+            echo "LAB_BASE=${LAB_BASE}"                 >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+            echo "alias lab='cd \"\${LAB_BASE}/lab\"'"  >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+            for i in ${LAB_BASE}/lab/*; do
+                if [ -d $i ]; then
+                    lab_dir=$(basename $i)
+                    echo "alias $lab_dir='cd \"\${LAB_BASE}/lab/$lab_dir\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+                fi
+            done
+            echo "alias demo='cd \"\${LAB_BASE}/demo\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+            for i in ${ORACLE_BASE}/local/obr/demo/demo??; do
+                if [ -d $i ]; then
+                demo_dir=$(basename $i)
+                echo "alias $demo_dir='cd \"\${LAB_BASE}/demo/$demo_dir\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+                fi
+            done
+        else
+            echo "INFO: skip basenv.conf for lab environment"
+        fi
+        echo "PATH + . A" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/sid._DEFAULT_.conf
+    else
+        echo "INFO: update bash_profile with lab information"
+        echo "export LAB_BASE=${LAB_BASE}"                 >> /home/$ORACLE_USER/.bash_profile
+        echo "alias lab='cd \"\${LAB_BASE}/lab\"'"  >> /home/$ORACLE_USER/.bash_profile
+        for i in ${LAB_BASE}/lab/*; do
+            if [ -d $i ]; then
+                lab_dir=$(basename $i)
+                echo "alias $lab_dir='cd \"\${LAB_BASE}/lab/$lab_dir\"'" >> /home/$ORACLE_USER/.bash_profile
+            fi
+        done
+        echo "alias demo='cd \"\${LAB_BASE}/demo\"'" >> /home/$ORACLE_USER/.bash_profile
+        for i in ${ORACLE_BASE}/local/obr/demo/demo??; do
+            if [ -d $i ]; then
+                demo_dir=$(basename $i)
+                echo "alias $demo_dir='cd \"\${LAB_BASE}/demo/$demo_dir\"'" >> /home/$ORACLE_USER/.bash_profile
+            fi
+        done   
+        echo "export PATH=\${LAB_BASE}:${LAB_BASE}/bin:." >> /home/$ORACLE_USER/.bash_profile
     fi
 else
     echo "### Skip config LAB_NAME environment ###################################"

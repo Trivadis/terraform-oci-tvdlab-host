@@ -159,6 +159,8 @@ echo $ORACLE_PWD |passwd --stdin $ORACLE_USER
 # adjust permissions
 chown -vR $ORACLE_USER:$ORACLE_USER /home/$ORACLE_USER 
 
+echo "### Generic host configuration ###########################################"
+
 # disable dev repo
 yum-config-manager --disable ol7_developer
 
@@ -167,6 +169,23 @@ yum install -y xauth xclock
 sed -i 's/.*X11Forwarding.*/X11Forwarding yes/g'    /etc/ssh/sshd_config
 sed -i 's/.*X11UseLocalhost.*/X11UseLocalhost no/g' /etc/ssh/sshd_config
 systemctl reload sshd
+
+echo "INFO: Set timezone -------------------------------------------------------"
+timedatectl set-timezone Europe/Zurich
+timedatectl
+
+echo "INFO: Update hosts file --------------------------------------------------"
+if [ $(grep -ic $(hostname) /etc/hosts) -eq 0 ]; then 
+    echo $(hostname -i) $(hostname -f) $(hostname -a) >> /etc/hosts
+    chattr +i /etc/hosts        # set hosts file immutable
+else
+    chattr +i /etc/hosts        # set hosts file immutable
+fi
+lsattr /etc/hosts
+
+echo "INFO: define OCI network config ------------------------------------------"
+# set PRESERVE_HOSTINFO information to 2
+sed -i 's/PRESERVE_HOSTINFO.*/PRESERVE_HOSTINFO=2/' /etc/oci-hostname.conf
 
 # configure a system wide login banner
 echo "### Configure login banner ##############################################"
@@ -407,7 +426,7 @@ then
     echo "### Install BasEnv #####################################################"
     if [ -f "$ORADBA_BIN/$SETUP_BASENV" ]; then
         # create a softlink for oratab
-        mkdir -p 
+        mkdir -p $ORACLE_BASE/$BE_DIR_NAME/dba 
         touch $ORACLE_BASE/$BE_DIR_NAME/dba/oratab
         ln -sfv $ORACLE_BASE/$BE_DIR_NAME/dba/oratab /etc/oratab
         chown -Rv $ORACLE_USER:$ORACLE_USER $ORACLE_BASE/$BE_DIR_NAME

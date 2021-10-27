@@ -16,6 +16,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.3.5] - 2021-10-27
+
+### Added
+
+- update host file with own hostname
+- Set hosts file immutable
+- Set timezone to Europe/Zurich
+- Set OCI network configuration to PRESERVE_HOSTINFO=2
+
+### Fixed
+
+- Add missing directory during basenv installation.
+
 ## [0.3.4] - 2021-10-27
 
 ### Fixed

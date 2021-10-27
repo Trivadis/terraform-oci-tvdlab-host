@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.3.4] - 2021-10-27
+
+### Fixed
+
+- Fix issue with curly brackets in bootstrap script
+
 ## [0.3.3] - 2021-10-27
 
 ### Added
@@ -303,3 +309,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.3.1]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.1
 [0.3.2]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.2
 [0.3.3]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.3
+[0.3.4]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.4

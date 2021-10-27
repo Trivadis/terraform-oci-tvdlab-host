@@ -498,19 +498,19 @@ if [ "$task_lab_config" = true ]; then
     if [ "$task_basenv_install" = true ] ; then
         if [ -f $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf ]; then
             echo "INFO: update basenv.conf with lab information"
-            echo "LAB_BASE=${LAB_BASE}"                 >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
-            echo "alias lab='cd \"\${LAB_BASE}/lab\"'"  >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
-            for i in ${LAB_BASE}/lab/*; do
+            echo "LAB_BASE=$LAB_BASE"                 >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+            echo "alias lab='cd \"\$LAB_BASE/lab\"'"  >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+            for i in $LAB_BASE/lab/*; do
                 if [ -d $i ]; then
                     lab_dir=$(basename $i)
-                    echo "alias $lab_dir='cd \"\${LAB_BASE}/lab/$lab_dir\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+                    echo "alias $lab_dir='cd \"\$LAB_BASE/lab/$lab_dir\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
                 fi
             done
-            echo "alias demo='cd \"\${LAB_BASE}/demo\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
-            for i in ${ORACLE_BASE}/local/obr/demo/demo??; do
+            echo "alias demo='cd \"\$LAB_BASE/demo\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+            for i in $ORACLE_BASE/local/obr/demo/demo??; do
                 if [ -d $i ]; then
                 demo_dir=$(basename $i)
-                echo "alias $demo_dir='cd \"\${LAB_BASE}/demo/$demo_dir\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
+                echo "alias $demo_dir='cd \"\$LAB_BASE/demo/$demo_dir\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
                 fi
             done
         else
@@ -519,22 +519,22 @@ if [ "$task_lab_config" = true ]; then
         echo "PATH + . A" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/sid._DEFAULT_.conf
     else
         echo "INFO: update bash_profile with lab information"
-        echo "export LAB_BASE=${LAB_BASE}"                 >> /home/$ORACLE_USER/.bash_profile
-        echo "alias lab='cd \"\${LAB_BASE}/lab\"'"  >> /home/$ORACLE_USER/.bash_profile
-        for i in ${LAB_BASE}/lab/*; do
+        echo "export LAB_BASE=$LAB_BASE"                 >> /home/$ORACLE_USER/.bash_profile
+        echo "alias lab='cd \"\$LAB_BASE/lab\"'"  >> /home/$ORACLE_USER/.bash_profile
+        for i in $LAB_BASE/lab/*; do
             if [ -d $i ]; then
                 lab_dir=$(basename $i)
-                echo "alias $lab_dir='cd \"\${LAB_BASE}/lab/$lab_dir\"'" >> /home/$ORACLE_USER/.bash_profile
+                echo "alias $lab_dir='cd \"\$LAB_BASE/lab/$lab_dir\"'" >> /home/$ORACLE_USER/.bash_profile
             fi
         done
-        echo "alias demo='cd \"\${LAB_BASE}/demo\"'" >> /home/$ORACLE_USER/.bash_profile
-        for i in ${ORACLE_BASE}/local/obr/demo/demo??; do
+        echo "alias demo='cd \"\$LAB_BASE/demo\"'" >> /home/$ORACLE_USER/.bash_profile
+        for i in $ORACLE_BASE/local/obr/demo/demo??; do
             if [ -d $i ]; then
                 demo_dir=$(basename $i)
-                echo "alias $demo_dir='cd \"\${LAB_BASE}/demo/$demo_dir\"'" >> /home/$ORACLE_USER/.bash_profile
+                echo "alias $demo_dir='cd \"\$LAB_BASE/demo/$demo_dir\"'" >> /home/$ORACLE_USER/.bash_profile
             fi
         done   
-        echo "export PATH=\${LAB_BASE}:${LAB_BASE}/bin:." >> /home/$ORACLE_USER/.bash_profile
+        echo "export PATH=\$LAB_BASE:$LAB_BASE/bin:." >> /home/$ORACLE_USER/.bash_profile
     fi
 else
     echo "### Skip config LAB_NAME environment ###################################"

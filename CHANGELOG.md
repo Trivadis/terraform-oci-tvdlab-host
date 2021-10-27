@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.3.6] - 2021-10-27
+
+### Fixed
+
+- fix wrong path for demo alias configuration
+
 ## [0.3.5] - 2021-10-27
 
 ### Added
@@ -323,3 +329,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.3.2]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.2
 [0.3.3]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.3
 [0.3.4]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.4
+[0.3.5]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.5
+[0.3.6]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.6

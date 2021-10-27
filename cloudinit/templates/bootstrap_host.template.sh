@@ -526,7 +526,7 @@ if [ "$task_lab_config" = true ]; then
                 fi
             done
             echo "alias demo='cd \"\$LAB_BASE/demo\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf
-            for i in $ORACLE_BASE/local/obr/demo/demo??; do
+            for i in $LAB_BASE/demo/*; do
                 if [ -d $i ]; then
                 demo_dir=$(basename $i)
                 echo "alias $demo_dir='cd \"\$LAB_BASE/demo/$demo_dir\"'" >> $ORACLE_BASE/$BE_DIR_NAME/dba/etc/basenv.conf

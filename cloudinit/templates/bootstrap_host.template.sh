@@ -130,8 +130,6 @@ else
     echo "WARN: could not source db env $SCRIPT_BIN_DIR/set_config_env.sh"
 fi
 
-export LAB_BASE="$ORACLE_BASE/$BE_DIR_NAME/$(echo $LAB_NAME_LOWER| sed 's/-//')"       # local LAB base folder
-
 if [ "$system_initilized" = true ] ; then
     echo "INFO: System already initialized. Fallback to minimal initialisation."
     task_disk_config=true       # configure additional volume

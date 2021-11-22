@@ -16,6 +16,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.3.8] - 2021-11-22
+
+### Changed
+
+- disable ol7_ksplice repository
+- disable ol7_developer repository
+- disable oci-included-ol7 repository
+- disable ol7_MySQL80 repository
+- disable ol7_MySQL80_connectors_community repository
+- disable ol7_MySQL80_tools_community repository
+
+## [0.3.7] - 2021-11-22
+
+### Fixed
+
+- disable ol7_ksplice repository
+
 ## [0.3.6] - 2021-10-27
 
 ### Fixed

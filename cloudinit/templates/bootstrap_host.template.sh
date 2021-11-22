@@ -163,7 +163,12 @@ echo "### Generic host configuration ###########################################
 
 # disable dev repo
 yum-config-manager --disable ol7_developer
+yum-config-manager --disable oci-included-ol7
 yum-config-manager --disable ol7_ksplice
+yum-config-manager --disable ol7_MySQL80
+yum-config-manager --disable ol7_MySQL80_connectors_community
+yum-config-manager --disable ol7_MySQL80_tools_community
+
 
 # config SSH for X11 forwarding
 yum install -y xauth xclock

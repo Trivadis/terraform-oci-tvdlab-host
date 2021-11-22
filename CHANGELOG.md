@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.3.10] - 2021-11-22
+
+### Changed
+
+- disable ol7_oci_included repository
+
 ## [0.3.9] - 2021-11-22
 
 ### Fixed

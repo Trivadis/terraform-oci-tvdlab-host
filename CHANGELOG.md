@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.3.9] - 2021-11-22
+
+### Fixed
+
+- fix wrong PATH setting in bootstrap template script
+
 ## [0.3.8] - 2021-11-22
 
 ### Changed

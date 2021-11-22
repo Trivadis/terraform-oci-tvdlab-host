@@ -559,7 +559,7 @@ if [ "$task_lab_config" = true ]; then
                 echo "alias $demo_dir='cd \"\$LAB_BASE/demo/$demo_dir\"'" >> /home/$ORACLE_USER/.bash_profile
             fi
         done   
-        echo "export PATH=\$LAB_BASE:$LAB_BASE/bin:." >> /home/$ORACLE_USER/.bash_profile
+        echo "export PATH=\$PATH:\$LAB_BASE:$LAB_BASE/bin:." >> /home/$ORACLE_USER/.bash_profile
     fi
 else
     echo "### Skip config LAB_NAME environment ###################################"

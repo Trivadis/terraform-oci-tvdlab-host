@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.3.11] - 2021-12-06
+
+### Fixed
+
+- add a check for OEL release before disable OEL7 repos
+  
 ## [0.3.10] - 2021-11-22
 
 ### Changed
@@ -360,3 +366,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.3.4]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.4
 [0.3.5]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.5
 [0.3.6]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.6
+[0.3.7]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.7
+[0.3.8]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.8
+[0.3.9]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.9
+[0.3.10]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.10
+[0.3.11]: https://github.com/Trivadis/terraform-oci-tvdlab-host/releases/tag/v0.3.11

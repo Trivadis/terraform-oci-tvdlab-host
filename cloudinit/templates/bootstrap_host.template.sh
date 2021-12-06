@@ -162,13 +162,16 @@ chown -vR $ORACLE_USER:$ORACLE_USER /home/$ORACLE_USER
 echo "### Generic host configuration ###########################################"
 
 # disable dev repo
-yum-config-manager --disable ol7_developer
-yum-config-manager --disable oci-included-ol7
-yum-config-manager --disable ol7_oci_included
-yum-config-manager --disable ol7_ksplice
-yum-config-manager --disable ol7_MySQL80
-yum-config-manager --disable ol7_MySQL80_connectors_community
-yum-config-manager --disable ol7_MySQL80_tools_community
+if [ $(grep -ic "7." /etc/redhat-release) -eq 1 ]; then 
+    echo "INFO: Disable some repo in OEL 7 -------------------------------------"
+    yum-config-manager --disable ol7_developer
+    yum-config-manager --disable oci-included-ol7
+    yum-config-manager --disable ol7_oci_included
+    yum-config-manager --disable ol7_ksplice
+    yum-config-manager --disable ol7_MySQL80
+    yum-config-manager --disable ol7_MySQL80_connectors_community
+    yum-config-manager --disable ol7_MySQL80_tools_community
+fi
 
 # config SSH for X11 forwarding
 yum install -y xauth xclock

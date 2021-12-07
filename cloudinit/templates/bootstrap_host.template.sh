@@ -375,6 +375,7 @@ then
     echo "### Install binaries ###################################################"
     if [ "$task_db_install" = true ]; then
         echo "### Install DB binaries ################################################"
+        export CV_ASSUME_DISTID=OEL7.8
         if [ -f "$ORADBA_BIN/$SETUP_DB" ]; then
             su -l $ORACLE_USER -c ". /tmp/$SETUP_ENV; $ORADBA_BIN/$SETUP_DB"
             echo "### Relink Unified Audit ###############################################"

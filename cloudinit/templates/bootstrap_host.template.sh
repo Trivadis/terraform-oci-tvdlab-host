@@ -171,10 +171,14 @@ if [ $(grep -ic "7." /etc/redhat-release) -eq 1 ]; then
     yum-config-manager --disable ol7_MySQL80
     yum-config-manager --disable ol7_MySQL80_connectors_community
     yum-config-manager --disable ol7_MySQL80_tools_community
+
+    yum install -y xauth xclock
+elif [ $(grep -ic "8." /etc/redhat-release) -eq 1 ]; then 
+    dnf config-manager --enable ol8_codeready_builder
+    dnf install -y xorg-x11-apps
 fi
 
 # config SSH for X11 forwarding
-yum install -y xauth xclock
 sed -i 's/.*X11Forwarding.*/X11Forwarding yes/g'    /etc/ssh/sshd_config
 sed -i 's/.*X11UseLocalhost.*/X11UseLocalhost no/g' /etc/ssh/sshd_config
 systemctl reload sshd

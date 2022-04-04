@@ -168,6 +168,7 @@ if [ $(grep -ic "7." /etc/redhat-release) -eq 1 ]; then
     yum-config-manager --disable oci-included-ol7
     yum-config-manager --disable ol7_oci_included
     yum-config-manager --disable ol7_ksplice
+    yum-config-manager --disable ol7_addons
     yum-config-manager --disable ol7_MySQL80
     yum-config-manager --disable ol7_MySQL80_connectors_community
     yum-config-manager --disable ol7_MySQL80_tools_community

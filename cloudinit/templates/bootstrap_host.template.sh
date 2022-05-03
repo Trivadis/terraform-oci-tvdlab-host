@@ -182,6 +182,22 @@ fi
 # config SSH for X11 forwarding
 sed -i 's/.*X11Forwarding.*/X11Forwarding yes/g'    /etc/ssh/sshd_config
 sed -i 's/.*X11UseLocalhost.*/X11UseLocalhost no/g' /etc/ssh/sshd_config
+
+# accenture ssh config
+cat << EOF >/etc/ssh/Banner
+
+This system is the property of Accenture, and is to be used in accordance with
+applicable Accenture Policies.Unauthorized access or activity is a violation of
+Accenture Policies and may be a violation of law. Use of this system constitutes
+consent to monitoring or unauthorized use, in accordance with Accenture Policies,
+local laws, and regulations. Unauthorized use may result in penalties including,
+but not limited to, reprimand, dismissal, financial penalties, and legal action
+
+EOF
+sed -i 's/.*MaxAuthTries.*/MaxAuthTries 5/g' /etc/ssh/sshd_config
+sed -i 's/.*HostBasedAuthentication.*/HostBasedAuthentication no/gi' /etc/ssh/sshd_config
+sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/g' /etc/ssh/sshd_config
+sed -i 's|.*Banner.*|Banner /etc/ssh/Banner|g' /etc/ssh/sshd_config
 systemctl reload sshd
 
 echo "INFO: Set timezone -------------------------------------------------------"

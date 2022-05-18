@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.5.0] - 2022-05-18
+
+### Added
+
+- Install *yum-cron* and setup a basic configuration to automatically install updates
+
 ## [0.4.0] - 2022-05-03
 
 ### Added

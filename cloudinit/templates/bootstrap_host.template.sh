@@ -200,6 +200,13 @@ sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/g' /etc/ssh/sshd_config
 sed -i 's|.*Banner.*|Banner /etc/ssh/Banner|g' /etc/ssh/sshd_config
 systemctl reload sshd
 
+echo "INFO: Config YUM cron ----------------------------------------------------"
+yum install -y yum-cron
+systemctl start yum-cron
+systemctl enable yum-cron
+sed -i 's/^apply_updates.*/apply_updates = yes/g' /etc/yum/yum-cron.conf
+sed -i 's/^random_sleep.*/random_sleep = 0/g' /etc/yum/yum-cron.conf
+
 echo "INFO: Set timezone -------------------------------------------------------"
 timedatectl set-timezone Europe/Zurich
 timedatectl

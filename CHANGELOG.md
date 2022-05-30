@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.5.1] - 2022-05-31
+
+### Fixed
+
+- Limit *yum-cron* installation to OEL 7
+
 ## [0.5.0] - 2022-05-18
 
 ### Added

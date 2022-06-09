@@ -18,7 +18,7 @@
 # host_db21c_name           = "db21"                                 # Name portion of host
 # host_db21c_private_ip     = "10.0.1.21"                            # Private IP for host.
 # host_db21c_image_id       = "OEL"                                  # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).host_db21c_private_ip             = "10.0.1.19"            # Private IP for host.
-# host_db21c_shape          = "VM.Standard.E3.Flex"                  # The shape of compute instance.
+# host_db21c_shape          = "VM.Standard.E4.Flex"                  # The shape of compute instance.
 # host_db21c_ocpus          = 1                                      # The OCPUS for the shape.
 # host_db21c_memory_in_gbs  = 16                                     # The memory in gbs for the shape. 
 # host_db21c_volume_enabled = true                                   # add a block volume

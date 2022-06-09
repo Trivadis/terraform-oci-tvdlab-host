@@ -185,7 +185,7 @@ variable "host_state" {
 
 variable "host_shape" {
   description = "The shape of compute instance."
-  default     = "VM.Standard.E3.Flex"
+  default     = "VM.Standard.E4.Flex"
   type        = string
 }
 

@@ -100,7 +100,7 @@ variable "host_db19c_boot_volume_size" {
 
 variable "host_db19c_shape" {
   description = "The shape of compute instance."
-  default     = "VM.Standard.E3.Flex"
+  default     = "VM.Standard.E4.Flex"
   type        = string
 }
 

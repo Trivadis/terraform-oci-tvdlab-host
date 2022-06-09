@@ -18,7 +18,7 @@
 # host_oud12c_name             = "oud12"                                # Name portion of host
 # host_oud12c_private_ip       = "10.0.1.40"                            # Private IP for host.
 # host_oud12c_image_id         = "OEL"                                  # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).host_oud12c_private_ip             = "10.0.1.19"            # Private IP for host.
-# host_oud12c_shape            = "VM.Standard.E3.Flex"                  # The shape of compute instance.
+# host_oud12c_shape            = "VM.Standard.E4.Flex"                  # The shape of compute instance.
 # host_oud12c_boot_volume_size = 100
 # host_oud12c_ocpus            = 1                                      # The OCPUS for the shape.
 # host_oud12c_memory_in_gbs    = 8                                      # The memory in gbs for the shape. 

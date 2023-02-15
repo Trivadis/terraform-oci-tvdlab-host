@@ -163,15 +163,16 @@ echo "### Generic host configuration ###########################################
 
 # disable dev repo
 if [ $(grep -ic "7." /etc/redhat-release) -eq 1 ]; then 
+    yum repolist
     echo "INFO: Disable some repo in OEL 7 -------------------------------------"
-    yum-config-manager --disable ol7_developer
-    yum-config-manager --disable oci-included-ol7
-    yum-config-manager --disable ol7_oci_included
-    yum-config-manager --disable ol7_ksplice
-    yum-config-manager --disable ol7_addons
-    yum-config-manager --disable ol7_MySQL80
-    yum-config-manager --disable ol7_MySQL80_connectors_community
-    yum-config-manager --disable ol7_MySQL80_tools_community
+    yum-config-manager --disable ol7_developer || echo "cannot disable the repo ol7_developer"
+    yum-config-manager --disable oci-included-ol7 || echo "cannot disable the repo oci-included-ol7"
+    yum-config-manager --disable ol7_oci_included || echo "cannot disable the repo ol7_oci_included"
+    yum-config-manager --disable ol7_ksplice || echo "cannot disable the repo ol7_ksplice"
+    yum-config-manager --disable ol7_addons || echo "cannot disable the repo ol7_addons"
+    yum-config-manager --disable ol7_MySQL80 || echo "cannot disable the repo ol7_MySQL80"
+    yum-config-manager --disable ol7_MySQL80_connectors_community || echo "cannot disable the repo ol7_MySQL80_connectors_community"
+    yum-config-manager --disable ol7_MySQL80_tools_community || echo "cannot disable the repo ol7_MySQL80_tools_community"
 
     yum install -y xauth xclock
 elif [ $(grep -ic "8." /etc/redhat-release) -eq 1 ]; then 

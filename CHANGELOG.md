@@ -16,6 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.5.3] - 2023-02-20
+
+### Added
+
+- add dnf-automatic for REL 8 installations
+
+### Fixed
+
+- Enhance error handling for yum install
+
 ## [0.5.2] - 2023-02-14
 
 ### Fixed

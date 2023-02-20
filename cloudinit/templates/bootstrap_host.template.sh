@@ -174,10 +174,12 @@ if [ $(grep -ic "7." /etc/redhat-release) -eq 1 ]; then
     yum-config-manager --disable ol7_MySQL80_connectors_community || echo "cannot disable the repo ol7_MySQL80_connectors_community"
     yum-config-manager --disable ol7_MySQL80_tools_community || echo "cannot disable the repo ol7_MySQL80_tools_community"
 
-    yum install -y xauth xclock
-elif [ $(grep -ic "8." /etc/redhat-release) -eq 1 ]; then 
-    dnf config-manager --enable ol8_codeready_builder
-    dnf install -y xorg-x11-apps
+    yum install -y xauth  || echo "cannot install xauth"
+    yum install -y xclock || echo "cannot install xclock"
+elif [ $(grep -ic "8\." /etc/redhat-release) -eq 1 ]; then 
+    dnf config-manager --enable ol8_codeready_builder || echo "cannot enable the repo ol8_codeready_builder"
+    dnf install -y xorg-x11-apps || echo "cannot install xorg-x11-apps packages"
+    dnf install -y dnf-automatic || echo "cannot install dnf-automatic packages"
 fi
 
 # config SSH for X11 forwarding
@@ -201,7 +203,7 @@ sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/g' /etc/ssh/sshd_config
 sed -i 's|.*Banner.*|Banner /etc/ssh/Banner|g' /etc/ssh/sshd_config
 systemctl reload sshd
 
-if [ $(grep -ic "7." /etc/redhat-release) -eq 1 ]; then 
+if [ $(grep -ic "7\." /etc/redhat-release) -eq 1 ]; then 
     echo "INFO: Config YUM cron ----------------------------------------------------"
     yum install -y yum-cron
     systemctl start yum-cron

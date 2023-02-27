@@ -124,6 +124,12 @@ variable "bastion_hosts" {
   type        = list(string)
 }
 
+variable "bastion_ssh_port" {
+  description = "SSH access port for bastion hosts."
+  type        = number
+  default     = 22
+}
+
 # Host Parameter ---------------------------------------------------------------
 variable "host_enabled" {
   description = "whether to create the compute instance or not."

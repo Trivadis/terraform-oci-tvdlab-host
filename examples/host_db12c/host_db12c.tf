@@ -17,7 +17,7 @@
 # - ADD VCM Module -------------------------------------------------------------
 module "tvdlab-db12c" {
   source  = "Trivadis/tvdlab-host/oci"
-  version = ">=0.1.0"
+  version = ">=0.5.0"
 
   # - Mandatory Parameters -----------------------------------------------------
   region              = var.region                          # The OCI region where resources will be created
@@ -35,6 +35,7 @@ module "tvdlab-db12c" {
   tvd_os_user           = var.tvd_os_user                         # Default OS user used to bootstrap
   tvd_participants      = var.tvd_participants                    # The number of VCN to create
   bastion_hosts         = module.tvdlab-bastion.bastion_public_ip # List of bastion host ips
+  bastion_ssh_port      = var.public_ssh_port                     # SSH port used to upload bootstrap scripts
   software_repo         = var.software_repo                       # Software repository URL to OCI object store swift API
   software_user         = var.software_user                       # Default OCI user to access the software repository
   software_password     = var.software_password                   # Default OCI password to access the software repository
@@ -183,5 +184,11 @@ variable "host_db12c_tags" {
   description = "A simple key-value pairs to tag the resources created"
   type        = map(any)
   default     = {}
+}
+
+variable "public_ssh_port" {
+  description = "Public SSH access port configured in security list."
+  type        = number
+  default     = 22
 }
 # --- EOF ----------------------------------------------------------------------

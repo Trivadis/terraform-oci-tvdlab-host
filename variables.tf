@@ -130,6 +130,12 @@ variable "bastion_ssh_port" {
   default     = 22
 }
 
+variable "bastion_ssh_timeout" {
+  description = "SSH access timeout for bastion hosts."
+  type        = string
+  default     = "5m"
+}
+
 # Host Parameter ---------------------------------------------------------------
 variable "host_enabled" {
   description = "whether to create the compute instance or not."

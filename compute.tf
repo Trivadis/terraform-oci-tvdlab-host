@@ -66,6 +66,7 @@ resource "oci_core_instance" "compute" {
       user                = var.tvd_os_user
       host                = self.private_ip
       port                = var.bastion_ssh_port
+      timeout             = var.bastion_ssh_timeout
       agent               = false
       private_key         = var.ssh_private_key
       bastion_host        = var.bastion_hosts[count.index]

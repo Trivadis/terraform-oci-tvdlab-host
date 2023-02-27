@@ -156,7 +156,7 @@ fi
 # update user password
 echo "INFO: reset password for $ORACLE_USER to default value"
 sed -i 's/^ocredit.*/ocredit = 0/g' /etc/security/pwquality.conf
-echo $ORACLE_PWD |passwd --stdin $ORACLE_USER
+echo $ORACLE_PWD |passwd --stdin $ORACLE_USER || echo "WARN: unable to reset password for $ORACLE_USER"
 
 # adjust permissions
 chown -vR $ORACLE_USER:$ORACLE_USER /home/$ORACLE_USER 
@@ -167,19 +167,19 @@ echo "### Generic host configuration ###########################################
 if [ $(grep -ic "7." /etc/redhat-release) -eq 1 ]; then 
     yum repolist
     echo "INFO: Disable some repo in OEL 7 -------------------------------------"
-    yum-config-manager --disable ol7_developer || echo "cannot disable the repo ol7_developer"
-    yum-config-manager --disable oci-included-ol7 || echo "cannot disable the repo oci-included-ol7"
-    yum-config-manager --disable ol7_oci_included || echo "cannot disable the repo ol7_oci_included"
-    yum-config-manager --disable ol7_ksplice || echo "cannot disable the repo ol7_ksplice"
-    yum-config-manager --disable ol7_addons || echo "cannot disable the repo ol7_addons"
-    yum-config-manager --disable ol7_MySQL80 || echo "cannot disable the repo ol7_MySQL80"
-    yum-config-manager --disable ol7_MySQL80_connectors_community || echo "cannot disable the repo ol7_MySQL80_connectors_community"
-    yum-config-manager --disable ol7_MySQL80_tools_community || echo "cannot disable the repo ol7_MySQL80_tools_community"
+    yum-config-manager --disable ol7_developer      || echo "WARN: cannot disable the repo ol7_developer"
+    yum-config-manager --disable oci-included-ol7   || echo "WARN: cannot disable the repo oci-included-ol7"
+    yum-config-manager --disable ol7_oci_included   || echo "WARN: cannot disable the repo ol7_oci_included"
+    yum-config-manager --disable ol7_ksplice        || echo "WARN: cannot disable the repo ol7_ksplice"
+    yum-config-manager --disable ol7_addons         || echo "WARN: cannot disable the repo ol7_addons"
+    yum-config-manager --disable ol7_MySQL80        || echo "WARN: cannot disable the repo ol7_MySQL80"
+    yum-config-manager --disable ol7_MySQL80_connectors_community   || echo "WARN: cannot disable the repo ol7_MySQL80_connectors_community"
+    yum-config-manager --disable ol7_MySQL80_tools_community        || echo "WARN: cannot disable the repo ol7_MySQL80_tools_community"
 
-    yum install -y xauth  || echo "cannot install xauth"
-    yum install -y xclock || echo "cannot install xclock"
+    yum install -y xauth  || echo "WARN: cannot install xauth"
+    yum install -y xclock || echo "WARN: cannot install xclock"
 elif [ $(grep -ic "8\." /etc/redhat-release) -eq 1 ]; then 
-    dnf config-manager --enable ol8_codeready_builder || echo "cannot enable the repo ol8_codeready_builder"
+    dnf config-manager --enable ol8_codeready_builder || echo "WARN: cannot enable the repo ol8_codeready_builder"
     dnf install -y xorg-x11-apps || echo "cannot install xorg-x11-apps packages"
     dnf install -y dnf-automatic || echo "cannot install dnf-automatic packages"
 fi

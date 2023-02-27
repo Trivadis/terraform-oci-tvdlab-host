@@ -155,6 +155,7 @@ fi
 
 # update user password
 echo "INFO: reset password for $ORACLE_USER to default value"
+sed -i 's/^ocredit.*/ocredit = 0/g' /etc/security/pwquality.conf
 echo $ORACLE_PWD |passwd --stdin $ORACLE_USER
 
 # adjust permissions

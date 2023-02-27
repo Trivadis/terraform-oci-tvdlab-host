@@ -22,6 +22,7 @@ export DOMAINNAME="${tvd_domain}"               # domain name used in this envir
 export ORACLE_PWD="${tvd_def_password}"         # default password used to configure different stuff
 export LAB_NAME="${lab_name}"                   # LAB_NAME Name
 export SOFTWARE_REPO="${software_repo}"         # URL of the software repository in OCI
+export SOFTWARE_REPO=${SOFTWARE_REPO%%+(/)}     # remove trailing backslash
 export SOFTWARE_USER="${software_user}"         # OCI User to access the software repository
 export SOFTWARE_PASSWORD="${software_password}" # API Token to access the software repository
 export LAB_REPO="${lab_source_url}"             # pre-authenticated URL for lab source
@@ -326,6 +327,9 @@ then
         if [[ $SOFTWARE_REPO == *"swiftobjectstorage"* ]]; then
             echo "INFO: set curl options to -X GET -u $SOFTWARE_USER:xxx"
             curl_opt="-X GET -u $SOFTWARE_USER:$SOFTWARE_PASSWORD"
+        else
+            echo "INFO: set curl options to -u $SOFTWARE_USER:xxx"
+            curl_opt="-u $SOFTWARE_USER:$SOFTWARE_PASSWORD"
         fi
     else
         echo "INFO: Using plain curl without credentials"

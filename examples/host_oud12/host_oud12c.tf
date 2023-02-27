@@ -36,6 +36,7 @@ module "tvdlab-oud12c" {
   tvd_participants      = var.tvd_participants                    # The number of VCN to create
   bastion_hosts         = module.tvdlab-bastion.bastion_public_ip # List of bastion host ips
   bastion_ssh_port      = var.public_ssh_port                     # SSH port used to upload bootstrap scripts
+  bastion_ssh_timeout   = var.bastion_ssh_timeout                 # SSH timeout during upload of bootstrap scripts
   software_repo         = var.software_repo                       # Software repository URL to OCI object store swift API
   software_user         = var.software_user                       # Default OCI user to access the software repository
   software_password     = var.software_password                   # Default OCI password to access the software repository
@@ -191,4 +192,12 @@ variable "public_ssh_port" {
   type        = number
   default     = 22
 }
+
+variable "bastion_ssh_timeout" {
+  description = "Public SSH access port configured in security list."
+  type        = string
+  default     = "5m"
+}
+
+
 # --- EOF ----------------------------------------------------------------------

@@ -37,7 +37,7 @@ export task_lab_config=true         # enable / disable Training configuration
 
 # Create a list of software to download based on environment variables ending 
 # with _PKG, _PKGS, or _MASTER
-SOFTWARE_LIST=""                        # initial values of SOFTWARE_LIST
+SOFTWARE_LIST=""                    # initial values of SOFTWARE_LIST
 for i in $(env|cut -d= -f1|grep '_PKG$\|_PKGS$\|_MASTER$'); do
     # check if environment variable is not empty and value not yet part of SOFTWARE_LIST
     if [ -n "${!i}" ] && [[ $SOFTWARE_LIST != *"${!i}"* ]]; then

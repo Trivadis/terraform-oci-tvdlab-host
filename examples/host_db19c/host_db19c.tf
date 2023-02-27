@@ -186,18 +186,4 @@ variable "host_db19c_tags" {
   type        = map(any)
   default     = {}
 }
-
-variable "public_ssh_port" {
-  description = "Public SSH access port configured in security list."
-  type        = number
-  default     = 22
-}
-
-variable "bastion_ssh_timeout" {
-  description = "Public SSH access port configured in security list."
-  type        = string
-  default     = "5m"
-}
-
-
 # --- EOF ----------------------------------------------------------------------

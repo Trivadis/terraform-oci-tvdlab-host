@@ -133,7 +133,7 @@ variable "bastion_ssh_port" {
 variable "bastion_ssh_timeout" {
   description = "SSH access timeout for bastion hosts."
   type        = string
-  default     = "5m"
+  default     = "20m"
 }
 
 # Host Parameter ---------------------------------------------------------------

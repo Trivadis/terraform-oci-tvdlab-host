@@ -1,11 +1,11 @@
 # ------------------------------------------------------------------------------
-# Trivadis AG, Infrastructure Managed Services
+# Trivadis - Part of Accenture, Platform Factory - Data Platforms
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ------------------------------------------------------------------------------
 # Name.......: variables.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.08
+# Date.......: 2023.03.10
 # Revision...: 
 # Purpose....: Variable file for the terraform module tvdlab host.
 # Notes......: -- 
@@ -16,13 +16,7 @@
 
 # provider identity parameters -------------------------------------------------
 variable "tenancy_ocid" {
-  description = "tenancy id where to create the resources"
-  type        = string
-}
-
-variable "region" {
-  # List of regions: https://docs.cloud.oracle.com/iaas/Content/General/Concepts/regions.htm#ServiceAvailabilityAcrossRegions
-  description = "The OCI region where resources will be created"
+  description = "tenancy OCID where to create the resources"
   type        = string
 }
 
@@ -64,13 +58,13 @@ variable "tags" {
 
 # Trivadis LAB specific parameter ----------------------------------------------
 variable "tvd_participants" {
-  description = "The number of VCN to create"
+  description = "The number of similar hosts to be created"
   type        = number
   default     = 1
 }
 
 variable "tvd_domain" {
-  description = "The domain name of the LAB environment"
+  description = "The domain name of the environment"
   type        = string
   default     = "trivadislabs.com"
 }
@@ -97,11 +91,6 @@ variable "ssh_authorized_keys" {
   type        = string
 }
 
-variable "ssh_private_key" {
-  description = "ssh private key used to access the internal hosts."
-  type        = string
-}
-
 variable "software_repo" {
   description = "Software repository URL to OCI object store swift API"
   type        = string
@@ -117,23 +106,6 @@ variable "software_password" {
   description = "Default OCI password to access the software repository"
   default     = ""
   type        = string
-}
-
-variable "bastion_hosts" {
-  description = "List of bastion host ips"
-  type        = list(string)
-}
-
-variable "bastion_ssh_port" {
-  description = "SSH access port for bastion hosts."
-  type        = number
-  default     = 22
-}
-
-variable "bastion_ssh_timeout" {
-  description = "SSH access timeout for bastion hosts."
-  type        = string
-  default     = "20m"
 }
 
 # Host Parameter ---------------------------------------------------------------
@@ -193,6 +165,7 @@ variable "hosts_file" {
 variable "host_state" {
   description = "Whether the host should be either RUNNING or STOPPED state. "
   default     = "RUNNING"
+  type        = string
 }
 
 variable "host_shape" {
@@ -271,15 +244,18 @@ variable "host_bootstrap_template" {
 variable "host_ORACLE_ROOT" {
   description = "default Oracle root / software folder."
   default     = "/u00"
+  type        = string
 }
 
 variable "host_ORACLE_DATA" {
   description = "default Oracle data folder used to store datafiles."
   default     = "/u01"
+  type        = string
 }
 
 variable "host_ORACLE_ARCH" {
   description = "default Oracle arch folder used to store archive logs and backups."
   default     = "/u02"
+  type        = string
 }
 # --- EOF ----------------------------------------------------------------------

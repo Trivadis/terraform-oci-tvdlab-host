@@ -24,7 +24,6 @@ module "tvdlab-compute" {
   version = ">= 1.0.0"
 
   # - Mandatory Parameters --------------------------------------------------
-  region         = var.region
   compartment_id = var.compartment_id
 }
 ```
@@ -39,7 +38,6 @@ module "tvdlab-vcn" {
   version = ">= 1.0.0"
 
   # - Mandatory Parameters --------------------------------------------------
-  region            = var.region
   compartment_id    = var.compartment_id
   tvd_participants  = 3
 }

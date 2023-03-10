@@ -4,20 +4,15 @@ Variables for the configuration of the terraform module, defined in [variables](
 
 - `tenancy_ocid` tenancy id where to create the resources.
 - `compartment_ocid` OCID of the compartment where to create all resources.
-- `region` Region where to provision the VCN.
 - `host_subnet` List of subnets for the host hosts.
-- `bastion_hosts` List of bastion host ips.
 - `ssh_authorized_keys` Authorized ssh public key allowed to access the host.  
 - `tvd_def_password` Default password for windows administrator, oracle, directory and more
-- `ssh_private_key` ssh private key used to access the internal hosts.
-- ``
 
 ## Provider
 
 | Parameter      | Description                                                                                                                                                        | Values | Default |
 |----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|---------|
 | `tenancy_ocid` | Tenancy OCID where to create the resources. Required when configuring provider.                                                                                    | OCID   |         |
-| `region`       | Region where to provision the VCN. [List of regions](https://docs.cloud.oracle.com/iaas/Content/General/Concepts/regions.htm). Required when configuring provider. |        |         |
 
 ## General OCI
 
@@ -50,7 +45,6 @@ Variables for the configuration of the terraform module, defined in [variables](
 | `host_volume_size`            | Size of the volume.                                                                                                                                                             |                       | 256                              |
 | `host_state`                  | Whether host should be either RUNNING or STOPPED state.                                                                                                                         | RUNNING / STOPPED     | RUNNING                          |
 | `host_subnet`                 | List of subnets for the hosts                                                                                                                                                   |                       | n/a                              |
-| `ssh_private_key`             | ssh private key used to access the internal hosts.                                                                                                                              |                       | n/a                              |
 | `ssh_authorized_keys`         | Authorized ssh public key allowed to access the host.                                                                                                                           |                       | n/a                              |
 | `host_env_config`             | Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh.                                                 |                       | `set_env_config.template.sh`     |
 | `host_setup_folder`           | description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit.                                                                       |                       | n/a                              |
@@ -75,16 +69,14 @@ Specific parameter to configure the Trivadis LAB environment.
 | `software_repo`     | Software repository URL to OCI object store swift API or any other URL where packages can be downloaded using `curl`              |        | n/a              |
 | `software_user`     | Default OCI user to access the software repository                                                                                |        | n/a              |
 | `software_password` | Default OCI password to access the software repository.                                                                           |        | n/a              |
-| `bastion_hosts`     | List of bastion host ips.                                                                                                         |        | n/a              |
 
 ## Local Variables
 
 | Parameter                 | Description                                                                                                                                                                                                             | Values                       | Default |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|---------|
-| `availability_domain`     | Effective name of the availability domain based on `var.region` and `var.ad_index`.                                                                                                                                     |                              |         |
+| `availability_domain`     | Effective name of the availability domain based on region and `var.ad_index`.                                                                                                                                     |                              |         |
 | `host_image_id`           | Tenancy OCID where to create the resources. Required when configuring provider.                                                                                                                                         |                              |         |
 | `resource_name`           | Local variable containing either the value of `var.resource_name` or evaluated based on the compartment name.                                                                                                           |                              |         |
-| `resource_name_lower`     | Lower case version of `resource_name`                                                                                                                                                                                   |                              |         |
 | `resource_shortname`      | Short, lower case version of the `resource_name` variable without any `-`.                                                                                                                                              |                              |         |
 | `host_image_id`           | OCID of the hostname image. If `var.host_image_id` is set to *OEL*, then the effective OCID will be evaluated using `data.oci_core_images` and based on `var.host_os`, `var.host_os_version` and `var.compartment_ocid` | OCID                         | OEL     |
 | `hosts_file`              | Host file to upload to the compute instance                                                                                                                                                                             |                              |         |

@@ -32,7 +32,6 @@ module "tvdlab-host" {
 
   # - Mandatory Parameters --------------------------------------------------
   tenancy_ocid          = var.tenancy_ocid
-  region                = var.region
   compartment_id        = var.compartment_id
   ssh_public_key_path   = var.ssh_public_key_path
   host_subnet           = module.tvdlab-vcn.private_subnet_id
@@ -48,7 +47,6 @@ module "tvdlab-host" {
 
   # - Mandatory Parameters --------------------------------------------------
   tenancy_ocid          = var.tenancy_ocid
-  region                = var.region
   compartment_id        = var.compartment_id
   ssh_public_key_path   = var.ssh_public_key_path
   host_subnet           = module.tvdlab-vcn.private_subnet_id

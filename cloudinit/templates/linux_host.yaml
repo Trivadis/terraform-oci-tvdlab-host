@@ -67,15 +67,21 @@ write_files:
 
 # --- Run configuration commands ----------------------------------------------
 runcmd:
+  # configure tools from development repositories
+  - yum-config-manager --enable ol7_developer --enable ol7_developer_EPEL
+  - yum upgrade -y
+  - yum install -y tmux pwgen bsdtar
+
+  # download lab source
+  - curl -Lsf ${lab_source_url} -o /tmp/${lab_name}.zip
+
+  # extract lab source
+  - bsdtar --strip-components=1 -xvf /tmp/${lab_name}.zip -C /home/${os_user} -s /$(basename ${host_setup_folder})/cloudinit/ "oci/$(basename ${host_setup_folder})/*" 'oci/cloudinit/*'
+
   # Fix permissions
   - chown -R ${os_user}:${os_user} /home/${os_user}/.ssh
   - chown -R ${os_user}:${os_user} /home/${os_user}/cloudinit
 
-  # configure tools from development repositories
-  - yum-config-manager --enable ol7_developer --enable ol7_developer_EPEL
-  - yum upgrade -y
-  - yum install -y tmux pwgen
-  
   # config SELinux Network access
   - setsebool httpd_can_network_connect on -P
   - setenforce 0

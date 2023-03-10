@@ -26,11 +26,14 @@ locals {
   host_cloudinit_template = var.host_cloudinit_template == "" ? "${path.module}/cloudinit/templates/linux_host.yaml" : var.host_cloudinit_template
   host_bootstrap_template = var.host_bootstrap_template == "" ? "${path.module}/cloudinit/templates/bootstrap_host.template.sh" : var.host_bootstrap_template
   host_bootstrap = base64encode(templatefile(local.host_cloudinit_template, {
-    yum_upgrade     = true
-    os_user         = var.tvd_os_user
-    authorized_keys = base64gzip(var.ssh_authorized_keys)
-    env_conf_script = base64gzip(file(local.host_env_config))
-    etc_hosts       = base64gzip(var.hosts_file)
+    yum_upgrade       = true
+    os_user           = var.tvd_os_user
+    authorized_keys   = base64gzip(var.ssh_authorized_keys)
+    env_conf_script   = base64gzip(file(local.host_env_config))
+    etc_hosts         = base64gzip(var.hosts_file)
+    lab_name          = local.resource_name
+    lab_source_url    = var.lab_source_url
+    host_setup_folder = local.host_setup_folder
     bootstrap_script = base64gzip(templatefile(local.host_bootstrap_template, {
       os_user           = var.tvd_os_user
       tvd_def_password  = var.tvd_def_password

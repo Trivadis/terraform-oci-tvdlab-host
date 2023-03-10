@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Trivadis AG, Infrastructure Managed Services
+# Trivadis - Part of Accenture, Platform Factory - Data Platforms
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ------------------------------------------------------------------------------
 # Name.......: host_db19c.tf
@@ -17,19 +17,19 @@
 # - ADD VCM Module -------------------------------------------------------------
 module "tvdlab-db19c" {
   source  = "Trivadis/tvdlab-host/oci"
-  version = ">=0.5.0"
+  version = ">= 2.0.0" # to limit module version specifiy upper / lower version = ">= 0.5.0, < 2.0.0"
 
   # - Mandatory Parameters -----------------------------------------------------
   compartment_ocid    = var.compartment_ocid                # OCID of the compartment where to create all resources
   tenancy_ocid        = var.tenancy_ocid                    # tenancy id where to create the resources
   host_subnet         = module.tvdlab-vcn.private_subnet_id # List of subnets for the host hosts
-  tvd_def_password    = var.tvd_def_password                # Default password for windows administrator, oracle, directory and more
+  tvd_def_password    = local.tvd_def_password              # Default password for windows administrator, oracle, directory and more
   lab_source_url      = var.lab_source_url                  # preauthenticated URL to the LAB source ZIP file.
   ssh_authorized_keys = local.ssh_authorized_keys           # SSH authorized keys to access the resource.
 
   # - Optional Parameters ------------------------------------------------------
   # Lab Configuration
-  resource_name         = var.resource_name               # user-friendly string to name all resource. If undefined it will be derived from compartment name.
+  resource_name         = local.resource_name             # user-friendly string to name all resource. If undefined it will be derived from compartment name.
   tvd_domain            = var.tvd_domain                  # The domain name of the LAB environment
   tvd_os_user           = var.tvd_os_user                 # Default OS user used to bootstrap
   tvd_participants      = var.tvd_participants            # The number of VCN to create

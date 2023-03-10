@@ -17,9 +17,8 @@
 locals {
   availability_domain     = data.oci_identity_availability_domains.ad_list.availability_domains[var.ad_index - 1].name
   resource_name           = var.resource_name == "" ? data.oci_identity_compartment.compartment.name : var.resource_name
-  resource_name_lower     = lower(local.resource_name)
   resource_shortname      = lower(replace(local.resource_name, "-", ""))
-  host_image_id           = var.host_image_id == "OEL" ? data.oci_core_images.oracle_images.images.0.id : var.host_image_id
+  host_image_id           = var.host_image_id == "OEL" ? data.oci_core_images.oracle_images.images[0].id : var.host_image_id
   hosts_file              = var.hosts_file == "" ? "${path.module}/etc/hosts.template" : var.hosts_file
   host_env_config         = var.host_env_config == "" ? "${path.module}/cloudinit/templates/set_env_config.template.sh" : var.host_env_config
   host_setup_folder       = var.host_setup_folder == "" ? "${path.module}/cloudinit/" : var.host_setup_folder
@@ -30,7 +29,7 @@ locals {
     os_user           = var.tvd_os_user
     authorized_keys   = base64gzip(var.ssh_authorized_keys)
     env_conf_script   = base64gzip(file(local.host_env_config))
-    etc_hosts         = base64gzip(var.hosts_file)
+    etc_hosts         = base64gzip(local.hosts_file)
     lab_name          = local.resource_name
     lab_source_url    = var.lab_source_url
     host_setup_folder = local.host_setup_folder

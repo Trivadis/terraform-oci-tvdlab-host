@@ -16,6 +16,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [2.1.0] - 2023-03-10
+
+### Added
+
+- add dnf-automatic for REL 8 installations
+
+### Fixed
+
+- fix a couple of *tflint* issues
+
+### Changed
+
+- change bootstrap back to download from url / oci bucket
+- clean up templates
+
+### Removed
+
+- remove unused variables
+- remove file provider and upload via bastion host
+
 ## [0.5.3] - 2023-02-20
 
 ### Added

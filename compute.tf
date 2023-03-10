@@ -56,23 +56,5 @@ resource "oci_core_instance" "compute" {
   timeouts {
     create = "60m"
   }
-
-  provisioner "file" {
-    source      = "${local.host_setup_folder}/"
-    destination = "/home/${var.tvd_os_user}/cloudinit"
-
-    connection {
-      type                = "ssh"
-      user                = var.tvd_os_user
-      host                = self.private_ip
-      timeout             = var.bastion_ssh_timeout
-      agent               = false
-      private_key         = var.ssh_private_key
-      bastion_host        = var.bastion_hosts[count.index]
-      bastion_port        = var.bastion_ssh_port
-      bastion_user        = "opc"
-      bastion_private_key = var.ssh_private_key
-    }
-  }
 }
 # --- EOF ----------------------------------------------------------------------

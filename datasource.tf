@@ -19,11 +19,6 @@ data "oci_identity_availability_domains" "ad_list" {
   compartment_id = var.tenancy_ocid
 }
 
-# get tenancy information
-data "oci_identity_tenancy" "tenancy" {
-  tenancy_id = var.tenancy_ocid
-}
-
 # get compartment information
 data "oci_identity_compartment" "compartment" {
   id = var.compartment_ocid

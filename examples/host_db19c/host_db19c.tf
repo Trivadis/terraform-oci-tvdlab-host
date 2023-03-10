@@ -5,7 +5,7 @@
 # Name.......: host_db19c.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.11
+# Date.......: 2023.03.10
 # Revision...: 
 # Purpose....: Main configuration to build the training environment.
 # Notes......: Define the core resouces using the module tvdlab-base
@@ -17,7 +17,7 @@
 # - ADD VCM Module -------------------------------------------------------------
 module "tvdlab-db19c" {
   source  = "Trivadis/tvdlab-host/oci"
-  version = ">= 2.0.0" # to limit module version specifiy upper / lower version = ">= 0.5.0, < 2.0.0"
+  version = ">= 2.2.0" # to limit module version specifiy upper / lower version = ">= 0.5.0, < 2.0.0"
 
   # - Mandatory Parameters -----------------------------------------------------
   compartment_ocid    = var.compartment_ocid                # OCID of the compartment where to create all resources

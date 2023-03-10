@@ -1,11 +1,11 @@
 # ------------------------------------------------------------------------------
-# Trivadis AG, Infrastructure Managed Services
+# Trivadis - Part of Accenture, Platform Factory - Data Platforms
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ------------------------------------------------------------------------------
 # Name.......: volumes.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.08
+# Date.......: 2023.03.10
 # Revision...: 
 # Purpose....: Define volumes for the terraform module tvdlab host.
 # Notes......: -- 
@@ -32,11 +32,12 @@ resource "oci_core_volume" "CreateVolume" {
   }
 }
 
+# Create a volume attachement
 resource "oci_core_volume_attachment" "CreateVolumeAttachment" {
   count           = var.host_volume_enabled == true ? var.tvd_participants : 0
   attachment_type = var.host_volume_attachment_type
-  instance_id     = oci_core_instance.compute.*.id[count.index]
-  volume_id       = oci_core_volume.CreateVolume.*.id[count.index]
+  instance_id     = oci_core_instance.compute[count.index].id
+  volume_id       = oci_core_volume.CreateVolume[count.index].id
 }
 
 # --- EOF ----------------------------------------------------------------------

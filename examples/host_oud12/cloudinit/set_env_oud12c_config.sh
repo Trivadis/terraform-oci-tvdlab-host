@@ -4,7 +4,7 @@
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # -----------------------------------------------------------------------------
 # Name.......: set_env_oud12c_config.sh
-# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2021.06.06
 # Revision...: 

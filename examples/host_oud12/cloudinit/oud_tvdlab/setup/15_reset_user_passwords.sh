@@ -4,7 +4,7 @@
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # -----------------------------------------------------------------------
 # Name.......: 15_reset_user_passwords.sh
-# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2020.06.30
 # Usage......: 15_reset_user_passwords.sh

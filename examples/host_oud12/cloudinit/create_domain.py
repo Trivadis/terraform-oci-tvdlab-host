@@ -3,7 +3,7 @@
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ----------------------------------------------------------------------
 # Name.......: create_domain.py
-# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2021.01.19
 # Revision...:

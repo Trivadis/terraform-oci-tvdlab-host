@@ -3,7 +3,7 @@
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ------------------------------------------------------------------------------
 # Name.......: locals.tf
-# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2021.06.08
 # Revision...: 

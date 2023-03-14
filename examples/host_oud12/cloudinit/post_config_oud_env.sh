@@ -4,7 +4,7 @@
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # -----------------------------------------------------------------------------
 # Name.......: post_config_oud_env.sh
-# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2021.06.16
 # Revision...: 

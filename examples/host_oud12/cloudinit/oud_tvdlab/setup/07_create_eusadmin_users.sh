@@ -4,7 +4,7 @@
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # -----------------------------------------------------------------------
 # Name.......: 07_create_eusadmin_users.sh
-# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2020.07.01
 # Revision...: --

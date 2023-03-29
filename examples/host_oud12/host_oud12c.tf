@@ -44,7 +44,7 @@ module "tvdlab-oud12c" {
   host_ORACLE_ROOT      = var.host_oud12c_ORACLE_ROOT      # default Oracle root / software folder 
   host_ORACLE_DATA      = var.host_oud12c_ORACLE_DATA      # default Oracle data folder used to store datafiles
   host_ORACLE_ARCH      = var.host_oud12c_ORACLE_ARCH      # default Oracle arch folder used to store archive logs and backups
-  host_setup_folder     = var.host_oud12c_setup_folder     # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
+  host_setup_folder     = var.host_oud12c_setup_folder     # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh
   host_env_config       = var.host_oud12c_env_config       # Host environment config script used to bootstrap host.
   host_enabled          = var.host_oud12c_enabled          # whether to create the compute instance or not.
   host_name             = var.host_oud12c_name             # Name portion of host
@@ -150,7 +150,7 @@ variable "host_oud12c_env_config" {
 }
 
 variable "host_oud12c_setup_folder" {
-  description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh"
+  description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh"
   default     = "./host_oud12c"
   type        = string
 }

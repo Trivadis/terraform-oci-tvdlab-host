@@ -25,7 +25,7 @@
 # host_wls12c_volume_size    = 256                                        # Size of the additional volume.
 # host_wls12c_volume_source  = ""                                         # Source block volume to clone from.
 # host_wls12c_state          = "RUNNING"                                  # Whether the host should be either RUNNING or STOPPED state. 
-# host_wls12c_setup_folder   = "./host_wls12c"                            # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_env_config.template.sh
+# host_wls12c_setup_folder   = "./host_wls12c"                            # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh
 # host_wls12c_env_config     = "./host_wls12c/set_env_wls12c_config.sh"   # Host environment config script used to bootstrap host.
 # Lab schedule for this resource uncomment enable specific schedule :
 # - weekends: off 20:00-09:00, allow 09:00-20:00

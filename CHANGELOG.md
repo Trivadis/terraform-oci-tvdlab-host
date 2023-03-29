@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [2.3.0] - 2023-03-29
+
+### Changed
+
+- rename *set_env_config.template.sh* to  *set_config_env.template.sh*
+
 ## [2.2.0] - 2023-03-10
 
 ### Changed
@@ -226,7 +232,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- update file header [set_env_config.template.sh](cloudinit/templates/set_env_config.template.sh)
+- update file header [set_config_env.template.sh](cloudinit/templates/set_config_env.template.sh)
 - change default *LOG_BASE* in all example config script to script execution
   directory rather than `/tmp`.
 - change base module version in example files to `version = ">=0.0.17"`
@@ -289,10 +295,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Add empty variable to `set_env_config.template.sh` i.e. *ORACLE_ROOT*,
+- Add empty variable to `set_config_env.template.sh` i.e. *ORACLE_ROOT*,
   *ORACLE_DATA*, *ORACLE_ARCH* and *ORACLE_BASE*
 - Bootstrap script now update variables *ORACLE_ROOT*, *ORACLE_DATA*,
-  *ORACLE_ARCH* and *ORACLE_BASE* in `set_env_config.template.sh`
+  *ORACLE_ARCH* and *ORACLE_BASE* in `set_config_env.template.sh`
 - update terraform example files to latest source version [0.0.11].
 
 ### Fixed

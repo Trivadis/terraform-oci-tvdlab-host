@@ -387,7 +387,7 @@ then
 
     echo "### Config $ORACLE_USER crontab ##############################################"
     su -l $ORACLE_USER -c "cp $ORACLE_BASE/$BE_DIR_NAME/oudbase/templates/etc/oud.crontab $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
-    su -l $ORACLE_USER -c "sed -i \"s|OUD_BASE|$ORACLE_BASE/$BE_DIR_NAME|g\" $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
+    su -l $ORACLE_USER -c "sed -i \"s|OUD_BASE|$ORACLE_BASE/$BE_DIR_NAME/oudbase|g\" $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
     su -l $ORACLE_USER -c "sed -i \"s|MAILADDRESS|$EMAIL|g\" $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
     su -l $ORACLE_USER -c "sed -i '/^#.*oud_backup.sh/s/^#//' $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"
     su -l $ORACLE_USER -c "sed -i '/^#.*oud_export.sh/s/^#//' $ORACLE_BASE/$BE_DIR_NAME/oudbase/etc/oud.crontab"

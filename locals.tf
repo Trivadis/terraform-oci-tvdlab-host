@@ -15,15 +15,16 @@
 # ------------------------------------------------------------------------------
 
 locals {
-  availability_domain     = data.oci_identity_availability_domains.ad_list.availability_domains[var.ad_index - 1].name
-  resource_name           = var.resource_name == "" ? data.oci_identity_compartment.compartment.name : var.resource_name
-  resource_shortname      = lower(replace(local.resource_name, "-", ""))
-  host_image_id           = var.host_image_id == "OEL" ? data.oci_core_images.oracle_images.images[0].id : var.host_image_id
-  hosts_file              = var.hosts_file == "" ? "${path.module}/etc/hosts.template" : var.hosts_file
-  host_env_config         = var.host_env_config == "" ? "${path.module}/cloudinit/templates/set_config_env.template.sh" : var.host_env_config
-  host_setup_folder       = var.host_setup_folder == "" ? "${path.module}/cloudinit/" : var.host_setup_folder
-  host_cloudinit_template = var.host_cloudinit_template == "" ? "${path.module}/cloudinit/templates/linux_host.yaml" : var.host_cloudinit_template
-  host_bootstrap_template = var.host_bootstrap_template == "" ? "${path.module}/cloudinit/templates/bootstrap_host.template.sh" : var.host_bootstrap_template
+  availability_domain             = data.oci_identity_availability_domains.ad_list.availability_domains[var.ad_index - 1].name
+  resource_name                   = var.resource_name == "" ? data.oci_identity_compartment.compartment.name : var.resource_name
+  resource_shortname              = lower(replace(local.resource_name, "-", ""))
+  host_image_id                   = var.host_image_id == "OEL" ? data.oci_core_images.oracle_images.images[0].id : var.host_image_id
+  hosts_file                      = var.hosts_file == "" ? "${path.module}/etc/hosts.template" : var.hosts_file
+  host_env_config                 = var.host_env_config == "" ? "${path.module}/cloudinit/templates/set_config_env.template.sh" : var.host_env_config
+  host_setup_folder               = var.host_setup_folder == "" ? "${path.module}/cloudinit/" : var.host_setup_folder
+  default_bootstrap_template_name = var.host_os_version == "8" ? "linux_host_ol8.yaml" : "linux_host_ol7.yaml"
+  host_cloudinit_template         = var.host_cloudinit_template == "" ? "${path.module}/cloudinit/templates/${local.default_bootstrap_template_name}" : var.host_cloudinit_template
+  host_bootstrap_template         = var.host_bootstrap_template == "" ? "${path.module}/cloudinit/templates/bootstrap_host.template.sh" : var.host_bootstrap_template
   host_bootstrap = base64encode(templatefile(local.host_cloudinit_template, {
     yum_upgrade       = true
     os_user           = var.tvd_os_user

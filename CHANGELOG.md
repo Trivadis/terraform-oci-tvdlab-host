@@ -16,6 +16,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [2.4.0] - 2023-03-29
+
+### Added
+
+- add a dedicated cloud init file for OL7 and OL8
+
+### Changed
+
+- set default cloud init file based on selected OS release e.g. OL7 or OL8
+- move *yum-cron* installation / configuration to cloud-init
+- update examples
+
 ## [2.3.0] - 2023-03-29
 
 ### Changed

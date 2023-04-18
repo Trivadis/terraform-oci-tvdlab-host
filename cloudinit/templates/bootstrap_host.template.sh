@@ -167,7 +167,6 @@ echo "### Generic host configuration ###########################################
 if [ $(grep -ic "7." /etc/redhat-release) -eq 1 ]; then 
     yum repolist
     echo "INFO: Disable some repo in OEL 7 -------------------------------------"
-    yum-config-manager --disable ol7_developer      || echo "WARN: cannot disable the repo ol7_developer"
     yum-config-manager --disable oci-included-ol7   || echo "WARN: cannot disable the repo oci-included-ol7"
     yum-config-manager --disable ol7_oci_included   || echo "WARN: cannot disable the repo ol7_oci_included"
     yum-config-manager --disable ol7_ksplice        || echo "WARN: cannot disable the repo ol7_ksplice"

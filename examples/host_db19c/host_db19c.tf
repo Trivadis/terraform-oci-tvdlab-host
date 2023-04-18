@@ -49,6 +49,8 @@ module "tvdlab-db19c" {
   host_enabled          = var.host_db19c_enabled          # whether to create the compute instance or not.
   host_name             = var.host_db19c_name             # Name portion of host
   host_image_id         = var.host_db19c_image_id         # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).
+  host_os               = var.host_db19c_os               # Base OS for the host.
+  host_os_version       = var.host_db19c_os_version       # Define Base OS version for the host.
   host_boot_volume_size = var.host_db19c_boot_volume_size # Size of the boot volume.
   host_ocpus            = var.host_db19c_ocpus            # The ocpus for the shape.
   host_memory_in_gbs    = var.host_db19c_memory_in_gbs    # The memory in gbs for the shape.
@@ -87,6 +89,18 @@ variable "host_db19c_name" {
 variable "host_db19c_image_id" {
   description = "Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux)."
   default     = "OEL"
+  type        = string
+}
+
+variable "host_db19c_os" {
+  description = "Base OS for the host."
+  default     = "Oracle Linux"
+  type        = string
+}
+
+variable "host_db19c_os_version" {
+  description = "Define Base OS version for the host."
+  default     = "7.9"
   type        = string
 }
 

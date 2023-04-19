@@ -58,7 +58,7 @@ variable "tags" {
 
 # Trivadis LAB specific parameter ----------------------------------------------
 variable "numberOf_labs" {
-  description = "Number of similar lab environments to be created. Default just one environment."
+  description = "The number of similar hosts to be created"
   type        = number
   default     = 1
 }
@@ -228,14 +228,14 @@ variable "host_setup_folder" {
   type        = string
 }
 
-variable "host_cloudinit_template" {
-  description = "Host specific cloudinit YAML file. Defaults to $path.module/cloudinit/templates/linux_host.yaml"
+variable "bootstrap_config_template" {
+  description = "Host specific cloudinit YAML file. Defaults to $path.module/cloudinit/templates/linux_host_ol8.yaml"
   default     = ""
   type        = string
 }
 
-variable "host_bootstrap_template" {
-  description = "Host specific bootstrap template script. Defaults to $path.module/cloudinit/templates/bootstrap_host.template.sh"
+variable "post_bootstrap_config_template" {
+  description = "Host specific bootstrap template script. Defaults to $path.module/cloudinit/templates/bastion_config.template.sh"
   default     = ""
   type        = string
 }

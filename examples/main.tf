@@ -60,7 +60,7 @@ module "tvdlab-compute" {
   host_name             = var.host_name
   host_image_id         = var.host_image_id
   host_shape            = var.host_shape
-  host_bootstrap        = var.host_bootstrap
+  bootstrap_config      = var.bootstrap_config
   host_state            = var.host_state
   host_public_ip        = var.host_public_ip
   host_private_ip       = var.host_private_ip

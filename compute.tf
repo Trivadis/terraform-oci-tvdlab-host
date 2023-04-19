@@ -39,7 +39,7 @@ resource "oci_core_instance" "compute" {
 
   metadata = {
     ssh_authorized_keys = var.ssh_authorized_keys
-    user_data           = local.host_bootstrap
+    user_data           = local.bootstrap_config
   }
 
   shape_config {

@@ -23,29 +23,18 @@ locals {
   host_env_config                 = var.host_env_config == "" ? "${path.module}/cloudinit/templates/set_config_env.template.sh" : var.host_env_config
   host_setup_folder               = var.host_setup_folder == "" ? "${path.module}/cloudinit/" : var.host_setup_folder
   default_bootstrap_template_name = var.host_os_version == "8" ? "linux_host_ol8.yaml" : "linux_host_ol7.yaml"
-  host_cloudinit_template         = var.host_cloudinit_template == "" ? "${path.module}/cloudinit/templates/${local.default_bootstrap_template_name}" : var.host_cloudinit_template
-  host_bootstrap_template         = var.host_bootstrap_template == "" ? "${path.module}/cloudinit/templates/bootstrap_host.template.sh" : var.host_bootstrap_template
-  host_bootstrap = base64encode(templatefile(local.host_cloudinit_template, {
-    yum_upgrade       = true
-    os_user           = var.lab_os_user
-    authorized_keys   = base64gzip(var.ssh_authorized_keys)
-    env_conf_script   = base64gzip(file(local.host_env_config))
-    etc_hosts         = base64gzip(local.hosts_file)
-    lab_name          = local.resource_name
-    lab_source_url    = var.lab_source_url
-    host_setup_folder = local.host_setup_folder
-    bootstrap_script = base64gzip(templatefile(local.host_bootstrap_template, {
-      os_user           = var.lab_os_user
-      lab_def_password  = var.lab_def_password
+  bootstrap_config_template       = var.bootstrap_config_template == "" ? "${path.module}/cloudinit/templates/${local.default_bootstrap_template_name}" : var.bootstrap_config_template
+  post_bootstrap_config_template  = var.post_bootstrap_config_template == "" ? "${path.module}/cloudinit/templates/bastion_config.template.sh" : var.post_bootstrap_config_template
+  bootstrap_config = base64encode(templatefile(local.host_cloudinit_template, {
+    lab_os_user     = var.lab_os_user
+    authorized_keys = base64gzip(var.ssh_authorized_keys)
+    etc_hosts       = base64gzip(local.hosts_file)
+    post_bootstrap_config = base64gzip(templatefile(local.post_bootstrap_config_template, {
+      lab_os_user       = var.lab_os_user
       lab_name          = var.resource_name
       lab_domain        = var.lab_domain
-      software_repo     = var.software_repo
-      software_user     = var.software_user
-      software_password = var.software_password
       lab_source_url    = var.lab_source_url
-      ORACLE_ROOT       = var.host_ORACLE_ROOT
-      ORACLE_DATA       = var.host_ORACLE_DATA
-      ORACLE_ARCH       = var.host_ORACLE_ARCH
+      host_setup_folder = local.host_setup_folder
     }))
   }))
 }

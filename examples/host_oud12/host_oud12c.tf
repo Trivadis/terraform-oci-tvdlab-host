@@ -36,9 +36,6 @@ module "tvdlab-oud12c" {
   lab_domain            = var.lab_domain                   # The domain name of the LAB environment
   lab_os_user           = var.lab_os_user                  # Default OS user used to bootstrap
   numberOf_labs         = var.numberOf_labs                # The number of VCN to create
-  software_repo         = var.software_repo                # Software repository URL to OCI object store swift API
-  software_user         = var.software_user                # Default OCI user to access the software repository
-  software_password     = var.software_password            # Default OCI password to access the software repository
   ad_index              = var.ad_index                     # The index of the availability domain. This is used to identify the availability_domain place the compute instances.
   label_prefix          = var.label_prefix                 # A string that will be prepended to all resources
   defined_tags          = local.host_oud12c_defined_tags   # Defined tags to tag the resources created

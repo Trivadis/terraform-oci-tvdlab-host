@@ -62,9 +62,6 @@ Specific parameter to configure the Trivadis LAB environment.
 | `lab_os_user`       | The default OS user used to setup the compute instance.                                                                           |        | `oracle`         |
 | `lab_def_password`  | Default password for windows administrator, oracle, directory and more                                                            |        | n/a              |
 | `lab_source_url`    | pre-Authenticated URL to the LAB source ZIP file.                                                                                 |        | n/a              |
-| `software_repo`     | Software repository URL to OCI object store swift API or any other URL where packages can be downloaded using `curl`              |        | n/a              |
-| `software_user`     | Default OCI user to access the software repository                                                                                |        | n/a              |
-| `software_password` | Default OCI password to access the software repository.                                                                           |        | n/a              |
 
 ## Local Variables
 

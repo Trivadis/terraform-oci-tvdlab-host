@@ -64,6 +64,7 @@ ssh_authorized_keys
 
 - remove variable *host_ORACLE_ARCH*, *host_ORACLE_DATA* and *host_ORACLE_ROOT*
 - remove variable *host_env_config*
+- remove variable *software_password*, *software_user* and *software_repo*
 
 ## [2.4.0] - 2023-03-29
 

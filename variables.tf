@@ -91,23 +91,6 @@ variable "ssh_authorized_keys" {
   type        = string
 }
 
-variable "software_repo" {
-  description = "Software repository URL to OCI object store swift API"
-  type        = string
-}
-
-variable "software_user" {
-  description = "Default OCI user to access the software repository"
-  default     = ""
-  type        = string
-}
-
-variable "software_password" {
-  description = "Default OCI password to access the software repository"
-  default     = ""
-  type        = string
-}
-
 # Host Parameter ---------------------------------------------------------------
 variable "host_enabled" {
   description = "whether to create the compute instance or not."

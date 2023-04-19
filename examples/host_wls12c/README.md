@@ -24,9 +24,6 @@ To use the module, a few requirements must be met:
   - *ssh_authorized_keys* SSH authorized keys to access the resource.
   - provide a URL for software download to make sure Oracle binaries will be
   downloaded
-  - *software_repo* software repository URL to OCI object store swift API
-  - *software_user* default OCI user to access the software repository
-  - *software_password* default OCI password to access the software repository
 
 ## Using the Module for WLS 12c
 

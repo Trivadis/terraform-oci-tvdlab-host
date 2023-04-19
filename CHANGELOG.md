@@ -16,40 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-### Ideas
-
-- dramatically reduce the bootstrap script. Keep bootstrap simple and add more
-  to the user side / scripts
-- remove variables *host_ORACLE_ARCH*, *host_ORACLE_DATA*, *host_ORACLE_ROOT*
-- review if parameters *host_volume_attachment_type*, *host_volume_enabled*,
-  *host_volume_size*, *host_volume_source* can be simplified
-- review if parameters *host_ocpus*, *host_os_version*, *host_os*, *host_shape*,
-  *host_memory_in_gbs* can be simplified
-
-host_boot_volume_size
-host_bootstrap_template
-host_cloudinit_template
-host_enabled
-host_env_config
-host_image_id
-host_name
-host_private_ip
-host_public_ip
-host_setup_folder
-host_state
-host_subnet
-hosts_file
-lab_source_url
-label_prefix
-resource_name
-software_password
-software_repo
-software_user
-ssh_authorized_keys
-
 ## [3.0.0] - 2023-04-19
-
-### Added
 
 ### Changed
 
@@ -57,8 +24,8 @@ ssh_authorized_keys
 - rename variable *tvd_def_password* to *lab_def_password*
 - rename variable *lab_os_user* to *lab_os_user*
 - rename variable *tvd_participants* to *numberOf_labs*
-
-### Fixed
+- switch to simple bootstrap without system config
+- remove bootstrap_host.sh script this now has to be done as part of the LAB / Post setup
 
 ### Removed
 

@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.1] - 2023-04-19
+
+### Fixed
+
+- fix issue with *post_bootstrap_config_template*
+
 ## [3.0.0] - 2023-04-19
 
 ### Changed

@@ -15,7 +15,6 @@
 #              at http://www.apache.org/licenses/
 # ------------------------------------------------------------------------------
 # - Customization --------------------------------------------------------------
-HOST=${HOST:-$(hostname)}
 export DOMAINNAME="${lab_domain}"               # domain name used in this environment
 export LAB_OS_USER="${lab_os_user}"             # LAB OS User used 
 export LAB_NAME="${lab_name}"                   # LAB_NAME Name

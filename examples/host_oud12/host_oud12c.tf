@@ -44,9 +44,6 @@ module "tvdlab-oud12c" {
   defined_tags          = local.host_oud12c_defined_tags   # Defined tags to tag the resources created
   tags                  = var.tags                         # A simple key-value pairs to tag the resources created
   hosts_file            = local.hosts_file                 # path to a custom /etc/hosts which has to be appended"
-  host_ORACLE_ROOT      = var.host_oud12c_ORACLE_ROOT      # default Oracle root / software folder 
-  host_ORACLE_DATA      = var.host_oud12c_ORACLE_DATA      # default Oracle data folder used to store datafiles
-  host_ORACLE_ARCH      = var.host_oud12c_ORACLE_ARCH      # default Oracle arch folder used to store archive logs and backups
   host_setup_folder     = var.host_oud12c_setup_folder     # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh
   host_env_config       = var.host_oud12c_env_config       # Host environment config script used to bootstrap host.
   host_enabled          = var.host_oud12c_enabled          # whether to create the compute instance or not.
@@ -167,11 +164,6 @@ variable "host_oud12c_ORACLE_ROOT" {
 variable "host_oud12c_ORACLE_DATA" {
   description = "default Oracle data folder used to store datafiles."
   default     = "/u02"
-}
-
-variable "host_oud12c_ORACLE_ARCH" {
-  description = "default Oracle arch folder used to store archive logs and backups."
-  default     = "/u04"
 }
 
 variable "host_oud12c_defined_tags" {

@@ -51,9 +51,6 @@ Variables for the configuration of the terraform module, defined in [variables](
 | `host_cloudinit_template`     | Host specific cloudinit YAML file. Defaults to $path.module/cloudinit/templates/linux_host.yaml.                                                                                |                       | `linux_host.yaml`                |
 | `bootstrap_config_template`     | Host specific bootstrap template script. Defaults to $path.module/cloudinit/templates/bootstrap_host.template.sh.                                                               |                       | `bootstrap_host.template.shyaml` |
 | `hosts_file`                  | Path to a custom hosts file which will be appended to `/etc/hosts`                                                                                                              |                       | `hosts.template`                 |
-| `host_ORACLE_ROOT`            | default Oracle root / software folder.                                                                                                                                          |                       | `/u00`                           |
-| `host_ORACLE_DATA`            | default Oracle data folder used to store datafiles.                                                                                                                             |                       | `/u01`                           |
-| `host_ORACLE_ARCH`            | default Oracle arch folder used to store archive logs and backups.                                                                                                              |                       | `/u02`                           |
 
 ## Trivadis LAB
 

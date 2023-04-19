@@ -44,9 +44,6 @@ module "tvdlab-wls12c" {
   defined_tags          = local.host_wls12c_defined_tags   # Defined tags to tag the resources created
   tags                  = var.tags                         # A simple key-value pairs to tag the resources created
   hosts_file            = local.hosts_file                 # path to a custom /etc/hosts which has to be appended"
-  host_ORACLE_ROOT      = var.ORACLE_ROOT                  # default Oracle root / software folder 
-  host_ORACLE_DATA      = var.ORACLE_DATA                  # default Oracle data folder used to store datafiles
-  host_ORACLE_ARCH      = var.ORACLE_ARCH                  # default Oracle arch folder used to store archive logs and backups
   host_setup_folder     = var.host_wls12c_setup_folder     # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh
   host_env_config       = var.host_wls12c_env_config       # Host environment config script used to bootstrap host.
   host_enabled          = var.host_wls12c_enabled          # whether to create the compute instance or not.

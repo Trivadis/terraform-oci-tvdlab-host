@@ -240,22 +240,4 @@ variable "post_bootstrap_config_template" {
   type        = string
 }
 
-# Oracle Home configuration variable
-variable "host_ORACLE_ROOT" {
-  description = "default Oracle root / software folder."
-  default     = "/u00"
-  type        = string
-}
-
-variable "host_ORACLE_DATA" {
-  description = "default Oracle data folder used to store datafiles."
-  default     = "/u01"
-  type        = string
-}
-
-variable "host_ORACLE_ARCH" {
-  description = "default Oracle arch folder used to store archive logs and backups."
-  default     = "/u02"
-  type        = string
-}
 # --- EOF ----------------------------------------------------------------------

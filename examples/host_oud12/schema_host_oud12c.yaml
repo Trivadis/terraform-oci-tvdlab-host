@@ -46,7 +46,6 @@
     - host_oud12c_env_config
     - host_oud12c_ORACLE_ROOT
     - host_oud12c_ORACLE_DATA
-    - host_oud12c_ORACLE_ARCH
     - host_oud12c_defined_tags
   visible: false
 

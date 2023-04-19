@@ -27,9 +27,6 @@
 # host_db19c_state          = "RUNNING"                              # Whether the host should be either RUNNING or STOPPED state. 
 # host_db19c_setup_folder   = "./host_db19c"                         # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh
 # host_db19c_env_config     = "./host_db19c/set_env_db19c_config.sh" # Host environment config script used to bootstrap host.
-# host_db19c_ORACLE_ROOT    = "/u01"                                 # default Oracle root / software folder 
-# host_db19c_ORACLE_DATA    = "/u02"                                 # default Oracle data folder used to store datafiles
-# host_db19c_ORACLE_ARCH    = "/u04"                                 # default Oracle arch folder used to store archive logs and backups
 # Lab schedule for this resource uncomment enable specific schedule :
 # - weekends: off 20:00-09:00, allow 09:00-20:00
 # - week day: off 20:00-06:00, allow 06:00-08:00, on 08:00-18:00, allow 18:00-19:00

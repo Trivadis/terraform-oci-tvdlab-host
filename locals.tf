@@ -25,7 +25,7 @@ locals {
   default_bootstrap_template_name = var.host_os_version == "8" ? "linux_host_ol8.yaml" : "linux_host_ol7.yaml"
   bootstrap_config_template       = var.bootstrap_config_template == "" ? "${path.module}/cloudinit/templates/${local.default_bootstrap_template_name}" : var.bootstrap_config_template
   post_bootstrap_config_template  = var.post_bootstrap_config_template == "" ? "${path.module}/cloudinit/templates/bastion_config.template.sh" : var.post_bootstrap_config_template
-  bootstrap_config = base64encode(templatefile(local.host_cloudinit_template, {
+  bootstrap_config = base64encode(templatefile(local.bootstrap_config_template, {
     lab_os_user     = var.lab_os_user
     authorized_keys = base64gzip(var.ssh_authorized_keys)
     etc_hosts       = base64gzip(local.hosts_file)

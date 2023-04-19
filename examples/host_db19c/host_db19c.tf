@@ -18,9 +18,9 @@
 module "tvdlab-db19c" {
   source = "Trivadis/tvdlab-host/oci"
   # limit module version using ~>, allows only the rightmost version component to increment
-  # e.g. 2.4.5 and 2.4.10 but not 2.5.0 see
+  # e.g. 3.0.5 and 3.0.10 but not 3.1.0 see
   # https://developer.hashicorp.com/terraform/language/expressions/version-constraints
-  version = "~> 2.4.0"
+  version = "~> 3.0.0"
 
   # - Mandatory Parameters -----------------------------------------------------
   compartment_ocid    = var.compartment_ocid                # OCID of the compartment where to create all resources

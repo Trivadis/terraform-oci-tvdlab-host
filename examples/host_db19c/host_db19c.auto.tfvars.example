@@ -26,7 +26,6 @@
 # host_db19c_volume_source  = ""                                     # Source block volume to clone from.
 # host_db19c_state          = "RUNNING"                              # Whether the host should be either RUNNING or STOPPED state. 
 # host_db19c_setup_folder   = "./host_db19c"                         # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh
-# host_db19c_env_config     = "./host_db19c/set_env_db19c_config.sh" # Host environment config script used to bootstrap host.
 # Lab schedule for this resource uncomment enable specific schedule :
 # - weekends: off 20:00-09:00, allow 09:00-20:00
 # - week day: off 20:00-06:00, allow 06:00-08:00, on 08:00-18:00, allow 18:00-19:00

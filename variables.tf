@@ -216,12 +216,6 @@ variable "host_volume_size" {
   type        = number
 }
 
-variable "host_env_config" {
-  description = "Host environment config script used to bootstrap host."
-  default     = ""
-  type        = string
-}
-
 variable "host_setup_folder" {
   description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/"
   default     = ""

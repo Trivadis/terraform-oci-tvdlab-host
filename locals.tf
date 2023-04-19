@@ -20,7 +20,6 @@ locals {
   resource_shortname              = lower(replace(local.resource_name, "-", ""))
   host_image_id                   = var.host_image_id == "OEL" ? data.oci_core_images.oracle_images.images[0].id : var.host_image_id
   hosts_file                      = var.hosts_file == "" ? "${path.module}/etc/hosts.template" : var.hosts_file
-  host_env_config                 = var.host_env_config == "" ? "${path.module}/cloudinit/templates/set_config_env.template.sh" : var.host_env_config
   host_setup_folder               = var.host_setup_folder == "" ? "${path.module}/cloudinit/" : var.host_setup_folder
   default_bootstrap_template_name = var.host_os_version == "8" ? "linux_host_ol8.yaml" : "linux_host_ol7.yaml"
   bootstrap_config_template       = var.bootstrap_config_template == "" ? "${path.module}/cloudinit/templates/${local.default_bootstrap_template_name}" : var.bootstrap_config_template

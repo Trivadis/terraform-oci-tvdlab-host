@@ -45,7 +45,6 @@ module "tvdlab-oud12c" {
   tags                  = var.tags                         # A simple key-value pairs to tag the resources created
   hosts_file            = local.hosts_file                 # path to a custom /etc/hosts which has to be appended"
   host_setup_folder     = var.host_oud12c_setup_folder     # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh
-  host_env_config       = var.host_oud12c_env_config       # Host environment config script used to bootstrap host.
   host_enabled          = var.host_oud12c_enabled          # whether to create the compute instance or not.
   host_name             = var.host_oud12c_name             # Name portion of host
   host_image_id         = var.host_oud12c_image_id         # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).
@@ -141,12 +140,6 @@ variable "host_oud12c_private_ip" {
 variable "host_oud12c_state" {
   description = "Whether the host should be either RUNNING or STOPPED state. "
   default     = "RUNNING"
-}
-
-variable "host_oud12c_env_config" {
-  description = "Host environment config script used to bootstrap host."
-  default     = "./host_oud12c/set_env_oud12c_config.sh"
-  type        = string
 }
 
 variable "host_oud12c_setup_folder" {

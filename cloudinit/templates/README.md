@@ -10,4 +10,3 @@ the different compute instances.
 - [linux_host.yaml](linux_host.yaml) *cloud-init* configuration template file
   for a Linux server. This file is generically used for all kind of Linux
   servers e.g. OUD, DB and WLS server.
-

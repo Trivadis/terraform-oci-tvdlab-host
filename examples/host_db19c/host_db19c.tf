@@ -45,7 +45,6 @@ module "tvdlab-db19c" {
   tags                  = var.tags                        # A simple key-value pairs to tag the resources created
   hosts_file            = local.hosts_file                # path to a custom /etc/hosts which has to be appended"
   host_setup_folder     = var.host_db19c_setup_folder     # Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh
-  host_env_config       = var.host_db19c_env_config       # Host environment config script used to bootstrap host.
   host_enabled          = var.host_db19c_enabled          # whether to create the compute instance or not.
   host_name             = var.host_db19c_name             # Name portion of host
   host_image_id         = var.host_db19c_image_id         # Provide a custom image id for the host or leave as OEL (Oracle Enterprise Linux).
@@ -155,12 +154,6 @@ variable "host_db19c_private_ip" {
 variable "host_db19c_state" {
   description = "Whether the host should be either RUNNING or STOPPED state. "
   default     = "RUNNING"
-}
-
-variable "host_db19c_env_config" {
-  description = "Host environment config script used to bootstrap host."
-  default     = "./host_db19c/set_env_db19c_config.sh"
-  type        = string
 }
 
 variable "host_db19c_setup_folder" {

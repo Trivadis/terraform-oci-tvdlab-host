@@ -35,7 +35,7 @@ module "tvdlab-db19c" {
   resource_name         = local.resource_name             # user-friendly string to name all resource. If undefined it will be derived from compartment name.
   lab_domain            = var.lab_domain                  # The domain name of the LAB environment
   lab_os_user           = var.lab_os_user                 # Default OS user used to bootstrap
-  tvd_participants      = var.tvd_participants            # The number of VCN to create
+  numberOf_labs         = var.numberOf_labs               # The number of VCN to create
   software_repo         = var.software_repo               # Software repository URL to OCI object store swift API
   software_user         = var.software_user               # Default OCI user to access the software repository
   software_password     = var.software_password           # Default OCI password to access the software repository
@@ -62,7 +62,7 @@ module "tvdlab-db19c" {
   host_volume_source    = var.host_db19c_volume_source    # Source block volume to clone from.
   host_private_ip       = var.host_db19c_private_ip       # Private IP for host.
   host_shape            = var.host_db19c_shape            # The shape of compute instance.
-  host_state            = var.tvd_training_state          # Whether the host should be either RUNNING or STOPPED state.
+  host_state            = var.lab_training_state          # Whether the host should be either RUNNING or STOPPED state.
 }
 
 # ------------------------------------------------------------------------------

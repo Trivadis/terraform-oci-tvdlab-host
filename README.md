@@ -38,7 +38,7 @@ module "tvdlab-host" {
 }
 ```
 
-To create multiple hosts in different VCNs just specify the `tvd_participants` parameter. The following example will create 3 hosts in the provided subnets. It is expected that `host_subnet` contains 3 different subnets.
+To create multiple hosts in different VCNs just specify the `numberOf_labs` parameter. The following example will create 3 hosts in the provided subnets. It is expected that `host_subnet` contains 3 different subnets.
 
 ```bash
 module "tvdlab-host" {
@@ -50,7 +50,7 @@ module "tvdlab-host" {
   compartment_id        = var.compartment_id
   ssh_public_key_path   = var.ssh_public_key_path
   host_subnet           = module.tvdlab-vcn.private_subnet_id
-  tvd_participants      = 3
+  numberOf_labs      = 3
 }
 ```
 

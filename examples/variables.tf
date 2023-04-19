@@ -57,8 +57,8 @@ variable "tags" {
 }
 
 # Trivadis LAB specific parameter ----------------------------------------------
-variable "tvd_participants" {
-  description = "The number of similar hosts to be created"
+variable "numberOf_labs" {
+  description = "Number of similar lab environments to be created. Default just one environment."
   type        = number
   default     = 1
 }

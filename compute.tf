@@ -15,7 +15,7 @@
 # ------------------------------------------------------------------------------
 
 resource "oci_core_instance" "compute" {
-  count               = var.host_enabled == true ? var.tvd_participants : 0
+  count               = var.host_enabled == true ? var.numberOf_labs : 0
   availability_domain = local.availability_domain
   compartment_id      = var.compartment_ocid
   display_name        = var.label_prefix == "none" ? format("${local.resource_shortname}-${var.host_name}%02d", count.index) : format("${var.label_prefix}-${local.resource_shortname}-${var.host_name}%02d", count.index)

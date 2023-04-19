@@ -30,7 +30,7 @@ module "tvdlab-compute" {
 
 ### Multiple VCN
 
-This module uses the terraform function `count` to create several equal VCNs. Therefore the variable `tvd_participants` is set to the number of VCNs to be created. The following example will create 3 equal VCN where each VCN is named according its number and the compartment or if specified according to the variable `resource_name`. e.g. for a compartment O-SEC it will create VCN *osec00*, *osec01* and *osec02*. The naming schema will also be used for all other resources.
+This module uses the terraform function `count` to create several equal VCNs. Therefore the variable `numberOf_labs` is set to the number of VCNs to be created. The following example will create 3 equal VCN where each VCN is named according its number and the compartment or if specified according to the variable `resource_name`. e.g. for a compartment O-SEC it will create VCN *osec00*, *osec01* and *osec02*. The naming schema will also be used for all other resources.
 
 ```bash
 module "tvdlab-vcn" {
@@ -39,7 +39,7 @@ module "tvdlab-vcn" {
 
   # - Mandatory Parameters --------------------------------------------------
   compartment_id    = var.compartment_id
-  tvd_participants  = 3
+  numberOf_labs  = 3
 }
 ```
 

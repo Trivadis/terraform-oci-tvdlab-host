@@ -35,7 +35,7 @@ module "tvdlab-oud12c" {
   resource_name         = local.resource_name              # user-friendly string to name all resource. If undefined it will be derived from compartment name.
   lab_domain            = var.lab_domain                   # The domain name of the LAB environment
   lab_os_user           = var.lab_os_user                  # Default OS user used to bootstrap
-  tvd_participants      = var.tvd_participants             # The number of VCN to create
+  numberOf_labs         = var.numberOf_labs                # The number of VCN to create
   software_repo         = var.software_repo                # Software repository URL to OCI object store swift API
   software_user         = var.software_user                # Default OCI user to access the software repository
   software_password     = var.software_password            # Default OCI password to access the software repository

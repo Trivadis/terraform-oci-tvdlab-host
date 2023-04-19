@@ -61,7 +61,7 @@ Specific parameter to configure the Trivadis LAB environment.
 
 | Parameter           | Description                                                                                                                       | Values | Default          |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------|--------|------------------|
-| `tvd_participants`  | The number of resource to create. This is used to build several identical environments for a training and laboratory environment. |        | 1                |
+| `numberOf_labs`  | Number of similar lab environments to be created. Default just one environment. This is used to build several identical environments for a training and laboratory environment. |        | 1                |
 | `lab_domain`        | The domain name of the LAB environment. This is used to register the public IP address of the host.                               |        | trivadislabs.com |
 | `lab_os_user`       | The default OS user used to setup the compute instance.                                                                           |        | `oracle`         |
 | `lab_def_password`  | Default password for windows administrator, oracle, directory and more                                                            |        | n/a              |

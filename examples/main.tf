@@ -51,9 +51,9 @@ module "tvdlab-compute" {
   tags         = var.tags
 
   # Lab Configuration
-  resource_name    = var.resource_name
-  lab_domain       = var.lab_domain
-  tvd_participants = var.tvd_participants
+  resource_name = var.resource_name
+  lab_domain    = var.lab_domain
+  numberOf_labs = var.numberOf_labs
 
   # host parameters
   host_enabled          = var.host_enabled

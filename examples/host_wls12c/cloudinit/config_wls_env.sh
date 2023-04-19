@@ -6,7 +6,7 @@
 # Name.......: config_wls_env.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.16
+# Date.......: 2023.04.19
 # Revision...: 
 # Purpose....: Script to configure the WLS server after bootstrap
 # Notes......: --

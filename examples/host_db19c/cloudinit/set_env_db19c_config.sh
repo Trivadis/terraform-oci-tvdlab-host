@@ -6,7 +6,7 @@
 # Name.......: set_env_db_config.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.06
+# Date.......: 2023.04.19
 # Revision...: 
 # Purpose....: Script to config the environement for 19c setup.
 # Notes......: --

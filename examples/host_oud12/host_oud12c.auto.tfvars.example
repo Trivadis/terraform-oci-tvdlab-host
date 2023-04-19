@@ -5,7 +5,7 @@
 # Name.......: host_oud12c.auto.auto.tfvars.example
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.11
+# Date.......: 2023.04.19
 # Revision...: 
 # Purpose....: Terraform Variable file for Oracle OUD 12c host
 # Notes......: 

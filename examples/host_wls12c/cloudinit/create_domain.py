@@ -5,7 +5,7 @@
 # Name.......: create_domain.py
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.01.19
+# Date.......: 2023.04.19
 # Revision...:
 # Purpose....: Script to create a Domain
 # Notes......:

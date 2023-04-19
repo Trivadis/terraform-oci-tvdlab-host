@@ -5,7 +5,7 @@
 # Name.......: host_oud12c.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.11
+# Date.......: 2023.04.19
 # Revision...: 
 # Purpose....: Main configuration to build the training environment.
 # Notes......: Define the core resouces using the module tvdlab-base

@@ -21,6 +21,7 @@ export LAB_OS_USER="${lab_os_user}"             # LAB OS User used
 export LAB_NAME="${lab_name}"                   # LAB_NAME Name
 export LAB_REPO="${lab_source_url}"             # pre-authenticated URL for lab source
 export HOST_SETUP_FOLDER="${host_setup_folder}" # Host setup folder name used to untar cloudinit stuff
+export LAB_DEFAULT_PWD="${lab_def_password}"    # default password used to configure different stuff
 # - End of Customization -------------------------------------------------------
 
 # - Default Values -------------------------------------------------------------
@@ -111,6 +112,9 @@ chown -R $LAB_OS_USER:$LAB_OS_USER /home/$LAB_OS_USER/cloudinit
 # Initiate custom bootstrap script
 if [ -f "/home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh" ]; then
     echo "INFO: Initiate custom bootstap script /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh"
+    if [ -n "$LAB_DEFAULT_PWD" ]; then
+        sed -i "s|\(.*LAB_DEFAULT_PWD=\)\"\"|\1\"$LAB_DEFAULT_PWD\"|" /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh
+    fi
     nohup /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh > /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.log 2>&1 & 
     echo "running" >/etc/boostrap_config_status
 else

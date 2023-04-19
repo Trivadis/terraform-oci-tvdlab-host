@@ -5,7 +5,7 @@
 # Name.......: host_db19c.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2023.03.10
+# Date.......: 2023.04.19
 # Revision...: 
 # Purpose....: Main configuration to build the training environment.
 # Notes......: Define the core resouces using the module tvdlab-base
@@ -72,9 +72,10 @@ locals {
 # Host Parameter ---------------------------------------------------------------
 variable "host_db19c_enabled" {
   description = "whether to create the compute instance or not."
-  default     = true
+  default     = false
   type        = bool
 }
+
 
 variable "host_db19c_name" {
   description = "Name portion of host"
@@ -106,15 +107,15 @@ variable "host_db19c_boot_volume_size" {
   type        = number
 }
 
+
 variable "host_db19c_shape" {
   description = "The shape of compute instance."
   default     = "VM.Standard.E4.Flex"
   type        = string
 }
-
 variable "host_db19c_ocpus" {
   description = "The ocpus for the shape."
-  default     = 1
+  default     = 2
   type        = number
 }
 
@@ -126,10 +127,9 @@ variable "host_db19c_memory_in_gbs" {
 
 variable "host_db19c_volume_enabled" {
   description = "whether to create an additional volume or not."
-  default     = true
+  default     = false
   type        = bool
 }
-
 variable "host_db19c_volume_source" {
   description = "Source block volume to clone from."
   default     = ""
@@ -148,31 +148,22 @@ variable "host_db19c_private_ip" {
   type        = string
 }
 
-variable "host_db19c_state" {
-  description = "Whether the host should be either RUNNING or STOPPED state. "
-  default     = "RUNNING"
-}
-
 variable "host_db19c_setup_folder" {
-  description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/templates/set_config_env.template.sh"
-  default     = "./host_db19c"
+  description = "Host specific setup folder for post bootstrap scripts. Defaults to $path.module/cloudinit/"
+  default     = ""
   type        = string
 }
 
-# Oracle Home configuration variable
-variable "host_db19c_ORACLE_ROOT" {
-  description = "default Oracle root / software folder."
-  default     = "/u01"
+variable "bootstrap_config_template" {
+  description = "Host specific cloudinit YAML file. Defaults to $path.module/cloudinit/templates/linux_host_ol8.yaml"
+  default     = ""
+  type        = string
 }
 
-variable "host_db19c_ORACLE_DATA" {
-  description = "default Oracle data folder used to store datafiles."
-  default     = "/u02"
-}
-
-variable "host_db19c_" {
-  description = "default Oracle arch folder used to store archive logs and backups."
-  default     = "/u04"
+variable "post_bootstrap_config_template" {
+  description = "Host specific bootstrap template script. Defaults to $path.module/cloudinit/templates/bastion_config.template.sh"
+  default     = ""
+  type        = string
 }
 
 variable "host_db19c_defined_tags" {

@@ -5,7 +5,7 @@
 # Name.......: locals.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.08
+# Date.......: 2023.04.19
 # Revision...: 
 # Purpose....: Local variables for the terraform module tvdlab vcn.
 # Notes......: -- 
@@ -33,6 +33,7 @@ locals {
       lab_name          = var.resource_name
       lab_domain        = var.lab_domain
       lab_source_url    = var.lab_source_url
+      lab_def_password  = var.lab_def_password
       host_setup_folder = local.host_setup_folder
     }))
   }))

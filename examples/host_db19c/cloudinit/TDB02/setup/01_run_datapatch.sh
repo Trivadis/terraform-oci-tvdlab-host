@@ -6,7 +6,7 @@
 # Name.......: 01_run_datapatch.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.01.11
+# Date.......: 2023.04.19
 # Revision...: --
 # Purpose....: run datapatch for regular DB, CDB and JVM
 # Notes......: --

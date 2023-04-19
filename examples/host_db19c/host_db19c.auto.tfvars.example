@@ -5,7 +5,7 @@
 # Name.......: host_db19c.auto.tfvars
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2021.06.11
+# Date.......: 2023.04.19
 # Revision...: 
 # Purpose....: Terraform Variable file for Oracle Database 19c host
 # Notes......: 
@@ -21,6 +21,8 @@
 # host_db19c_shape          = "VM.Standard.E4.Flex"                  # The shape of compute instance.
 # host_db19c_ocpus          = 1                                      # The OCPUS for the shape.
 # host_db19c_memory_in_gbs  = 16                                     # The memory in gbs for the shape. 
+# host_db19c_os             = "Oracle Linux"                         # Base OS for the host.
+# host_db19c_os_version     = "7.9"                                  # Define Base OS version for the host.
 # host_db19c_volume_enabled = true                                   # add a block volume
 # host_db19c_volume_size    = 256                                    # Size of the additional volume.
 # host_db19c_volume_source  = ""                                     # Source block volume to clone from.

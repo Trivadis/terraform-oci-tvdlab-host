@@ -63,7 +63,7 @@ Specific parameter to configure the Trivadis LAB environment.
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------|--------|------------------|
 | `tvd_participants`  | The number of resource to create. This is used to build several identical environments for a training and laboratory environment. |        | 1                |
 | `lab_domain`        | The domain name of the LAB environment. This is used to register the public IP address of the host.                               |        | trivadislabs.com |
-| `tvd_os_user`       | The default OS user used to setup the compute instance.                                                                           |        | `oracle`         |
+| `lab_os_user`       | The default OS user used to setup the compute instance.                                                                           |        | `oracle`         |
 | `lab_def_password`  | Default password for windows administrator, oracle, directory and more                                                            |        | n/a              |
 | `lab_source_url`    | pre-Authenticated URL to the LAB source ZIP file.                                                                                 |        | n/a              |
 | `software_repo`     | Software repository URL to OCI object store swift API or any other URL where packages can be downloaded using `curl`              |        | n/a              |

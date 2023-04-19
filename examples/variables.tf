@@ -69,7 +69,7 @@ variable "lab_domain" {
   default     = "trivadislabs.com"
 }
 
-variable "tvd_os_user" {
+variable "lab_os_user" {
   description = "Default OS user used to bootstrap"
   default     = "oracle"
   type        = string

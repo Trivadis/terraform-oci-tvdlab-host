@@ -27,7 +27,7 @@ locals {
   host_bootstrap_template         = var.host_bootstrap_template == "" ? "${path.module}/cloudinit/templates/bootstrap_host.template.sh" : var.host_bootstrap_template
   host_bootstrap = base64encode(templatefile(local.host_cloudinit_template, {
     yum_upgrade       = true
-    os_user           = var.tvd_os_user
+    os_user           = var.lab_os_user
     authorized_keys   = base64gzip(var.ssh_authorized_keys)
     env_conf_script   = base64gzip(file(local.host_env_config))
     etc_hosts         = base64gzip(local.hosts_file)
@@ -35,7 +35,7 @@ locals {
     lab_source_url    = var.lab_source_url
     host_setup_folder = local.host_setup_folder
     bootstrap_script = base64gzip(templatefile(local.host_bootstrap_template, {
-      os_user           = var.tvd_os_user
+      os_user           = var.lab_os_user
       lab_def_password  = var.lab_def_password
       lab_name          = var.resource_name
       lab_domain        = var.lab_domain

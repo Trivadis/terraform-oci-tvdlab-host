@@ -36,9 +36,9 @@ locals {
     host_setup_folder = local.host_setup_folder
     bootstrap_script = base64gzip(templatefile(local.host_bootstrap_template, {
       os_user           = var.tvd_os_user
-      tvd_def_password  = var.tvd_def_password
+      lab_def_password  = var.lab_def_password
       lab_name          = var.resource_name
-      tvd_domain        = var.tvd_domain
+      lab_domain        = var.lab_domain
       software_repo     = var.software_repo
       software_user     = var.software_user
       software_password = var.software_password

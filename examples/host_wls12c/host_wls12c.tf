@@ -26,14 +26,14 @@ module "tvdlab-wls12c" {
   compartment_ocid    = var.compartment_ocid                # OCID of the compartment where to create all resources
   tenancy_ocid        = var.tenancy_ocid                    # tenancy id where to create the resources
   host_subnet         = module.tvdlab-vcn.private_subnet_id # List of subnets for the host hosts
-  tvd_def_password    = local.tvd_def_password              # Default password for windows administrator, oracle, directory and more
+  lab_def_password    = local.lab_def_password              # Default password for windows administrator, oracle, directory and more
   lab_source_url      = var.lab_source_url                  # preauthenticated URL to the LAB source ZIP file.
   ssh_authorized_keys = local.ssh_authorized_keys           # SSH authorized keys to access the resource.
 
   # - Optional Parameters ------------------------------------------------------
   # Lab Configuration
   resource_name         = local.resource_name              # user-friendly string to name all resource. If undefined it will be derived from compartment name.
-  tvd_domain            = var.tvd_domain                   # The domain name of the LAB environment
+  lab_domain            = var.lab_domain                   # The domain name of the LAB environment
   tvd_os_user           = var.tvd_os_user                  # Default OS user used to bootstrap
   tvd_participants      = var.tvd_participants             # The number of VCN to create
   software_repo         = var.software_repo                # Software repository URL to OCI object store swift API

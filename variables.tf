@@ -63,7 +63,7 @@ variable "tvd_participants" {
   default     = 1
 }
 
-variable "tvd_domain" {
+variable "lab_domain" {
   description = "The domain name of the environment"
   type        = string
   default     = "trivadislabs.com"
@@ -75,7 +75,7 @@ variable "tvd_os_user" {
   type        = string
 }
 
-variable "tvd_def_password" {
+variable "lab_def_password" {
   description = "Default password for windows administrator, oracle, directory and more"
   type        = string
 }

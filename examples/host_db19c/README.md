@@ -19,7 +19,7 @@ To use the module, a few requirements must be met:
   - *compartment_ocid* OCID of the compartment where to create all resources
   - *tenancy_ocid* tenancy id where to create the resources
   - *host_subnet* List of subnets for the host hosts
-  - *tvd_def_password* Default password for windows administrator, oracle, directory and more
+  - *lab_def_password* Default password for windows administrator, oracle, directory and more
   - *lab_source_url* preauthenticated URL to the LAB source ZIP file.
   - *ssh_authorized_keys* SSH authorized keys to access the resource.
 - provide a URL for software download to make sure Oracle binaries will be

@@ -21,8 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - dramatically reduce the bootstrap script. Keep bootstrap simple and add more
   to the user side / scripts
 - remove variables *host_ORACLE_ARCH*, *host_ORACLE_DATA*, *host_ORACLE_ROOT*
-- rename *tvd_domain* to *lab_domain*
-- rename *tvd_participants*, *tvd_def_password*, *tvd_os_user*
+- rename *lab_domain* to *lab_domain*
+- rename *tvd_participants*, *lab_def_password*, *tvd_os_user*
 - review if parameters *host_volume_attachment_type*, *host_volume_enabled*,
   *host_volume_size*, *host_volume_source* can be simplified
 - review if parameters *host_ocpus*, *host_os_version*, *host_os*, *host_shape*,
@@ -48,6 +48,22 @@ software_password
 software_repo
 software_user
 ssh_authorized_keys
+
+## [3.0.0] - 2023-04-19
+
+### Added
+
+### Changed
+
+- rename variable *tvd_domain* to *lab_domain*
+- rename variable *tvd_def_password* to *lab_def_password*
+- rename variable *tvd_os_user* to *lab_os_user*
+- rename variable *tvd_def_password* to *lab_def_password*
+-  
+
+### Fixed
+
+### Removed
 
 ## [2.4.0] - 2023-03-29
 
@@ -230,7 +246,7 @@ ssh_authorized_keys
 
 ### Changed
 
-- Add password reset for *os_user* *tvd_def_password* in bootstrap template
+- Add password reset for *os_user* *lab_def_password* in bootstrap template
 
 ## [0.2.0] - 2021-09-07
 

@@ -6,7 +6,7 @@ Variables for the configuration of the terraform module, defined in [variables](
 - `compartment_ocid` OCID of the compartment where to create all resources.
 - `host_subnet` List of subnets for the host hosts.
 - `ssh_authorized_keys` Authorized ssh public key allowed to access the host.  
-- `tvd_def_password` Default password for windows administrator, oracle, directory and more
+- `lab_def_password` Default password for windows administrator, oracle, directory and more
 
 ## Provider
 
@@ -62,9 +62,9 @@ Specific parameter to configure the Trivadis LAB environment.
 | Parameter           | Description                                                                                                                       | Values | Default          |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------|--------|------------------|
 | `tvd_participants`  | The number of resource to create. This is used to build several identical environments for a training and laboratory environment. |        | 1                |
-| `tvd_domain`        | The domain name of the LAB environment. This is used to register the public IP address of the host.                               |        | trivadislabs.com |
+| `lab_domain`        | The domain name of the LAB environment. This is used to register the public IP address of the host.                               |        | trivadislabs.com |
 | `tvd_os_user`       | The default OS user used to setup the compute instance.                                                                           |        | `oracle`         |
-| `tvd_def_password`  | Default password for windows administrator, oracle, directory and more                                                            |        | n/a              |
+| `lab_def_password`  | Default password for windows administrator, oracle, directory and more                                                            |        | n/a              |
 | `lab_source_url`    | pre-Authenticated URL to the LAB source ZIP file.                                                                                 |        | n/a              |
 | `software_repo`     | Software repository URL to OCI object store swift API or any other URL where packages can be downloaded using `curl`              |        | n/a              |
 | `software_user`     | Default OCI user to access the software repository                                                                                |        | n/a              |

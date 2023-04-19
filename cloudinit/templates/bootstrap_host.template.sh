@@ -18,8 +18,8 @@
 # - Terraform Customization ---------------------------------------------------
 # Variable values provided by terraform template file
 export ORACLE_USER="${os_user}"                 # OS User used 
-export DOMAINNAME="${tvd_domain}"               # domain name used in this environment
-export ORACLE_PWD="${tvd_def_password}"         # default password used to configure different stuff
+export DOMAINNAME="${lab_domain}"               # domain name used in this environment
+export ORACLE_PWD="${lab_def_password}"         # default password used to configure different stuff
 export LAB_NAME="${lab_name}"                   # LAB_NAME Name
 export SOFTWARE_REPO="${software_repo}"         # URL of the software repository in OCI
 export SOFTWARE_REPO=$(echo $SOFTWARE_REPO|sed 's/\/*$//g') # remove trailing backslash

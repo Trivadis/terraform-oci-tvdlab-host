@@ -16,6 +16,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+### Ideas
+
+- dramatically reduce the bootstrap script. Keep bootstrap simple and add more
+  to the user side / scripts
+- remove variables *host_ORACLE_ARCH*, *host_ORACLE_DATA*, *host_ORACLE_ROOT*
+- rename *tvd_domain* to *lab_domain*
+- rename *tvd_participants*, *tvd_def_password*, *tvd_os_user*
+- review if parameters *host_volume_attachment_type*, *host_volume_enabled*,
+  *host_volume_size*, *host_volume_source* can be simplified
+- review if parameters *host_ocpus*, *host_os_version*, *host_os*, *host_shape*,
+  *host_memory_in_gbs* can be simplified
+
+host_boot_volume_size
+host_bootstrap_template
+host_cloudinit_template
+host_enabled
+host_env_config
+host_image_id
+host_name
+host_private_ip
+host_public_ip
+host_setup_folder
+host_state
+host_subnet
+hosts_file
+lab_source_url
+label_prefix
+resource_name
+software_password
+software_repo
+software_user
+ssh_authorized_keys
+
 ## [2.4.0] - 2023-03-29
 
 ### Added

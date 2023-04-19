@@ -6,7 +6,7 @@
 # Name.......: bastion_host.yaml 
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2023.04.17
+# Date.......: 2023.04.19
 # Revision...: 
 # Purpose....: cloud-init configuration file for linux hosts
 # Notes......: --
@@ -18,17 +18,18 @@
 output: {all: '| tee -a /var/log/cloud-init-output.log'}
 
 # --- Install/upgrade yum packages ---------------------------------------------
-package_upgrade: ${yum_upgrade} # Enable yum update
+package_upgrade: true           # Enable yum update
 packages:                       # install additional packages
   - git                         # Fast Version Control System
   - tmux                        # A terminal multiplexer
+  - firewalld                   # A firewall daemon with D-Bus interface providing a dynamic firewall
 # --- EOF Install/upgrade yum packages -----------------------------------------
 
 # --- Create users -------------------------------------------------------------
 users:
   - default
-  - name: ${os_user}
-    gecos: Oracle OS User
+  - name: ${lab_os_user}
+    gecos: Lab OS User
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     lock_passwd: true
 # --- EOF Create users ---------------------------------------------------------
@@ -36,7 +37,7 @@ users:
 # --- Update remote files ------------------------------------------------------
 write_files:
 # Add oracle SSH authorized keys ----------------------------------------------
-  - path: "/home/${os_user}/.ssh/authorized_keys"
+  - path: "/home/${lab_os_user}/.ssh/authorized_keys"
     permissions: "0600"
     encoding: "gzip+base64"
     content: |
@@ -49,52 +50,45 @@ write_files:
     content: |
       ${etc_hosts}
 
-# Add bootstrap script --------------------------------------------------------
-  - path: "/home/${os_user}/cloudinit/bootstrap_linux_host.sh"
+# Add post bootstrap script ----------------------------------------------------
+  - path: "/root/post_bootstrap_config.sh"
     permissions: "0750"
     encoding: "gzip+base64"
     content: |
-      ${bootstrap_script}
-
-
-# Add release environement script ----------------------------------------------
-  - path: "/home/${os_user}/cloudinit/set_config_env.sh"
-    permissions: "0750"
-    encoding: "gzip+base64"
-    content: |
-      ${env_conf_script}
-
+      ${post_bootstrap_config}
 # --- EOF Update remote files --------------------------------------------------
 
 # --- Run configuration commands -----------------------------------------------
 runcmd:
-# configure tools from development repositories
+  # configure tools from development repositories
+  - echo "INFO Start runcmd of bootstrap configuration on host $(hostname) at $(date)"
   - dnf config-manager --set-enabled ol8_developer --set-enabled ol8_developer_EPEL
   - dnf install -y pwgen bsdtar
 
-# configure automatic download / updates
+  # configure automatic download / updates
   - dnf install -y dnf-automatic
   - sed -i 's/^apply_updates.*/apply_updates = yes/g' /etc/dnf/automatic.conf
   - systemctl enable --now dnf-automatic.timer
-  - rm -f /etc/issue.d/cockpit.issue /etc/motd.d/cockpit
-  - rm -f /etc/bash_completion.d/docker-compose
+  - rm -vf /etc/issue.d/cockpit.issue /etc/motd.d/cockpit
+  - rm -vf /etc/bash_completion.d/docker-compose
 
-  # download lab source
-  - curl -Lsf ${lab_source_url} -o /tmp/${lab_name}.zip
-
-  # extract lab source
-  - bsdtar --strip-components=1 -xvf /tmp/${lab_name}.zip -C /home/${os_user} -s /$(basename ${host_setup_folder})/cloudinit/ "oci/$(basename ${host_setup_folder})/*" 'oci/cloudinit/*'
-
-  # Fix permissions
-  - chown -R ${os_user}:${os_user} /home/${os_user}/.ssh
-  - chown -R ${os_user}:${os_user} /home/${os_user}/cloudinit
-
+  # Configure firewalld for SSH and HTTP/HTTPS
+  - firewall-offline-cmd --add-service=http
+  - firewall-offline-cmd --add-service=https
+  - firewall-offline-cmd --add-service=ssh
+  - firewall-offline-cmd --list-all
+  - systemctl enable firewalld 
+  - systemctl restart firewalld 
+  - systemctl status firewalld 
+  
   # config SELinux Network access
   - setsebool httpd_can_network_connect on -P
   - setenforce 0
   - sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
 
-  # start bootstrap
-  - /home/${os_user}/cloudinit/bootstrap_linux_host.sh
-# --- EOF Run configuration commands ------------------------------------------
-# --- EOF ---------------------------------------------------------------------
+  # run post bootstrap configuration
+  - /root/post_bootstrap_config.sh > /root/post_bootstrap_config.log 2>&1
+
+  - echo "INFO Finish runcmd of bootstrap configuration on host $(hostname) at $(date)"
+# --- EOF Run configuration commands -------------------------------------------
+# --- EOF ----------------------------------------------------------------------

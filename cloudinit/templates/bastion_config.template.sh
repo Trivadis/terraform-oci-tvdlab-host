@@ -116,5 +116,16 @@ else
     echo "n/a" >/var/log/boostrap_custom_config_status
 fi
 
+# create set_terraform_config_env.sh configuration script using terraform LAB
+# environment variables
+cat << EOF >/home/$LAB_OS_USER/set_terraform_config_env.sh
+export DOMAINNAME=$DOMAINNAME
+export LAB_NAME=$LAB_NAME
+export LAB_REPO=$LAB_REPO
+export LAB_OS_USER=$LAB_OS_USER
+export LAB_DEFAULT_PWD=$LAB_DEFAULT_PWD
+export HOST_SETUP_FOLDER=$HOST_SETUP_FOLDER
+EOF
+
 echo "INFO: Finish post bootstrap bastion configuration on host $(hostname) at $(date)"
 # --- EOF ----------------------------------------------------------------------

@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.4] - 2023-04-22
+
+### Added
+
+- create the file *set_terraform_config_env.sh* during bootstrap process with all
+  environment variabled defined during setup
+
 ## [3.0.3] - 2023-04-22
 
 ### Changed

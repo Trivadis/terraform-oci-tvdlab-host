@@ -64,7 +64,7 @@ LOAD15=\$(cat /proc/loadavg | awk {'print \$3'})
 PUBLIC_IP=\$(dig +short myip.opendns.com @resolver1.opendns.com)
 export PRIVATE_IP=\$(hostname -I |cut -d' ' -f1)
 BOOTSTRAP_STATUS1=\$((sudo cloud-init status 2>/dev/null|| echo "n/a")|cut -d' ' -f2|sed 's/ //g')
-BOOTSTRAP_STATUS2=\$(cat /etc/boostrap_config_status 2>/dev/null|| echo "n/a")
+BOOTSTRAP_STATUS2=\$(cat /var/log/boostrap_custom_config_status 2>/dev/null|| echo "n/a")
 
 echo "
 ===============================================================================
@@ -110,10 +110,10 @@ if [ -f "/home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh" ]; then
         sed -i "s|\(.*LAB_DEFAULT_PWD=\)\"\"|\1\"$LAB_DEFAULT_PWD\"|" /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh
     fi
     nohup /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh > /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.log 2>&1 & 
-    echo "running" >/etc/boostrap_config_status
+    echo "running" >/var/log/boostrap_custom_config_status
 else
     echo "INFO: Skip custom bootstap script /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh"
-    echo "n/a" >/etc/boostrap_config_status
+    echo "n/a" >/var/log/boostrap_custom_config_status
 fi
 
 echo "INFO: Finish post bootstrap bastion configuration on host $(hostname) at $(date)"

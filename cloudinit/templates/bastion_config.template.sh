@@ -65,6 +65,10 @@ PUBLIC_IP=\$(dig +short myip.opendns.com @resolver1.opendns.com)
 export PRIVATE_IP=\$(hostname -I |cut -d' ' -f1)
 BOOTSTRAP_STATUS1=\$((sudo cloud-init status 2>/dev/null|| echo "n/a")|cut -d' ' -f2|sed 's/ //g')
 BOOTSTRAP_STATUS2=\$(cat /var/log/boostrap_custom_config_status 2>/dev/null|| echo "n/a")
+BOOTSTRAP_CURRENT=$(ps -ef|grep bootstrap_linux_host.sh|grep -iv grep|wc -l)
+if [[ "$BOOTSTRAP_STATUS2" == *"running"* ]] && [ $BOOTSTRAP_CURRENT -eq 0 ]; then
+  BOOTSTRAP_STATUS2="error"
+fi
 
 echo "
 ===============================================================================

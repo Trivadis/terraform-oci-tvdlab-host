@@ -799,7 +799,9 @@ EXECUTE dbms_stats.gather_schema_stats( -
 
 ----------------------------------------------------------------------------
 -- create VPD stuff
-CONNECT tvd_hr_sec/tvd_hr_sec@localhost:1521/&pdb..&DB_DOMAIN
+-- set the current
+ALTER SESSION SET container=&pdb;
+ALTER SESSION SET current_schema=&pass_sec;
 CREATE OR REPLACE FUNCTION EMPLOYEE_RESTRICT (
    SCHEMA   IN   VARCHAR2,
    tab      IN   VARCHAR2

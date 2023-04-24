@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.6] - 2023-04-24
+
+### Fixed
+
+- correctly escape variables in *bastion_config.template.sh*
+
 ## [3.0.5] - 2023-04-24
 
 ### Added

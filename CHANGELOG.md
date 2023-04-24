@@ -16,6 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.7] - 2023-04-24
+
+### Changed
+
+- rename *boostrap_custom_config_status* to *bootstrap_custom_config_status*
+
+### Removed
+
+- remove *dig* from login-info.sh
+
 ## [3.0.6] - 2023-04-24
 
 ### Fixed

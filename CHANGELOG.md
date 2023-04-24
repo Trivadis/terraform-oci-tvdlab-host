@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.9] - 2023-04-24
+
+### Changed
+
+- Fix a minor issue in SQL script of the examples
+
 ## [3.0.8] - 2023-04-24
 
 ### Fixed

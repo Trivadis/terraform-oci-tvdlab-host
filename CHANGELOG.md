@@ -16,6 +16,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.5] - 2023-04-24
+
+### Added
+
+- add a check if script *bootstrap_linux_host.sh* is still running and status of
+  *boostrap_custom_config_status* is set to **running**. If no login banner will
+  report an error
+
+### Changed
+
+- change initial value for *boostrap_custom_config_status* to **starting**
+
 ## [3.0.4] - 2023-04-22
 
 ### Added

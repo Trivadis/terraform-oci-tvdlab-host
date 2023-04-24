@@ -110,7 +110,7 @@ if [ -f "/home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh" ]; then
         sed -i "s|\(.*LAB_DEFAULT_PWD=\)\"\"|\1\"$LAB_DEFAULT_PWD\"|" /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh
     fi
     nohup /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh > /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.log 2>&1 & 
-    echo "running" >/var/log/boostrap_custom_config_status
+    echo "starting" >/var/log/boostrap_custom_config_status
 else
     echo "INFO: Skip custom bootstap script /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh"
     echo "n/a" >/var/log/boostrap_custom_config_status

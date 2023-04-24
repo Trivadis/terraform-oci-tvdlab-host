@@ -109,6 +109,17 @@ chown -R $LAB_OS_USER:$LAB_OS_USER /home/$LAB_OS_USER/cloudinit
 
 # Initiate custom bootstrap script
 if [ -f "/home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh" ]; then
+    # create set_terraform_config_env.sh configuration script using terraform LAB
+    # environment variables
+    cat << EOF >/home/$LAB_OS_USER/cloudinit/set_terraform_config_env.sh
+    export DOMAINNAME=$DOMAINNAME
+    export LAB_NAME=$LAB_NAME
+    export LAB_REPO=$LAB_REPO
+    export LAB_OS_USER=$LAB_OS_USER
+    export LAB_DEFAULT_PWD=$LAB_DEFAULT_PWD
+    export HOST_SETUP_FOLDER=$HOST_SETUP_FOLDER
+EOF
+
     echo "INFO: Initiate custom bootstap script /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh"
     if [ -n "$LAB_DEFAULT_PWD" ]; then
         sed -i "s|\(.*LAB_DEFAULT_PWD=\)\"\"|\1\"$LAB_DEFAULT_PWD\"|" /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh
@@ -119,17 +130,6 @@ else
     echo "INFO: Skip custom bootstap script /home/$LAB_OS_USER/cloudinit/bootstrap_linux_host.sh"
     echo "n/a" >/var/log/bootstrap_custom_config_status
 fi
-
-# create set_terraform_config_env.sh configuration script using terraform LAB
-# environment variables
-cat << EOF >/home/$LAB_OS_USER/set_terraform_config_env.sh
-export DOMAINNAME=$DOMAINNAME
-export LAB_NAME=$LAB_NAME
-export LAB_REPO=$LAB_REPO
-export LAB_OS_USER=$LAB_OS_USER
-export LAB_DEFAULT_PWD=$LAB_DEFAULT_PWD
-export HOST_SETUP_FOLDER=$HOST_SETUP_FOLDER
-EOF
 
 echo "INFO: Finish post bootstrap bastion configuration on host $(hostname) at $(date)"
 # --- EOF ----------------------------------------------------------------------

@@ -21,7 +21,7 @@ locals {
   host_image_id                   = var.host_image_id == "OEL" ? data.oci_core_images.oracle_images.images[0].id : var.host_image_id
   hosts_file                      = var.hosts_file == "" ? "${path.module}/etc/hosts.template" : var.hosts_file
   host_setup_folder               = var.host_setup_folder == "" ? "${path.module}/cloudinit/" : var.host_setup_folder
-  default_bootstrap_template_name = var.host_os_version == "8" ? "linux_host_ol8.yaml" : "linux_host_ol7.yaml"
+  default_bootstrap_template_name = var.host_os_version == "9" ? "linux_host_ol9.yaml" : var.host_os_version == "8" ? "linux_host_ol8.yaml" : "linux_host_ol7.yaml"
   bootstrap_config_template       = var.bootstrap_config_template == "" ? "${path.module}/cloudinit/templates/${local.default_bootstrap_template_name}" : var.bootstrap_config_template
   post_bootstrap_config_template  = var.post_bootstrap_config_template == "" ? "${path.module}/cloudinit/templates/bastion_config.template.sh" : var.post_bootstrap_config_template
   bootstrap_config = base64encode(templatefile(local.bootstrap_config_template, {

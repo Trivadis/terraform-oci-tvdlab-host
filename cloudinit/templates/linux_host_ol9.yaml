@@ -1,0 +1,94 @@
+#cloud-config
+# ------------------------------------------------------------------------------
+# Trivadis - Part of Accenture, Platform Factory - Data Platforms
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ------------------------------------------------------------------------------
+# Name.......: bastion_host.yaml 
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2023.04.19
+# Revision...: 
+# Purpose....: cloud-init configuration file for linux hosts
+# Notes......: --
+# Reference..: --
+# License....: Apache License Version 2.0, January 2004 as shown
+#              at http://www.apache.org/licenses/
+# ------------------------------------------------------------------------------
+# Capture all subprocess output into a logfile
+output: {all: '| tee -a /var/log/cloud-init-output.log'}
+
+# --- Install/upgrade yum packages ---------------------------------------------
+package_upgrade: true           # Enable yum update
+packages:                       # install additional packages
+  - git                         # Fast Version Control System
+  - tmux                        # A terminal multiplexer
+  - firewalld                   # A firewall daemon with D-Bus interface providing a dynamic firewall
+# --- EOF Install/upgrade yum packages -----------------------------------------
+
+# --- Create users -------------------------------------------------------------
+users:
+  - default
+  - name: ${lab_os_user}
+    gecos: Lab OS User
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    lock_passwd: true
+# --- EOF Create users ---------------------------------------------------------
+
+# --- Update remote files ------------------------------------------------------
+write_files:
+# Add oracle SSH authorized keys ----------------------------------------------
+  - path: "/home/${lab_os_user}/.ssh/authorized_keys"
+    permissions: "0600"
+    encoding: "gzip+base64"
+    content: |
+      ${authorized_keys}
+
+# Append /etc/hosts with custom hosts entries ---------------------------------
+  - path: /etc/hosts
+    append: true
+    encoding: "gzip+base64"
+    content: |
+      ${etc_hosts}
+
+# Add post bootstrap script ----------------------------------------------------
+  - path: "/root/post_bootstrap_config.sh"
+    permissions: "0750"
+    encoding: "gzip+base64"
+    content: |
+      ${post_bootstrap_config}
+# --- EOF Update remote files --------------------------------------------------
+
+# --- Run configuration commands -----------------------------------------------
+runcmd:
+  # configure tools from development repositories
+  - echo "INFO Start runcmd of bootstrap configuration on host $(hostname) at $(date)"
+  - dnf config-manager --set-enabled ol9_developer --set-enabled ol9_developer_EPEL
+  - dnf install -y pwgen bsdtar
+
+  # configure automatic download / updates
+  - dnf install -y dnf-automatic
+  - sed -i 's/^apply_updates.*/apply_updates = yes/g' /etc/dnf/automatic.conf
+  - systemctl enable --now dnf-automatic.timer
+  - rm -vf /etc/issue.d/cockpit.issue /etc/motd.d/cockpit
+  - rm -vf /etc/bash_completion.d/docker-compose
+
+  # Configure firewalld for SSH and HTTP/HTTPS
+  - firewall-offline-cmd --add-service=http
+  - firewall-offline-cmd --add-service=https
+  - firewall-offline-cmd --add-service=ssh
+  - firewall-offline-cmd --list-all
+  - systemctl enable firewalld 
+  - systemctl restart firewalld 
+  - systemctl status firewalld 
+  
+  # config SELinux Network access
+  - setsebool httpd_can_network_connect on -P
+  - setenforce 0
+  - sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
+
+  # run post bootstrap configuration
+  - /root/post_bootstrap_config.sh > /root/post_bootstrap_config.log 2>&1
+
+  - echo "INFO Finish runcmd of bootstrap configuration on host $(hostname) at $(date)"
+# --- EOF Run configuration commands -------------------------------------------
+# --- EOF ----------------------------------------------------------------------

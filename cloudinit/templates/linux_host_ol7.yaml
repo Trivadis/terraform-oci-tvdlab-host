@@ -30,8 +30,19 @@ users:
   - default
   - name: ${lab_os_user}
     gecos: Lab OS User
-    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    groups: users,admin,wheel
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
     lock_passwd: true
+
+  - name: ansible
+    gecos: Ansible User
+    groups: users,admin,wheel
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    lock_passwd: true
+    ssh_authorized_keys: |
+      ${authorized_keys}
 # --- EOF Create users ---------------------------------------------------------
 
 # --- Update remote files ------------------------------------------------------

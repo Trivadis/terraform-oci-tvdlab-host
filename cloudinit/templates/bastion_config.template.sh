@@ -63,7 +63,7 @@ LOAD5=\$(cat /proc/loadavg | awk {'print \$2'})
 LOAD15=\$(cat /proc/loadavg | awk {'print \$3'})
 PUBLIC_IP="n/a"
 PRIVATE_IP=\$(hostname -I |cut -d' ' -f1)
-BOOTSTRAP_STATUS1=\$((sudo cloud-init status 2>/dev/null|| echo "n/a")|cut -d' ' -f2|sed 's/ //g')
+BOOTSTRAP_STATUS1=\$(sudo cloud-init status 2>/dev/null|cut -d' ' -f2|sed 's/ //g')
 BOOTSTRAP_STATUS2=\$(cat /var/log/bootstrap_custom_config_status 2>/dev/null|| echo "n/a")
 BOOTSTRAP_CURRENT=\$(ps -ef|grep bootstrap_linux_host.sh|grep -iv grep|wc -l)
 if [[ "\$BOOTSTRAP_STATUS2" == *"running"* ]] && [ \$BOOTSTRAP_CURRENT -eq 0 ]; then

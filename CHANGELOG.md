@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.11] - 2023-05-04
+
+### Added
+
+- Add an *ansible* user with the same *authorized_keys* as the LAB user
+  
 ## [3.0.10] - 2023-05-03
 
 ### Added

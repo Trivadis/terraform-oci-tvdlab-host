@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.12] - 2023-05-04
+
+### Changed
+
+- Change default value for *BOOTSTRAP_STATUS1*
+- add *authorized_keys* for *ansible* user
+
 ## [3.0.11] - 2023-05-04
 
 ### Added

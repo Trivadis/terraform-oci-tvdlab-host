@@ -5,8 +5,8 @@
 # Name.......: terraform.tfvars.example
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2020.10.12
-# Revision...: 
+# Date.......: 2023.05.04
+# Revision...: 3.0.12
 # Purpose....: Example Terraform Variable file.
 # Notes......: 
 # Reference..: --

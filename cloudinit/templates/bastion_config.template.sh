@@ -1,13 +1,13 @@
 #!/bin/bash
 # ------------------------------------------------------------------------------
-# Trivadis - Part of Accenture, Platform Factory - Transactional Data Platform
+# Trivadis - Part of Accenture, Platform Factory - Data Platforms
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ------------------------------------------------------------------------------
 # Name.......: bastion_config.template.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2023.04.19
-# Revision...: 
+# Date.......: 2023.05.04
+# Revision...: 3.0.12
 # Purpose....: Script to configure the bastion host after bootstrap
 # Notes......: --
 # Reference..: --

@@ -3,11 +3,11 @@
 # Trivadis - Part of Accenture, Platform Factory - Data Platforms
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ------------------------------------------------------------------------------
-# Name.......: bastion_host.yaml 
+# Name.......: linux_host_ol9.yaml 
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2023.04.19
-# Revision...: 
+# Date.......: 2023.05.04
+# Revision...: 3.0.12
 # Purpose....: cloud-init configuration file for linux hosts
 # Notes......: --
 # Reference..: --

@@ -5,8 +5,8 @@
 # Name.......: main.tf
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@accenture.com
 # Editor.....: Stefan Oehrli
-# Date.......: 2020.10.12
-# Revision...: 
+# Date.......: 2023.05.04
+# Revision...: 3.0.12
 # Purpose....: Main file to use terraform module tvdlab compute.
 # Notes......: -- 
 # Reference..: --

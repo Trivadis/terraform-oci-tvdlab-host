@@ -28,6 +28,8 @@ packages:                       # install additional packages
 # --- Create users -------------------------------------------------------------
 users:
   - default
+
+# Add Lab OS user --------------------------------------------------------------
   - name: ${lab_os_user}
     gecos: Lab OS User
     groups: users,admin,wheel
@@ -35,20 +37,26 @@ users:
     shell: /bin/bash
     lock_passwd: true
 
+# Add ansible user -------------------------------------------------------------
   - name: ansible
     gecos: Ansible User
     groups: users,admin,wheel
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     lock_passwd: true
-    ssh_authorized_keys: |
-      ${authorized_keys}
 # --- EOF Create users ---------------------------------------------------------
 
 # --- Update remote files ------------------------------------------------------
 write_files:
-# Add oracle SSH authorized keys ----------------------------------------------
+# Add Lab OS User SSH authorized keys ------------------------------------------
   - path: "/home/${lab_os_user}/.ssh/authorized_keys"
+    permissions: "0600"
+    encoding: "gzip+base64"
+    content: |
+      ${authorized_keys}
+
+# Add ansible user SSH authorized keys -----------------------------------------
+  - path: "/home/ansible/.ssh/authorized_keys"
     permissions: "0600"
     encoding: "gzip+base64"
     content: |

@@ -83,7 +83,7 @@ echo "
 - Memory used.......: \$MEMORY1 / \$MEMORY2
 - Swap in use.......: \$(free -m | tail -n 1 | awk '{print \$3}') MB
 -------------------------------------------------------------------------------
-- Bootstrap Status..: \$BOOTSTRAP_STATUS1
+- Bootstrap Status..: \$${BOOTSTRAP_STATUS1:-"n/a"}
 - Config Status.....: \$BOOTSTRAP_STATUS2
 ===============================================================================
 "

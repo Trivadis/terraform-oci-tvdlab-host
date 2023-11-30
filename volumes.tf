@@ -36,8 +36,8 @@ resource "oci_core_volume" "CreateVolume" {
 resource "oci_core_volume_attachment" "CreateVolumeAttachment" {
   count           = var.host_volume_enabled == true ? var.numberOf_labs : 0
   attachment_type = var.host_volume_attachment_type
-  instance_id     = oci_core_instance.compute[count.index].id
-  volume_id       = oci_core_volume.CreateVolume[count.index].id
+  instance_id     = length(oci_core_instance.compute) > 0 ? oci_core_instance.compute[count.index].id : ""
+  volume_id       = length(oci_core_volume.CreateVolume) > 0 ? oci_core_volume.CreateVolume[count.index].id : ""
 }
 
 # --- EOF ----------------------------------------------------------------------

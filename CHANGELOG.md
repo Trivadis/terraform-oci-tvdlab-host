@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.14] - 2023-11-30
+
+### Fixed
+
+- Fix the fix volume attach issue when vm is not created
+
 ## [3.0.13] - 2023-11-30
 
 ### Fixed

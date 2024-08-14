@@ -35,6 +35,8 @@ resource "oci_core_instance" "compute" {
     # disable the legacy (/v1) instance metadata service endpoints 
     are_legacy_imds_endpoints_disabled = true
   }
+  # Whether to enable in-transit encryption for the data volume's paravirtualized attachment
+  is_pv_encryption_in_transit_enabled = true
   # prevent the host from destroying and recreating itself if the image ocid changes 
   lifecycle {
     ignore_changes = [source_details[0].source_id]

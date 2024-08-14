@@ -31,7 +31,10 @@ resource "oci_core_instance" "compute" {
     display_name     = var.label_prefix == "none" ? "vnic" : "${var.label_prefix}-vnic"
     hostname_label   = var.host_name
   }
-
+  instance_options {
+    # disable the legacy (/v1) instance metadata service endpoints 
+    are_legacy_imds_endpoints_disabled = true
+  }
   # prevent the host from destroying and recreating itself if the image ocid changes 
   lifecycle {
     ignore_changes = [source_details[0].source_id]
